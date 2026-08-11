@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>한강 실시간 수온 - 한강 물 온도 확인 | 물타기계산기</title>
-  <meta name="description" content="한강 실시간 수온을 확인하세요. 노량진, 선유, 탄천, 중랑천, 안양천 관측소별 현재 수온 정보를 제공합니다." />
+  <meta name="description" content="한강 실시간 수온을 확인하세요. 노량진, 선유, 탄천, 중랑천, 안양천 관측소별 현재 수온과 수질 정보를 제공합니다." />
   <meta name="keywords" content="한강수온, 한강물온도, 한강실시간수온, 한강수영, 한강온도, 한강수질" />
   <meta property="og:title" content="한강 실시간 수온 확인" />
   <meta property="og:description" content="한강 관측소별 실시간 수온을 확인하세요." />
@@ -46,8 +46,6 @@
     .faq-q.open .faq-arrow{transform:rotate(180deg);}
     .faq-a{font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none;}
     .faq-a.open{display:block;}
-    .hangang-link-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-2);color:var(--text-secondary);font-size:14px;font-weight:600;text-decoration:none;transition:all 0.15s;margin-top:10px;}
-    .hangang-link-btn:hover{border-color:var(--primary);color:var(--primary);}
   </style>
 </head>
 <body>
@@ -108,10 +106,6 @@
           <div style="font-size:13px">데이터를 불러오는 중...</div>
         </div>
       </div>
-      <!-- hangang.life 바로가기 -->
-      <a href="https://hangang.life" target="_blank" rel="noopener" class="hangang-link-btn">
-        🌊 hangang.life에서 자세히 보기 →
-      </a>
     </div>
 
     <!-- 수온 안전 기준 -->
@@ -160,7 +154,6 @@
     </div>
 
     <div class="ad-banner ad-banner-tall">광고 영역 (300×250)</div>
-
     <div>
       <div class="section-title">관련 서비스</div>
       <div class="related-grid">
@@ -180,19 +173,16 @@
       <a href="index.html">홈</a><a href="privacy.html">개인정보처리방침</a>
       <a href="terms.html">이용약관</a><a href="contact.html">문의하기</a>
     </div>
-    <p class="footer-notice">수온 데이터는 한강라이프(hangang.life) API를 통해 제공됩니다. 참고용으로만 활용하세요.</p>
+    <p class="footer-notice">수온 데이터는 서울시 열린데이터광장 공공데이터를 활용합니다. 참고용으로만 활용하세요.</p>
     <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
   </div>
 </footer>
 
 <script>
-// Cloudflare Workers 무료 프록시 사용 (CORS 해결)
-// 여러 프록시 순서대로 시도
-const APIS = [
-  'https://hangang-proxy.workers.dev/',  // 나중에 직접 만든 프록시
-  'https://corsproxy.io/?https://api.hangang.life/',
-  'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.hangang.life/'),
-];
+// 서울시 열린데이터광장 한강수계 수질측정망 API
+// JSONP 방식으로 CORS 우회
+const API_KEY = '666756495771756437394967756374';
+const API_URL = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
 
 function getTempStatus(t) {
   if(t<10) return {cls:'s-cold',icon:'❄️',label:'차가움',desc:'수온이 매우 낮습니다. 수영 시 저체온증 위험이 있습니다.'};
@@ -209,49 +199,61 @@ async function fetchData() {
   svg.classList.add('spinning');
   document.getElementById('refresh-btn').disabled = true;
 
-  let done = false;
-
-  // 1. corsproxy.io 시도
   try {
-    const res = await fetch('https://corsproxy.io/?https://api.hangang.life/', {
-      signal: AbortSignal.timeout(6000)
-    });
-    if(res.ok) {
-      const data = await res.json();
-      if(data && data.STATUS === 'OK') {
-        renderData(data.DATAs.DATA.HANGANG);
-        done = true;
-      }
+    // HTTP API를 HTTPS 페이지에서 호출시 mixed content 문제 → HTTPS 버전 시도
+    const url = `https://openAPI.seoul.go.kr:443/${API_KEY}/json/WPOSInformationTime/1/5/`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const data = await res.json();
+
+    if(data && data.WPOSInformationTime && data.WPOSInformationTime.row) {
+      renderData(data.WPOSInformationTime.row);
+    } else {
+      // HTTP 버전 (CORS 프록시 경유)
+      await fetchViaProxy();
     }
-  } catch(e) { console.warn('proxy1 fail', e.message); }
-
-  // 2. allorigins 시도
-  if(!done) {
-    try {
-      const res = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.hangang.life/'), {
-        signal: AbortSignal.timeout(6000)
-      });
-      if(res.ok) {
-        const wrapper = await res.json();
-        const data = JSON.parse(wrapper.contents);
-        if(data && data.STATUS === 'OK') {
-          renderData(data.DATAs.DATA.HANGANG);
-          done = true;
-        }
-      }
-    } catch(e) { console.warn('proxy2 fail', e.message); }
+  } catch(e) {
+    console.warn('직접 호출 실패:', e.message);
+    await fetchViaProxy();
   }
-
-  if(!done) showError();
 
   svg.classList.remove('spinning');
   document.getElementById('refresh-btn').disabled = false;
 }
 
-function renderData(stations) {
-  const temps = Object.values(stations)
-    .map(s => parseFloat(s.TEMP))
-    .filter(t => !isNaN(t) && t > 0);
+async function fetchViaProxy() {
+  try {
+    const target = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
+    const res = await fetch(
+      'https://api.allorigins.win/get?url=' + encodeURIComponent(target),
+      { signal: AbortSignal.timeout(8000) }
+    );
+    const wrapper = await res.json();
+    const data = JSON.parse(wrapper.contents);
+    if(data && data.WPOSInformationTime && data.WPOSInformationTime.row) {
+      renderData(data.WPOSInformationTime.row);
+    } else {
+      showError();
+    }
+  } catch(e) {
+    console.error('프록시도 실패:', e.message);
+    showError();
+  }
+}
+
+function renderData(rows) {
+  // 최신 데이터만 추출 (관측소별 최신 1건)
+  const stations = {};
+  rows.forEach(row => {
+    const name = row.MSR_LOC_NM;
+    const temp = parseFloat(row.WATER_TEMP);
+    if(!isNaN(temp) && temp > 0) {
+      if(!stations[name] || row.MSR_DATE_TIME > stations[name].time) {
+        stations[name] = { temp, time: row.MSR_DATE_TIME, ph: parseFloat(row.PH) };
+      }
+    }
+  });
+
+  const temps = Object.values(stations).map(s => s.temp);
   if(!temps.length) { showError(); return; }
 
   const avg = temps.reduce((a,b)=>a+b,0) / temps.length;
@@ -277,23 +279,16 @@ function renderData(stations) {
 
   const grid = document.getElementById('station-grid');
   grid.innerHTML = '';
-  const nameMap = {
-    '탄천':'탄천합류부','중랑천':'중랑천합류부','안양천':'안양천합류부',
-    '선유':'선유','노량진':'노량진','잠실':'잠실','행주':'행주',
-    '한강대교':'한강대교','광진교':'광진교'
-  };
-  Object.entries(stations).forEach(([key, val]) => {
-    const temp = parseFloat(val.TEMP);
-    if(isNaN(temp)||temp<=0) return;
-    const s = getTempStatus(temp);
-    const c = getColor(temp);
+  Object.entries(stations).forEach(([name, val]) => {
+    const s = getTempStatus(val.temp);
+    const c = getColor(val.temp);
     const div = document.createElement('div');
     div.className = 'station-card';
     div.innerHTML = `
-      <div class="station-name">${nameMap[key]||key}</div>
-      <div class="station-temp" style="color:${c}">${temp.toFixed(1)}<span>°C</span></div>
+      <div class="station-name">${name}</div>
+      <div class="station-temp" style="color:${c}">${val.temp.toFixed(1)}<span>°C</span></div>
+      ${!isNaN(val.ph)?`<div style="font-size:12px;color:var(--text-muted);margin-top:3px">pH ${val.ph.toFixed(1)}</div>`:''}
       <div style="margin-top:6px"><span class="s-badge ${s.cls}" style="font-size:11px;padding:3px 8px">${s.icon}</span></div>
-      ${val.LAST_UPDATE?`<div style="font-size:11px;color:var(--text-muted);margin-top:4px">${val.LAST_UPDATE}</div>`:''}
     `;
     grid.appendChild(div);
   });
@@ -305,10 +300,9 @@ function showError() {
   badge.textContent = '⚠️ 연결 실패';
   badge.className = 's-badge s-warm';
   document.getElementById('status-desc').textContent =
-    'API 연결에 실패했습니다. 아래 hangang.life 버튼으로 직접 확인하세요.';
+    '데이터를 불러오지 못했습니다. 새로고침을 눌러보세요.';
   document.getElementById('station-grid').innerHTML =
-    '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">' +
-    '⚠️ 데이터를 불러오지 못했습니다.<br>새로고침하거나 hangang.life에서 직접 확인하세요.</div>';
+    '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">⚠️ 데이터 불러오기 실패. 새로고침해 주세요.</div>';
 }
 
 function toggleFaq(btn) {
