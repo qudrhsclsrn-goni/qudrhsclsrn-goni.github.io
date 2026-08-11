@@ -311,11 +311,11 @@ function renderData(rows) {
   document.getElementById('spin-svg').classList.remove('spinning');
   const stations = {};
   rows.forEach(row => {
-    const name = row.MSR_LOC_NM;
-    const temp = parseFloat(row.WATER_TEMP);
+    const name = row.MSRSTN_NM;
+    const temp = parseFloat(row.WATT);
     if(!isNaN(temp) && temp > 0) {
-      if(!stations[name] || row.MSR_DATE_TIME > stations[name].time)
-        stations[name] = { temp, time: row.MSR_DATE_TIME, ph: parseFloat(row.PH) };
+      if(!stations[name] || row.YMD+row.HR > stations[name].time)
+        stations[name] = { temp, time: row.YMD+row.HR, ph: parseFloat(row.TOT_PH) };
     }
   });
 
