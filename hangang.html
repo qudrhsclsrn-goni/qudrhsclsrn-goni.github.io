@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>한강 실시간 수온 - 한강 물 온도 확인 | 물타기계산기</title>
-  <meta name="description" content="한강 실시간 수온을 확인하세요. 노량진, 선유, 탄천, 중랑천, 안양천 관측소별 현재 수온과 수질 정보를 제공합니다." />
+  <meta name="description" content="한강 실시간 수온을 확인하세요. 노량진, 선유, 탄천, 중랑천, 안양천 관측소별 현재 수온 정보를 제공합니다." />
   <meta name="keywords" content="한강수온, 한강물온도, 한강실시간수온, 한강수영, 한강온도, 한강수질" />
   <meta property="og:title" content="한강 실시간 수온 확인" />
   <meta property="og:description" content="한강 관측소별 실시간 수온을 확인하세요." />
@@ -17,7 +17,7 @@
   <style>
     .temp-big{font-size:56px;font-weight:800;letter-spacing:-2px;line-height:1;}
     .temp-unit{font-size:26px;font-weight:600;vertical-align:super;}
-    .status-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;}
+    .s-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;}
     .s-cold{background:#eff6ff;color:#1d4ed8;}
     .s-cool{background:#f0fdf4;color:#15803d;}
     .s-warm{background:#fefce8;color:#a16207;}
@@ -31,14 +31,13 @@
     .station-card:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow);}
     .station-name{font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:8px;}
     .station-temp{font-size:30px;font-weight:800;}
-    .station-temp span{font-size:14px;font-weight:600;color:var(--text-muted);}
-    .station-time{font-size:11px;color:var(--text-muted);margin-top:4px;}
+    .station-temp span{font-size:14px;color:var(--text-muted);}
     .temp-bar{height:10px;background:linear-gradient(to right,#60a5fa,#34d399,#fbbf24,#f87171);border-radius:5px;position:relative;margin:12px 0 6px;}
-    .temp-dot{position:absolute;top:-5px;width:20px;height:20px;background:var(--card-bg);border:3px solid var(--primary);border-radius:50%;transform:translateX(-50%);transition:left 0.6s ease;}
+    .temp-dot{position:absolute;top:-5px;width:20px;height:20px;background:var(--card-bg);border:3px solid var(--primary);border-radius:50%;transform:translateX(-50%);transition:left 0.6s;}
     .refresh-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--text-secondary);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all 0.15s;}
     .refresh-btn:hover{border-color:var(--primary);color:var(--primary);}
-    .spin{animation:spin 1s linear infinite;}
     @keyframes spin{to{transform:rotate(360deg);}}
+    .spinning{animation:spin 1s linear infinite;}
     .faq-item{border-bottom:1px solid var(--border);}
     .faq-item:last-child{border-bottom:none;}
     .faq-q{width:100%;padding:13px 0;background:none;border:none;font-size:14px;font-weight:500;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font);}
@@ -47,6 +46,8 @@
     .faq-q.open .faq-arrow{transform:rotate(180deg);}
     .faq-a{font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none;}
     .faq-a.open{display:block;}
+    .hangang-link-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-2);color:var(--text-secondary);font-size:14px;font-weight:600;text-decoration:none;transition:all 0.15s;margin-top:10px;}
+    .hangang-link-btn:hover{border-color:var(--primary);color:var(--primary);}
   </style>
 </head>
 <body>
@@ -77,28 +78,22 @@
             <span class="temp-big" id="avg-temp" style="color:var(--primary)">--</span>
             <span class="temp-unit" style="color:var(--primary)">°C</span>
           </div>
-          <div style="margin-top:10px" id="badge-wrap">
-            <span class="status-badge s-cool" id="status-badge">불러오는 중...</span>
+          <div style="margin-top:10px">
+            <span class="s-badge s-cool" id="status-badge">불러오는 중...</span>
           </div>
         </div>
         <div style="text-align:right">
           <button class="refresh-btn" id="refresh-btn" onclick="fetchData()">
-            <svg id="spin-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+            <svg id="spin-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
             새로고침
           </button>
           <div style="font-size:12px;color:var(--text-muted);margin-top:6px" id="update-time">-</div>
         </div>
       </div>
-
-      <!-- 온도 바 -->
-      <div class="temp-bar">
-        <div class="temp-dot" id="temp-dot" style="left:50%"></div>
-      </div>
+      <div class="temp-bar"><div class="temp-dot" id="temp-dot" style="left:50%"></div></div>
       <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:12px">
         <span>0°C</span><span>10°C</span><span>20°C</span><span>30°C</span><span>40°C</span>
       </div>
-
-      <!-- 상태 설명 -->
       <div id="status-desc" style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--text-secondary)">
         데이터를 불러오는 중입니다...
       </div>
@@ -113,6 +108,10 @@
           <div style="font-size:13px">데이터를 불러오는 중...</div>
         </div>
       </div>
+      <!-- hangang.life 바로가기 -->
+      <a href="https://hangang.life" target="_blank" rel="noopener" class="hangang-link-btn">
+        🌊 hangang.life에서 자세히 보기 →
+      </a>
     </div>
 
     <!-- 수온 안전 기준 -->
@@ -120,19 +119,19 @@
       <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">수온별 안전 기준</h2>
       <div style="display:grid;gap:8px">
         <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
-          <span class="status-badge s-cold" style="white-space:nowrap">❄️ 차가움</span>
+          <span class="s-badge s-cold" style="white-space:nowrap">❄️ 차가움</span>
           <span style="font-size:13px;color:var(--text-secondary)"><strong>10°C 미만</strong> — 수영 위험. 저체온증 주의</span>
         </div>
         <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
-          <span class="status-badge s-cool" style="white-space:nowrap">🏊 적합</span>
+          <span class="s-badge s-cool" style="white-space:nowrap">🏊 적합</span>
           <span style="font-size:13px;color:var(--text-secondary)"><strong>10~25°C</strong> — 수영하기 좋은 수온</span>
         </div>
         <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
-          <span class="status-badge s-warm" style="white-space:nowrap">🌤️ 따뜻함</span>
+          <span class="s-badge s-warm" style="white-space:nowrap">🌤️ 따뜻함</span>
           <span style="font-size:13px;color:var(--text-secondary)"><strong>25~30°C</strong> — 수영 가능, 더위 주의</span>
         </div>
         <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
-          <span class="status-badge s-hot" style="white-space:nowrap">🌡️ 높음</span>
+          <span class="s-badge s-hot" style="white-space:nowrap">🌡️ 높음</span>
           <span style="font-size:13px;color:var(--text-secondary)"><strong>30°C 이상</strong> — 녹조 주의, 수질 악화 가능</span>
         </div>
       </div>
@@ -181,139 +180,135 @@
       <a href="index.html">홈</a><a href="privacy.html">개인정보처리방침</a>
       <a href="terms.html">이용약관</a><a href="contact.html">문의하기</a>
     </div>
-    <p class="footer-notice">수온 데이터는 서울시 열린데이터광장 및 한강라이프 API를 통해 제공됩니다. 참고용으로만 활용하세요.</p>
+    <p class="footer-notice">수온 데이터는 한강라이프(hangang.life) API를 통해 제공됩니다. 참고용으로만 활용하세요.</p>
     <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
   </div>
 </footer>
 
 <script>
-// 한강라이프 API를 여러 CORS 프록시로 시도
-const PROXIES = [
-  'https://corsproxy.io/?',
-  'https://api.allorigins.win/raw?url=',
-  'https://cors-anywhere.herokuapp.com/',
+// Cloudflare Workers 무료 프록시 사용 (CORS 해결)
+// 여러 프록시 순서대로 시도
+const APIS = [
+  'https://hangang-proxy.workers.dev/',  // 나중에 직접 만든 프록시
+  'https://corsproxy.io/?https://api.hangang.life/',
+  'https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.hangang.life/'),
 ];
-const API = 'https://api.hangang.life/';
-
-// 서울 열린데이터 백업 (API키 없이 샘플)
-const SAMPLE_DATA = {
-  '노량진': { temp: null, time: '' },
-  '선유': { temp: null, time: '' },
-  '탄천': { temp: null, time: '' },
-  '중랑천': { temp: null, time: '' },
-  '안양천': { temp: null, time: '' },
-};
 
 function getTempStatus(t) {
-  if(t < 10) return {cls:'s-cold', icon:'❄️', label:'차가움', desc:'수온이 매우 낮습니다. 수영 시 저체온증 위험이 있으니 주의하세요.'};
-  if(t < 25) return {cls:'s-cool', icon:'🏊', label:'수영 적합', desc:'수영하기 좋은 수온입니다. 공식 수영장 구역에서 안전하게 즐기세요.'};
-  if(t < 30) return {cls:'s-warm', icon:'🌤️', label:'따뜻함', desc:'수온이 높은 편입니다. 장시간 활동 시 탈수와 더위에 주의하세요.'};
-  return {cls:'s-hot', icon:'🌡️', label:'높음', desc:'수온이 매우 높습니다. 녹조 발생 가능성이 있으니 수질을 확인하세요.'};
+  if(t<10) return {cls:'s-cold',icon:'❄️',label:'차가움',desc:'수온이 매우 낮습니다. 수영 시 저체온증 위험이 있습니다.'};
+  if(t<25) return {cls:'s-cool',icon:'🏊',label:'수영 적합',desc:'수영하기 좋은 수온입니다. 공식 수영장 구역에서 안전하게 즐기세요.'};
+  if(t<30) return {cls:'s-warm',icon:'🌤️',label:'따뜻함',desc:'수온이 높은 편입니다. 장시간 활동 시 탈수에 주의하세요.'};
+  return {cls:'s-hot',icon:'🌡️',label:'높음',desc:'수온이 매우 높습니다. 녹조 발생 가능성이 있습니다.'};
 }
-function getTempColor(t) {
-  if(t<10) return '#60a5fa';
-  if(t<20) return '#34d399';
-  if(t<28) return '#fbbf24';
-  return '#f87171';
+function getColor(t) {
+  return t<10?'#60a5fa':t<20?'#34d399':t<28?'#fbbf24':'#f87171';
 }
 
 async function fetchData() {
-  const btn = document.getElementById('refresh-btn');
-  const icon = document.getElementById('spin-icon');
-  icon.classList.add('spin');
-  btn.disabled = true;
+  const svg = document.getElementById('spin-svg');
+  svg.classList.add('spinning');
+  document.getElementById('refresh-btn').disabled = true;
 
-  let success = false;
+  let done = false;
 
-  for(const proxy of PROXIES) {
-    try {
-      const url = proxy + encodeURIComponent(API);
-      const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+  // 1. corsproxy.io 시도
+  try {
+    const res = await fetch('https://corsproxy.io/?https://api.hangang.life/', {
+      signal: AbortSignal.timeout(6000)
+    });
+    if(res.ok) {
       const data = await res.json();
-
-      if(data && data.STATUS === 'OK' && data.DATAs) {
+      if(data && data.STATUS === 'OK') {
         renderData(data.DATAs.DATA.HANGANG);
-        success = true;
-        break;
+        done = true;
       }
-    } catch(e) {
-      console.warn('프록시 실패:', proxy, e.message);
     }
+  } catch(e) { console.warn('proxy1 fail', e.message); }
+
+  // 2. allorigins 시도
+  if(!done) {
+    try {
+      const res = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://api.hangang.life/'), {
+        signal: AbortSignal.timeout(6000)
+      });
+      if(res.ok) {
+        const wrapper = await res.json();
+        const data = JSON.parse(wrapper.contents);
+        if(data && data.STATUS === 'OK') {
+          renderData(data.DATAs.DATA.HANGANG);
+          done = true;
+        }
+      }
+    } catch(e) { console.warn('proxy2 fail', e.message); }
   }
 
-  if(!success) {
-    showError();
-  }
+  if(!done) showError();
 
-  icon.classList.remove('spin');
-  btn.disabled = false;
+  svg.classList.remove('spinning');
+  document.getElementById('refresh-btn').disabled = false;
 }
 
 function renderData(stations) {
   const temps = Object.values(stations)
     .map(s => parseFloat(s.TEMP))
     .filter(t => !isNaN(t) && t > 0);
-
   if(!temps.length) { showError(); return; }
 
-  const avg = temps.reduce((a,b) => a+b, 0) / temps.length;
-  const status = getTempStatus(avg);
-  const color = getTempColor(avg);
+  const avg = temps.reduce((a,b)=>a+b,0) / temps.length;
+  const st = getTempStatus(avg);
+  const col = getColor(avg);
 
   document.getElementById('avg-temp').textContent = avg.toFixed(1);
-  document.getElementById('avg-temp').style.color = color;
-
+  document.getElementById('avg-temp').style.color = col;
   const badge = document.getElementById('status-badge');
-  badge.textContent = `${status.icon} ${status.label}`;
-  badge.className = `status-badge ${status.cls}`;
+  badge.textContent = st.icon + ' ' + st.label;
+  badge.className = 's-badge ' + st.cls;
+  document.getElementById('status-desc').textContent = st.desc;
 
-  document.getElementById('status-desc').textContent = status.desc;
-
-  const pct = Math.min(Math.max(avg / 40 * 100, 2), 98);
+  const pct = Math.min(Math.max(avg/40*100, 2), 98);
   const dot = document.getElementById('temp-dot');
   dot.style.left = pct + '%';
-  dot.style.borderColor = color;
+  dot.style.borderColor = col;
 
   const now = new Date();
   document.getElementById('update-time').textContent =
-    `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} 기준`;
+    now.getHours().toString().padStart(2,'0') + ':' +
+    now.getMinutes().toString().padStart(2,'0') + ' 기준';
 
   const grid = document.getElementById('station-grid');
   grid.innerHTML = '';
-
-  const stationMap = {
-    '탄천': '탄천합류부', '중랑천': '중랑천합류부', '안양천': '안양천합류부',
-    '선유': '선유', '노량진': '노량진', '잠실': '잠실', '행주': '행주',
-    '한강대교': '한강대교', '광진교': '광진교',
+  const nameMap = {
+    '탄천':'탄천합류부','중랑천':'중랑천합류부','안양천':'안양천합류부',
+    '선유':'선유','노량진':'노량진','잠실':'잠실','행주':'행주',
+    '한강대교':'한강대교','광진교':'광진교'
   };
-
   Object.entries(stations).forEach(([key, val]) => {
     const temp = parseFloat(val.TEMP);
-    if(isNaN(temp) || temp <= 0) return;
-    const st = getTempStatus(temp);
-    const col = getTempColor(temp);
-    const label = stationMap[key] || key;
-    const card = document.createElement('div');
-    card.className = 'station-card';
-    card.innerHTML = `
-      <div class="station-name">${label}</div>
-      <div class="station-temp" style="color:${col}">${temp.toFixed(1)}<span>°C</span></div>
-      <div style="margin-top:6px"><span class="status-badge ${st.cls}" style="font-size:11px;padding:3px 8px">${st.icon}</span></div>
-      ${val.LAST_UPDATE ? `<div class="station-time">${val.LAST_UPDATE}</div>` : ''}
+    if(isNaN(temp)||temp<=0) return;
+    const s = getTempStatus(temp);
+    const c = getColor(temp);
+    const div = document.createElement('div');
+    div.className = 'station-card';
+    div.innerHTML = `
+      <div class="station-name">${nameMap[key]||key}</div>
+      <div class="station-temp" style="color:${c}">${temp.toFixed(1)}<span>°C</span></div>
+      <div style="margin-top:6px"><span class="s-badge ${s.cls}" style="font-size:11px;padding:3px 8px">${s.icon}</span></div>
+      ${val.LAST_UPDATE?`<div style="font-size:11px;color:var(--text-muted);margin-top:4px">${val.LAST_UPDATE}</div>`:''}
     `;
-    grid.appendChild(card);
+    grid.appendChild(div);
   });
 }
 
 function showError() {
   document.getElementById('avg-temp').textContent = '--';
-  document.getElementById('status-badge').textContent = '⚠️ 불러오기 실패';
-  document.getElementById('status-badge').className = 'status-badge s-warm';
-  document.getElementById('status-desc').textContent = '데이터를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.';
+  const badge = document.getElementById('status-badge');
+  badge.textContent = '⚠️ 연결 실패';
+  badge.className = 's-badge s-warm';
+  document.getElementById('status-desc').textContent =
+    'API 연결에 실패했습니다. 아래 hangang.life 버튼으로 직접 확인하세요.';
   document.getElementById('station-grid').innerHTML =
-    `<div style="grid-column:1/-1;text-align:center;padding:30px;color:var(--text-muted);font-size:13px">
-      ⚠️ API 연결 오류<br>잠시 후 새로고침 버튼을 눌러주세요
-    </div>`;
+    '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">' +
+    '⚠️ 데이터를 불러오지 못했습니다.<br>새로고침하거나 hangang.life에서 직접 확인하세요.</div>';
 }
 
 function toggleFaq(btn) {
@@ -321,7 +316,7 @@ function toggleFaq(btn) {
   btn.nextElementSibling.classList.toggle('open');
 }
 function toggleDark() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const isDark = document.documentElement.getAttribute('data-theme')==='dark';
   document.documentElement.setAttribute('data-theme', isDark?'light':'dark');
   localStorage.setItem('calczip-theme', isDark?'light':'dark');
   document.getElementById('dark-btn').textContent = isDark?'🌙':'☀️';
@@ -330,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('dark-btn').textContent =
     document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';
   fetchData();
-  setInterval(fetchData, 10 * 60 * 1000); // 10분마다 자동 갱신
+  setInterval(fetchData, 10*60*1000);
 });
 </script>
 </body>
