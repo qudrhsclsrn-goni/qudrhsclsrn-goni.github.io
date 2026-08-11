@@ -279,7 +279,7 @@
 </footer>
 
 <script>
-const API_KEY = '666756495771756437394967756374';
+const API_KEY = '69527271597175643634564d545749';
 
 function getTempStatus(t) {
   if(t<10) return {cls:'s-cold',icon:'❄️',label:'차가움',color:'#60a5fa',heroColor:'linear-gradient(160deg,#0f2a4a,#1a4f8a,#0d5a5e)',desc:'수온이 매우 낮습니다. 수영 시 저체온증 위험이 있습니다.',thermoColor:'linear-gradient(to top,#60a5fa,#93c5fd)'};
@@ -291,26 +291,17 @@ function getTempStatus(t) {
 async function fetchData() {
   document.getElementById('spin-svg').classList.add('spinning');
 
-  const TARGET = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
-  const PROXIES = [
-    `https://openAPI.seoul.go.kr:443/${API_KEY}/json/WPOSInformationTime/1/5/`,  // HTTPS 직접
-    `https://corsproxy.io/?${encodeURIComponent(TARGET)}`,
-    `https://api.allorigins.win/get?url=${encodeURIComponent(TARGET)}`,
-    `https://api.codetabs.com/v1/proxy?quest=${TARGET}`,
-  ];
-
-  for (const url of PROXIES) {
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
-      let data = await res.json();
-      // allorigins는 contents 안에 들어있음
-      if (data.contents) data = JSON.parse(data.contents);
-      if (data?.WPOSInformationTime?.row) {
-        renderData(data.WPOSInformationTime.row);
-        return;
-      }
-    } catch(e) { console.warn('프록시 실패:', url, e.message); }
-  }
+  // Cloudflare Workers 프록시 경유 (CORS 해결)
+  try {
+    const res = await fetch('https://hangang.qudrhsclsrn.workers.dev/', {
+      signal: AbortSignal.timeout(10000)
+    });
+    const data = await res.json();
+    if (data?.WPOSInformationTime?.row) {
+      renderData(data.WPOSInformationTime.row);
+      return;
+    }
+  } catch(e) { console.warn('Workers 실패:', e.message); }
 
   showError();
   document.getElementById('spin-svg').classList.remove('spinning');
