@@ -290,20 +290,27 @@ function getTempStatus(t) {
 
 async function fetchData() {
   document.getElementById('spin-svg').classList.add('spinning');
-  try {
-    const url = `https://openAPI.seoul.go.kr:443/${API_KEY}/json/WPOSInformationTime/1/5/`;
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-    const data = await res.json();
-    if(data?.WPOSInformationTime?.row) { renderData(data.WPOSInformationTime.row); return; }
-  } catch(e) { console.warn(e); }
 
-  try {
-    const target = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
-    const res = await fetch('https://api.allorigins.win/get?url='+encodeURIComponent(target), { signal: AbortSignal.timeout(8000) });
-    const w = await res.json();
-    const data = JSON.parse(w.contents);
-    if(data?.WPOSInformationTime?.row) { renderData(data.WPOSInformationTime.row); return; }
-  } catch(e) { console.warn(e); }
+  const TARGET = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
+  const PROXIES = [
+    `https://openAPI.seoul.go.kr:443/${API_KEY}/json/WPOSInformationTime/1/5/`,  // HTTPS 직접
+    `https://corsproxy.io/?${encodeURIComponent(TARGET)}`,
+    `https://api.allorigins.win/get?url=${encodeURIComponent(TARGET)}`,
+    `https://api.codetabs.com/v1/proxy?quest=${TARGET}`,
+  ];
+
+  for (const url of PROXIES) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
+      let data = await res.json();
+      // allorigins는 contents 안에 들어있음
+      if (data.contents) data = JSON.parse(data.contents);
+      if (data?.WPOSInformationTime?.row) {
+        renderData(data.WPOSInformationTime.row);
+        return;
+      }
+    } catch(e) { console.warn('프록시 실패:', url, e.message); }
+  }
 
   showError();
   document.getElementById('spin-svg').classList.remove('spinning');
