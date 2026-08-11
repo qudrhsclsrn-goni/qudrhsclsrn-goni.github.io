@@ -15,40 +15,97 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
   <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
   <style>
-    .temp-big{font-size:56px;font-weight:800;letter-spacing:-2px;line-height:1;}
-    .temp-unit{font-size:26px;font-weight:600;vertical-align:super;}
-    .s-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:13px;font-weight:600;}
-    .s-cold{background:#eff6ff;color:#1d4ed8;}
-    .s-cool{background:#f0fdf4;color:#15803d;}
-    .s-warm{background:#fefce8;color:#a16207;}
-    .s-hot{background:#fef2f2;color:#b91c1c;}
-    [data-theme="dark"] .s-cold{background:#1e3a5f;color:#93c5fd;}
-    [data-theme="dark"] .s-cool{background:#14532d;color:#86efac;}
-    [data-theme="dark"] .s-warm{background:#422006;color:#fde68a;}
-    [data-theme="dark"] .s-hot{background:#450a0a;color:#fca5a5;}
-    .station-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
-    .station-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;text-align:center;transition:all 0.2s;}
-    .station-card:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow);}
-    .station-name{font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:8px;}
-    .station-temp{font-size:30px;font-weight:800;}
-    .station-temp span{font-size:14px;color:var(--text-muted);}
-    .temp-bar{height:10px;background:linear-gradient(to right,#60a5fa,#34d399,#fbbf24,#f87171);border-radius:5px;position:relative;margin:12px 0 6px;}
-    .temp-dot{position:absolute;top:-5px;width:20px;height:20px;background:var(--card-bg);border:3px solid var(--primary);border-radius:50%;transform:translateX(-50%);transition:left 0.6s;}
-    .refresh-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--text-secondary);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all 0.15s;}
-    .refresh-btn:hover{border-color:var(--primary);color:var(--primary);}
-    @keyframes spin{to{transform:rotate(360deg);}}
-    .spinning{animation:spin 1s linear infinite;}
-    .faq-item{border-bottom:1px solid var(--border);}
-    .faq-item:last-child{border-bottom:none;}
-    .faq-q{width:100%;padding:13px 0;background:none;border:none;font-size:14px;font-weight:500;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font);}
-    .faq-q:hover{color:var(--primary);}
-    .faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;}
-    .faq-q.open .faq-arrow{transform:rotate(180deg);}
-    .faq-a{font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none;}
-    .faq-a.open{display:block;}
+    /* ===== 히어로 섹션 ===== */
+    .river-hero {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 0;
+      background: linear-gradient(160deg, #0f4c81 0%, #1565a8 40%, #0d7377 100%);
+      padding: 32px 24px 0;
+      min-height: 240px;
+    }
+    .river-hero-content { position: relative; z-index: 2; }
+    .river-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .river-temp { font-size: 72px; font-weight: 800; color: #fff; letter-spacing: -3px; line-height: 1; }
+    .river-temp sup { font-size: 32px; font-weight: 600; vertical-align: super; }
+    .river-status { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; background: rgba(255,255,255,0.2); color: #fff; backdrop-filter: blur(4px); }
+    .river-time { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 8px; }
+
+    /* SVG 물결 애니메이션 */
+    .wave-container { position: absolute; bottom: 0; left: 0; right: 0; height: 80px; }
+    .wave { animation: wave-move 4s linear infinite; }
+    .wave2 { animation: wave-move 6s linear infinite reverse; opacity: 0.6; }
+    @keyframes wave-move { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* 물고기 애니메이션 */
+    .fish { position: absolute; font-size: 18px; animation: swim 8s linear infinite; opacity: 0.8; }
+    .fish:nth-child(1) { top: 55%; animation-duration: 9s; }
+    .fish:nth-child(2) { top: 65%; animation-duration: 12s; animation-delay: -4s; font-size: 13px; }
+    .fish:nth-child(3) { top: 45%; animation-duration: 7s; animation-delay: -2s; font-size: 14px; }
+    @keyframes swim { 0%{left:-40px;transform:scaleX(1)} 49%{transform:scaleX(1)} 50%{left:calc(100% + 40px);transform:scaleX(-1)} 99%{transform:scaleX(-1)} 100%{left:-40px;transform:scaleX(1)} }
+
+    /* 버블 */
+    .bubble { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.15); animation: rise linear infinite; }
+    @keyframes rise { 0%{transform:translateY(0) scale(1);opacity:0.6} 100%{transform:translateY(-120px) scale(1.3);opacity:0} }
+
+    /* ===== 수온계 ===== */
+    .thermometer-wrap { display: flex; align-items: center; gap: 16px; margin: 16px 0; }
+    .thermometer { width: 28px; height: 100px; background: rgba(255,255,255,0.15); border-radius: 14px; position: relative; border: 2px solid rgba(255,255,255,0.3); overflow: hidden; }
+    .thermo-fill { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 0 0 12px 12px; transition: height 1s ease; }
+    .thermo-labels { display: flex; flex-direction: column; justify-content: space-between; height: 100px; font-size: 10px; color: rgba(255,255,255,0.6); }
+
+    /* ===== 관측소 카드 ===== */
+    .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .station-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 14px; text-align: center;
+      transition: all 0.2s; position: relative; overflow: hidden;
+    }
+    .station-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+    .station-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .station-name { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    .station-temp-val { font-size: 30px; font-weight: 800; }
+    .station-temp-val span { font-size: 14px; color: var(--text-muted); }
+    .station-wave { font-size: 20px; margin-top: 4px; }
+
+    /* ===== 온도 게이지 ===== */
+    .gauge-wrap { margin: 12px 0; }
+    .gauge-bar { height: 12px; background: linear-gradient(to right,#60a5fa,#34d399,#fbbf24,#f87171); border-radius: 6px; position: relative; }
+    .gauge-dot { position: absolute; top: -4px; width: 20px; height: 20px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.3); transform: translateX(-50%); transition: left 0.8s cubic-bezier(.34,1.56,.64,1); }
+    .gauge-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+    /* ===== 배지 ===== */
+    .s-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+    .s-cold { background: #eff6ff; color: #1d4ed8; }
+    .s-cool { background: #f0fdf4; color: #15803d; }
+    .s-warm { background: #fefce8; color: #a16207; }
+    .s-hot  { background: #fef2f2; color: #b91c1c; }
+    [data-theme="dark"] .s-cold { background: #1e3a5f; color: #93c5fd; }
+    [data-theme="dark"] .s-cool { background: #14532d; color: #86efac; }
+    [data-theme="dark"] .s-warm { background: #422006; color: #fde68a; }
+    [data-theme="dark"] .s-hot  { background: #450a0a; color: #fca5a5; }
+
+    /* ===== 기타 ===== */
+    .refresh-btn { display: flex; align-items: center; gap: 6px; padding: 7px 14px; border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-sm); background: rgba(255,255,255,0.15); color: #fff; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font); transition: all 0.15s; backdrop-filter: blur(4px); }
+    .refresh-btn:hover { background: rgba(255,255,255,0.25); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinning { animation: spin 1s linear infinite; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { width:100%; padding:13px 0; background:none; border:none; font-size:14px; font-weight:500; color:var(--text-primary); cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center; gap:12px; font-family:var(--font); }
+    .faq-q:hover { color: var(--primary); }
+    .faq-arrow { font-size:11px; color:var(--text-muted); transition:transform 0.2s; }
+    .faq-q.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a { font-size:13px; color:var(--text-secondary); line-height:1.8; padding:0 0 13px; display:none; }
+    .faq-a.open { display: block; }
   </style>
 </head>
 <body>
+
 <header class="site-header">
   <div class="header-inner">
     <a href="index.html" class="logo">물타기<span>계산기</span></a>
@@ -63,41 +120,84 @@
   <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
   <main class="main-content">
     <nav class="breadcrumb"><a href="index.html">홈</a><span>›</span><span>한강 수온</span></nav>
-    <h1 class="page-title">🌊 한강 실시간 수온</h1>
-    <p class="page-desc">서울시 수질 자동측정망 기반 실시간 한강 수온 정보입니다.</p>
-    <div class="ad-banner">광고 영역 (728×90)</div>
 
-    <!-- 메인 수온 카드 -->
-    <div class="calc-card">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
-        <div>
-          <div style="font-size:13px;color:var(--text-muted);margin-bottom:6px">현재 평균 수온</div>
-          <div style="display:flex;align-items:baseline;gap:4px">
-            <span class="temp-big" id="avg-temp" style="color:var(--primary)">--</span>
-            <span class="temp-unit" style="color:var(--primary)">°C</span>
+    <!-- ===== 히어로 카드 ===== -->
+    <div class="river-hero" id="river-hero">
+      <!-- 물고기 -->
+      <div class="fish" style="animation-delay:0s">🐟</div>
+      <div class="fish" style="animation-delay:-5s">🐠</div>
+      <div class="fish" style="animation-delay:-2s">🐡</div>
+      <!-- 버블 -->
+      <div class="bubble" style="width:6px;height:6px;left:20%;bottom:80px;animation-duration:3s;animation-delay:0s"></div>
+      <div class="bubble" style="width:4px;height:4px;left:50%;bottom:70px;animation-duration:4s;animation-delay:1s"></div>
+      <div class="bubble" style="width:8px;height:8px;left:75%;bottom:85px;animation-duration:3.5s;animation-delay:2s"></div>
+
+      <div class="river-hero-content">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px">
+          <div>
+            <div class="river-label">🌊 한강 실시간 수온</div>
+            <div class="river-temp" id="hero-temp">--<sup>°C</sup></div>
+            <div class="river-status" id="hero-badge">🌀 불러오는 중...</div>
+            <div class="river-time" id="hero-time">-</div>
           </div>
-          <div style="margin-top:10px">
-            <span class="s-badge s-cool" id="status-badge">불러오는 중...</span>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+            <button class="refresh-btn" onclick="fetchData()">
+              <svg id="spin-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+              새로고침
+            </button>
+            <!-- 수온계 -->
+            <div class="thermometer-wrap">
+              <div class="thermo-labels">
+                <span>40°</span><span>30°</span><span>20°</span><span>10°</span><span>0°</span>
+              </div>
+              <div class="thermometer">
+                <div class="thermo-fill" id="thermo-fill" style="height:0%;background:linear-gradient(to top,#f87171,#fbbf24)"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div style="text-align:right">
-          <button class="refresh-btn" id="refresh-btn" onclick="fetchData()">
-            <svg id="spin-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
-            새로고침
-          </button>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:6px" id="update-time">-</div>
+
+        <!-- 상태 설명 -->
+        <div id="hero-desc" style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.8);min-height:18px"></div>
+      </div>
+
+      <!-- SVG 물결 -->
+      <div class="wave-container">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="width:200%;height:100%;display:block">
+          <defs>
+            <linearGradient id="wg" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(255,255,255,0.15)"/>
+              <stop offset="100%" style="stop-color:rgba(255,255,255,0.05)"/>
+            </linearGradient>
+          </defs>
+          <path class="wave" d="M0,40 C180,10 360,70 540,40 C720,10 900,70 1080,40 C1260,10 1440,70 1440,40 L1440,80 L0,80 Z" fill="url(#wg)"/>
+          <path class="wave2" d="M0,50 C240,20 480,80 720,50 C960,20 1200,80 1440,50 L1440,80 L0,80 Z" fill="rgba(255,255,255,0.08)"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="ad-banner" style="margin-top:16px">광고 영역 (728×90)</div>
+
+    <!-- ===== 온도 게이지 + 설명 ===== -->
+    <div class="calc-card" style="margin-top:0">
+      <div class="gauge-wrap">
+        <div class="gauge-bar">
+          <div class="gauge-dot" id="gauge-dot" style="left:50%;background:#34d399"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>0°C<br>❄️</span>
+          <span style="text-align:center">10°C<br>🏊</span>
+          <span style="text-align:center">20°C<br>😊</span>
+          <span style="text-align:center">30°C<br>☀️</span>
+          <span style="text-align:right">40°C<br>🌡️</span>
         </div>
       </div>
-      <div class="temp-bar"><div class="temp-dot" id="temp-dot" style="left:50%"></div></div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:12px">
-        <span>0°C</span><span>10°C</span><span>20°C</span><span>30°C</span><span>40°C</span>
-      </div>
-      <div id="status-desc" style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--text-secondary)">
+      <div id="status-desc" style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--text-secondary);margin-top:8px">
         데이터를 불러오는 중입니다...
       </div>
     </div>
 
-    <!-- 관측소별 카드 -->
+    <!-- ===== 관측소별 카드 ===== -->
     <div class="calc-card" style="margin-top:0">
       <div class="section-title">관측소별 수온</div>
       <div class="station-grid" id="station-grid">
@@ -108,7 +208,7 @@
       </div>
     </div>
 
-    <!-- 수온 안전 기준 -->
+    <!-- ===== 수온 안전 기준 ===== -->
     <div class="calc-card" style="margin-top:0">
       <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">수온별 안전 기준</h2>
       <div style="display:grid;gap:8px">
@@ -179,130 +279,109 @@
 </footer>
 
 <script>
-// 서울시 열린데이터광장 한강수계 수질측정망 API
-// JSONP 방식으로 CORS 우회
 const API_KEY = '666756495771756437394967756374';
-const API_URL = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
 
 function getTempStatus(t) {
-  if(t<10) return {cls:'s-cold',icon:'❄️',label:'차가움',desc:'수온이 매우 낮습니다. 수영 시 저체온증 위험이 있습니다.'};
-  if(t<25) return {cls:'s-cool',icon:'🏊',label:'수영 적합',desc:'수영하기 좋은 수온입니다. 공식 수영장 구역에서 안전하게 즐기세요.'};
-  if(t<30) return {cls:'s-warm',icon:'🌤️',label:'따뜻함',desc:'수온이 높은 편입니다. 장시간 활동 시 탈수에 주의하세요.'};
-  return {cls:'s-hot',icon:'🌡️',label:'높음',desc:'수온이 매우 높습니다. 녹조 발생 가능성이 있습니다.'};
-}
-function getColor(t) {
-  return t<10?'#60a5fa':t<20?'#34d399':t<28?'#fbbf24':'#f87171';
+  if(t<10) return {cls:'s-cold',icon:'❄️',label:'차가움',color:'#60a5fa',heroColor:'linear-gradient(160deg,#0f2a4a,#1a4f8a,#0d5a5e)',desc:'수온이 매우 낮습니다. 수영 시 저체온증 위험이 있습니다.',thermoColor:'linear-gradient(to top,#60a5fa,#93c5fd)'};
+  if(t<25) return {cls:'s-cool',icon:'🏊',label:'수영 적합',color:'#34d399',heroColor:'linear-gradient(160deg,#0f4c81,#1565a8,#0d7377)',desc:'수영하기 좋은 수온입니다! 안전요원이 있는 구역에서 즐겨보세요.',thermoColor:'linear-gradient(to top,#34d399,#6ee7b7)'};
+  if(t<30) return {cls:'s-warm',icon:'🌤️',label:'따뜻함',color:'#fbbf24',heroColor:'linear-gradient(160deg,#7c3a00,#b45309,#0d6966)',desc:'수온이 따뜻합니다. 장시간 활동 시 탈수와 더위에 주의하세요.',thermoColor:'linear-gradient(to top,#f59e0b,#fde68a)'};
+  return {cls:'s-hot',icon:'🌡️',label:'높음',color:'#f87171',heroColor:'linear-gradient(160deg,#7f1d1d,#b91c1c,#0d5252)',desc:'수온이 매우 높습니다. 녹조 발생 가능성이 있으니 주의하세요.',thermoColor:'linear-gradient(to top,#ef4444,#fca5a5)'};
 }
 
 async function fetchData() {
-  const svg = document.getElementById('spin-svg');
-  svg.classList.add('spinning');
-  document.getElementById('refresh-btn').disabled = true;
-
+  document.getElementById('spin-svg').classList.add('spinning');
   try {
-    // HTTP API를 HTTPS 페이지에서 호출시 mixed content 문제 → HTTPS 버전 시도
     const url = `https://openAPI.seoul.go.kr:443/${API_KEY}/json/WPOSInformationTime/1/5/`;
     const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
     const data = await res.json();
+    if(data?.WPOSInformationTime?.row) { renderData(data.WPOSInformationTime.row); return; }
+  } catch(e) { console.warn(e); }
 
-    if(data && data.WPOSInformationTime && data.WPOSInformationTime.row) {
-      renderData(data.WPOSInformationTime.row);
-    } else {
-      // HTTP 버전 (CORS 프록시 경유)
-      await fetchViaProxy();
-    }
-  } catch(e) {
-    console.warn('직접 호출 실패:', e.message);
-    await fetchViaProxy();
-  }
-
-  svg.classList.remove('spinning');
-  document.getElementById('refresh-btn').disabled = false;
-}
-
-async function fetchViaProxy() {
   try {
     const target = `http://openAPI.seoul.go.kr:8088/${API_KEY}/json/WPOSInformationTime/1/5/`;
-    const res = await fetch(
-      'https://api.allorigins.win/get?url=' + encodeURIComponent(target),
-      { signal: AbortSignal.timeout(8000) }
-    );
-    const wrapper = await res.json();
-    const data = JSON.parse(wrapper.contents);
-    if(data && data.WPOSInformationTime && data.WPOSInformationTime.row) {
-      renderData(data.WPOSInformationTime.row);
-    } else {
-      showError();
-    }
-  } catch(e) {
-    console.error('프록시도 실패:', e.message);
-    showError();
-  }
+    const res = await fetch('https://api.allorigins.win/get?url='+encodeURIComponent(target), { signal: AbortSignal.timeout(8000) });
+    const w = await res.json();
+    const data = JSON.parse(w.contents);
+    if(data?.WPOSInformationTime?.row) { renderData(data.WPOSInformationTime.row); return; }
+  } catch(e) { console.warn(e); }
+
+  showError();
+  document.getElementById('spin-svg').classList.remove('spinning');
 }
 
 function renderData(rows) {
-  // 최신 데이터만 추출 (관측소별 최신 1건)
+  document.getElementById('spin-svg').classList.remove('spinning');
   const stations = {};
   rows.forEach(row => {
     const name = row.MSR_LOC_NM;
     const temp = parseFloat(row.WATER_TEMP);
     if(!isNaN(temp) && temp > 0) {
-      if(!stations[name] || row.MSR_DATE_TIME > stations[name].time) {
+      if(!stations[name] || row.MSR_DATE_TIME > stations[name].time)
         stations[name] = { temp, time: row.MSR_DATE_TIME, ph: parseFloat(row.PH) };
-      }
     }
   });
 
   const temps = Object.values(stations).map(s => s.temp);
   if(!temps.length) { showError(); return; }
-
   const avg = temps.reduce((a,b)=>a+b,0) / temps.length;
   const st = getTempStatus(avg);
-  const col = getColor(avg);
 
-  document.getElementById('avg-temp').textContent = avg.toFixed(1);
-  document.getElementById('avg-temp').style.color = col;
-  const badge = document.getElementById('status-badge');
-  badge.textContent = st.icon + ' ' + st.label;
-  badge.className = 's-badge ' + st.cls;
-  document.getElementById('status-desc').textContent = st.desc;
-
-  const pct = Math.min(Math.max(avg/40*100, 2), 98);
-  const dot = document.getElementById('temp-dot');
-  dot.style.left = pct + '%';
-  dot.style.borderColor = col;
+  // 히어로 업데이트
+  document.getElementById('hero-temp').innerHTML = avg.toFixed(1) + '<sup>°C</sup>';
+  document.getElementById('hero-badge').textContent = st.icon + ' ' + st.label;
+  document.getElementById('hero-desc').textContent = st.desc;
+  document.getElementById('river-hero').style.background = st.heroColor;
 
   const now = new Date();
-  document.getElementById('update-time').textContent =
-    now.getHours().toString().padStart(2,'0') + ':' +
-    now.getMinutes().toString().padStart(2,'0') + ' 기준';
+  document.getElementById('hero-time').textContent =
+    `📡 ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} 기준 · 서울시 수질측정망`;
 
+  // 수온계
+  const pct = Math.min(avg / 40 * 100, 100);
+  document.getElementById('thermo-fill').style.height = pct + '%';
+  document.getElementById('thermo-fill').style.background = st.thermoColor;
+
+  // 게이지
+  const gaugePct = Math.min(Math.max(avg/40*100, 1), 99);
+  const dot = document.getElementById('gauge-dot');
+  dot.style.left = gaugePct + '%';
+  dot.style.background = st.color;
+
+  // 상태 설명
+  document.getElementById('status-desc').innerHTML =
+    `<span class="s-badge ${st.cls}">${st.icon} ${st.label}</span>&nbsp;&nbsp;${st.desc}`;
+
+  // 관측소 카드
   const grid = document.getElementById('station-grid');
   grid.innerHTML = '';
+  const tempColors = [st.color];
   Object.entries(stations).forEach(([name, val]) => {
     const s = getTempStatus(val.temp);
-    const c = getColor(val.temp);
     const div = document.createElement('div');
     div.className = 'station-card';
+    div.style.cssText = `--card-accent:${s.color}`;
     div.innerHTML = `
+      <style>.station-card[data-name="${name}"]::before{background:${s.color}}</style>
       <div class="station-name">${name}</div>
-      <div class="station-temp" style="color:${c}">${val.temp.toFixed(1)}<span>°C</span></div>
-      ${!isNaN(val.ph)?`<div style="font-size:12px;color:var(--text-muted);margin-top:3px">pH ${val.ph.toFixed(1)}</div>`:''}
-      <div style="margin-top:6px"><span class="s-badge ${s.cls}" style="font-size:11px;padding:3px 8px">${s.icon}</span></div>
+      <div class="station-temp-val" style="color:${s.color}">${val.temp.toFixed(1)}<span>°C</span></div>
+      ${!isNaN(val.ph) ? `<div style="font-size:11px;color:var(--text-muted);margin-top:2px">pH ${val.ph.toFixed(1)}</div>` : ''}
+      <div class="station-wave">${val.temp<15?'🥶':val.temp<22?'😊':val.temp<28?'😎':'🥵'}</div>
     `;
+    div.setAttribute('data-name', name);
     grid.appendChild(div);
+
+    // ::before 색상 직접 적용
+    div.style.borderTop = `3px solid ${s.color}`;
   });
 }
 
 function showError() {
-  document.getElementById('avg-temp').textContent = '--';
-  const badge = document.getElementById('status-badge');
-  badge.textContent = '⚠️ 연결 실패';
-  badge.className = 's-badge s-warm';
-  document.getElementById('status-desc').textContent =
-    '데이터를 불러오지 못했습니다. 새로고침을 눌러보세요.';
+  document.getElementById('spin-svg').classList.remove('spinning');
+  document.getElementById('hero-temp').innerHTML = '--<sup>°C</sup>';
+  document.getElementById('hero-badge').textContent = '⚠️ 연결 실패';
+  document.getElementById('hero-desc').textContent = '데이터를 불러오지 못했습니다. 새로고침을 눌러보세요.';
   document.getElementById('station-grid').innerHTML =
-    '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">⚠️ 데이터 불러오기 실패. 새로고침해 주세요.</div>';
+    '<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">⚠️ 새로고침을 눌러보세요</div>';
 }
 
 function toggleFaq(btn) {
