@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>한강 수온 - 실시간 한강 물 온도 확인 | 물타기계산기</title>
+  <meta name="description" content="한강 실시간 수온을 확인하세요. 한강대교, 잠실대교, 행주대교, 노량진 등 관측소별 현재 수온과 pH를 실시간으로 제공합니다." />
+  <meta name="keywords" content="한강수온, 한강물온도, 한강실시간수온, 한강수영, 한강온도, 한강수질" />
+  <meta property="og:title" content="한강 실시간 수온 확인" />
+  <meta property="og:description" content="한강 관측소별 실시간 수온과 pH를 확인하세요." />
+  <meta property="og:type" content="website" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5000637956714787" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>
+    .temp-big { font-size: 52px; font-weight: 800; letter-spacing: -2px; line-height: 1; }
+    .temp-unit { font-size: 24px; font-weight: 600; vertical-align: super; }
+    .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+    .status-cold { background: #eff6ff; color: #1d4ed8; }
+    .status-cool { background: #f0fdf4; color: #15803d; }
+    .status-warm { background: #fefce8; color: #a16207; }
+    .status-hot  { background: #fef2f2; color: #b91c1c; }
+    [data-theme="dark"] .status-cold { background: #1e3a5f; color: #93c5fd; }
+    [data-theme="dark"] .status-cool { background: #14532d; color: #86efac; }
+    [data-theme="dark"] .status-warm { background: #422006; color: #fde68a; }
+    [data-theme="dark"] .status-hot  { background: #450a0a; color: #fca5a5; }
+
+    .station-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .station-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; text-align: center; transition: all 0.2s; cursor: default; }
+    .station-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
+    .station-card.active { border-color: var(--primary); background: var(--highlight-bg); }
+    .station-name { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+    .station-temp { font-size: 28px; font-weight: 800; color: var(--text-primary); }
+    .station-temp span { font-size: 14px; font-weight: 600; color: var(--text-muted); }
+    .station-ph { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .station-time { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    .temp-bar-wrap { margin: 12px 0; }
+    .temp-bar { height: 10px; background: linear-gradient(to right, #60a5fa, #34d399, #fbbf24, #f87171); border-radius: 5px; position: relative; }
+    .temp-indicator { position: absolute; top: -4px; width: 18px; height: 18px; background: var(--card-bg); border: 3px solid var(--primary); border-radius: 50%; transform: translateX(-50%); transition: left 0.5s; }
+
+    .refresh-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: none; color: var(--text-secondary); font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+    .refresh-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .refresh-btn.loading svg { animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .update-time { font-size: 12px; color: var(--text-muted); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { width:100%; padding:13px 0; background:none; border:none; font-size:14px; font-weight:500; color:var(--text-primary); cursor:pointer; text-align:left; display:flex; justify-content:space-between; align-items:center; gap:12px; font-family:var(--font); }
+    .faq-q:hover { color: var(--primary); }
+    .faq-arrow { font-size:11px; color:var(--text-muted); transition:transform 0.2s; }
+    .faq-q.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a { font-size:13px; color:var(--text-secondary); line-height:1.8; padding:0 0 13px; display:none; }
+    .faq-a.open { display: block; }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">물타기<span>계산기</span></a>
+    <div class="header-right">
+      <nav class="header-nav"><a href="index.html">홈</a></nav>
+      <button class="dark-toggle" onclick="toggleDark()" id="dark-btn">🌙</button>
+    </div>
+  </div>
+</header>
+
+<div class="page-layout">
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+
+  <main class="main-content">
+    <nav class="breadcrumb"><a href="index.html">홈</a><span>›</span><span>한강 수온</span></nav>
+    <h1 class="page-title">🌊 한강 실시간 수온</h1>
+    <p class="page-desc">한강 관측소별 실시간 수온과 수질 정보를 확인하세요.</p>
+
+    <div class="ad-banner">광고 영역 (728×90)</div>
+
+    <!-- 메인 카드 -->
+    <div class="calc-card" id="main-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <div>
+          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px">현재 한강 평균 수온</div>
+          <div style="display:flex;align-items:baseline;gap:4px">
+            <span class="temp-big" id="avg-temp" style="color:var(--primary)">--</span>
+            <span class="temp-unit" style="color:var(--primary)">°C</span>
+          </div>
+          <div style="margin-top:8px" id="status-badge-wrap">
+            <span class="status-badge status-cool" id="status-badge">불러오는 중...</span>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <button class="refresh-btn" id="refresh-btn" onclick="fetchData()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+            새로고침
+          </button>
+          <div class="update-time" style="margin-top:6px" id="update-time">-</div>
+        </div>
+      </div>
+
+      <!-- 온도 바 -->
+      <div class="temp-bar-wrap">
+        <div class="temp-bar">
+          <div class="temp-indicator" id="temp-indicator" style="left:50%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:6px">
+          <span>0°C</span><span>10°C</span><span>20°C</span><span>30°C</span><span>40°C</span>
+        </div>
+      </div>
+
+      <!-- 수온 상태 설명 -->
+      <div id="temp-desc" style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;font-size:13px;color:var(--text-secondary);margin-top:4px"></div>
+    </div>
+
+    <!-- 관측소별 -->
+    <div class="calc-card" style="margin-top:0">
+      <div class="section-title">관측소별 수온</div>
+      <div class="station-grid" id="station-grid">
+        <div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">
+          <div style="font-size:24px;margin-bottom:8px">🌊</div>
+          데이터를 불러오는 중입니다...
+        </div>
+      </div>
+    </div>
+
+    <!-- 수온 안내 -->
+    <div class="calc-card" style="margin-top:0">
+      <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">수온별 한강 수영 안전 기준</h2>
+      <div style="display:grid;gap:8px">
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
+          <span class="status-badge status-cold">❄️ 차가움</span>
+          <span style="font-size:13px;color:var(--text-secondary)"><strong>10°C 미만</strong> — 수영 위험. 저체온증 주의</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
+          <span class="status-badge status-cool">🏊 적합</span>
+          <span style="font-size:13px;color:var(--text-secondary)"><strong>10~25°C</strong> — 수영하기 좋은 수온</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
+          <span class="status-badge status-warm">🌤️ 따뜻함</span>
+          <span style="font-size:13px;color:var(--text-secondary)"><strong>25~30°C</strong> — 수영 가능, 더위 주의</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm)">
+          <span class="status-badge status-hot">🌡️ 높음</span>
+          <span style="font-size:13px;color:var(--text-secondary)"><strong>30°C 이상</strong> — 수질 악화 주의, 녹조 가능성</span>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px">※ 한강 수영은 안전요원이 배치된 공식 수영장 구역에서만 가능합니다.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="calc-card" style="margin-top:0">
+      <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">자주 묻는 질문 (FAQ)</h2>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>한강 수온은 얼마나 자주 업데이트되나요?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">한강 수온 데이터는 한강라이프(hangang.life) API를 통해 제공되며, 실시간으로 업데이트됩니다. 페이지의 새로고침 버튼을 누르면 최신 데이터를 불러올 수 있습니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>한강에서 수영할 수 있는 곳은 어디인가요?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">한강에서는 안전요원이 배치된 공식 수영장 구역에서만 수영이 가능합니다. 뚝섬, 광나루, 잠원, 망원, 양화 한강공원 등에 수영장이 있으며, 여름철(7~8월)에만 운영합니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>pH가 무엇을 의미하나요?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">pH는 물의 산성도를 나타내는 지표입니다. 7이 중성이며, 7보다 낮으면 산성, 높으면 알칼리성입니다. 한강의 pH는 보통 7.0~8.5 사이로, 이 범위가 수중 생태계에 적합합니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>한강 수온이 높을 때 주의사항은?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">수온이 25°C 이상으로 높아지면 녹조(청록색 조류)가 발생할 수 있습니다. 녹조 발생 시 수영, 낚시, 수상 레저를 자제하고 물과 직접 접촉을 피하는 것이 좋습니다. 녹조 정보는 환경부 물환경정보시스템에서 확인할 수 있습니다.</div>
+      </div>
+    </div>
+
+    <div class="ad-banner ad-banner-tall">광고 영역 (300×250)</div>
+
+    <div>
+      <div class="section-title">관련 계산기</div>
+      <div class="related-grid">
+        <a href="stock-add.html" class="related-card"><div class="r-icon">📉</div>물타기 계산기</a>
+        <a href="salary.html" class="related-card"><div class="r-icon">💼</div>연봉 실수령</a>
+        <a href="dday.html" class="related-card"><div class="r-icon">📅</div>D-day 계산기</a>
+        <a href="game-apple.html" class="related-card"><div class="r-icon">🍎</div>사과 게임</a>
+      </div>
+    </div>
+
+  </main>
+
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">홈</a><a href="privacy.html">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a><a href="contact.html">문의하기</a>
+    </div>
+    <p class="footer-notice">수온 데이터는 한강라이프 API를 통해 제공됩니다. 실제 상황과 다를 수 있으니 참고용으로만 활용하세요.</p>
+    <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const PROXY = 'https://api.allorigins.win/raw?url=';
+const API_URL = 'https://api.hangang.life/';
+
+// 관측소 한글명 매핑
+const STATION_NAMES = {
+  '한강대교': '한강대교',
+  '잠실대교': '잠실대교',
+  '행주대교': '행주대교',
+  '노량진': '노량진',
+  '광진교': '광진교',
+  '한강철교': '한강철교',
+  '팔당': '팔당댐',
+  '구리': '구리',
+  '암사': '암사',
+};
+
+function getTempStatus(temp) {
+  if (temp < 10) return { cls: 'status-cold', icon: '❄️', label: '차가움', desc: '수온이 매우 낮습니다. 수영 시 저체온증 위험이 있으니 주의하세요.' };
+  if (temp < 25) return { cls: 'status-cool', icon: '🏊', label: '수영 적합', desc: '수영하기 좋은 수온입니다. 한강 수영장 구역에서 안전하게 즐기세요.' };
+  if (temp < 30) return { cls: 'status-warm', icon: '🌤️', label: '따뜻함', desc: '수온이 높은 편입니다. 장시간 활동 시 더위와 탈수에 주의하세요.' };
+  return { cls: 'status-hot', icon: '🌡️', label: '높음', desc: '수온이 매우 높습니다. 녹조 발생 가능성이 있으니 수질을 확인하세요.' };
+}
+
+function getTempColor(temp) {
+  if (temp < 10) return '#60a5fa';
+  if (temp < 20) return '#34d399';
+  if (temp < 28) return '#fbbf24';
+  return '#f87171';
+}
+
+async function fetchData() {
+  const btn = document.getElementById('refresh-btn');
+  btn.classList.add('loading');
+
+  try {
+    // CORS 우회 프록시 사용
+    const res = await fetch(PROXY + encodeURIComponent(API_URL));
+    const data = await res.json();
+
+    if (data && data.STATUS === 'OK') {
+      renderData(data.DATAs.DATA.HANGANG, data.DATAs.CACHE_META);
+    } else {
+      showError('데이터를 불러오지 못했습니다.');
+    }
+  } catch(e) {
+    console.error(e);
+    // 프록시 실패 시 다른 프록시 시도
+    try {
+      const res2 = await fetch(`https://corsproxy.io/?${encodeURIComponent(API_URL)}`);
+      const data2 = await res2.json();
+      if (data2 && data2.STATUS === 'OK') {
+        renderData(data2.DATAs.DATA.HANGANG, data2.DATAs.CACHE_META);
+      } else {
+        showError('데이터를 불러오지 못했습니다.');
+      }
+    } catch(e2) {
+      showError('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
+  } finally {
+    btn.classList.remove('loading');
+  }
+}
+
+function renderData(stations, cacheMeta) {
+  // 평균 수온 계산
+  const temps = Object.values(stations).map(s => parseFloat(s.TEMP)).filter(t => !isNaN(t) && t > 0);
+  const avgTemp = temps.length ? (temps.reduce((a,b) => a+b, 0) / temps.length) : 0;
+
+  // 메인 카드 업데이트
+  document.getElementById('avg-temp').textContent = avgTemp.toFixed(1);
+  document.getElementById('avg-temp').style.color = getTempColor(avgTemp);
+
+  const status = getTempStatus(avgTemp);
+  const badge = document.getElementById('status-badge');
+  badge.textContent = `${status.icon} ${status.label}`;
+  badge.className = `status-badge ${status.cls}`;
+  document.getElementById('temp-desc').textContent = status.desc;
+
+  // 온도 바 인디케이터 위치 (0~40°C 범위)
+  const pct = Math.min(Math.max(avgTemp / 40 * 100, 2), 98);
+  document.getElementById('temp-indicator').style.left = pct + '%';
+  document.getElementById('temp-indicator').style.borderColor = getTempColor(avgTemp);
+
+  // 업데이트 시간
+  const now = new Date();
+  document.getElementById('update-time').textContent =
+    `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')} 기준`;
+
+  // 관측소 카드
+  const grid = document.getElementById('station-grid');
+  grid.innerHTML = '';
+
+  Object.entries(stations).forEach(([name, data]) => {
+    const temp = parseFloat(data.TEMP);
+    const ph = parseFloat(data.PH);
+    const status = getTempStatus(temp);
+
+    const card = document.createElement('div');
+    card.className = 'station-card';
+    card.innerHTML = `
+      <div class="station-name">${STATION_NAMES[name] || name}</div>
+      <div class="station-temp" style="color:${getTempColor(temp)}">${temp.toFixed(1)}<span>°C</span></div>
+      ${ph ? `<div class="station-ph">pH ${ph.toFixed(1)}</div>` : ''}
+      <div style="margin-top:6px"><span class="status-badge ${status.cls}" style="font-size:11px;padding:3px 8px">${status.icon} ${status.label}</span></div>
+      <div class="station-time">${data.LAST_UPDATE || ''}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showError(msg) {
+  document.getElementById('avg-temp').textContent = '--';
+  document.getElementById('status-badge').textContent = '⚠️ ' + msg;
+  document.getElementById('status-badge').className = 'status-badge status-warm';
+  document.getElementById('station-grid').innerHTML =
+    `<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--text-muted);font-size:13px">⚠️ ${msg}</div>`;
+}
+
+function toggleFaq(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('calczip-theme', isDark ? 'light' : 'dark');
+  document.getElementById('dark-btn').textContent = isDark ? '🌙' : '☀️';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('dark-btn').textContent =
+    document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+  fetchData();
+  // 5분마다 자동 갱신
+  setInterval(fetchData, 5 * 60 * 1000);
+});
+</script>
+</body>
+</html>
