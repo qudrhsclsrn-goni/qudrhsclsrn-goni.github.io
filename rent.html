@@ -83,11 +83,11 @@ function toggleFaq(btn) {
         <div class="input-row" style="margin-bottom:12px">
           <div class="input-group" style="margin:0">
             <label class="input-label">전세 보증금 <span class="sub">(원)</span></label>
-            <input class="input-field" type="number" id="jeonse-amt" placeholder="예: 300,000,000" oninput="calc()" />
+            <input class="input-field" type="text" id="jeonse-amt" placeholder="예: 300,000,000" oninput="fmtInput(this);calc()" />
           </div>
           <div class="input-group" style="margin:0">
             <label class="input-label">월세 보증금 <span class="sub">(원)</span></label>
-            <input class="input-field" type="number" id="monthly-deposit" placeholder="예: 50,000,000" oninput="calc()" />
+            <input class="input-field" type="text" id="monthly-deposit" placeholder="예: 50,000,000" oninput="fmtInput(this);calc()" />
           </div>
         </div>
         <div class="input-group">
@@ -103,11 +103,11 @@ function toggleFaq(btn) {
         <div class="input-row" style="margin-bottom:12px">
           <div class="input-group" style="margin:0">
             <label class="input-label">월세 보증금 <span class="sub">(원)</span></label>
-            <input class="input-field" type="number" id="m-deposit" placeholder="예: 50,000,000" oninput="calc()" />
+            <input class="input-field" type="text" id="m-deposit" placeholder="예: 50,000,000" oninput="fmtInput(this);calc()" />
           </div>
           <div class="input-group" style="margin:0">
             <label class="input-label">월세 <span class="sub">(원/월)</span></label>
-            <input class="input-field" type="number" id="m-rent" placeholder="예: 800,000" oninput="calc()" />
+            <input class="input-field" type="text" id="m-rent" placeholder="예: 800,000" oninput="fmtInput(this);calc()" />
           </div>
         </div>
         <div class="input-group">
@@ -121,7 +121,7 @@ function toggleFaq(btn) {
         <div class="input-row" style="margin-bottom:12px">
           <div class="input-group" style="margin:0">
             <label class="input-label">전세 보증금 <span class="sub">(원)</span></label>
-            <input class="input-field" type="number" id="cmp-jeonse" placeholder="예: 300,000,000" oninput="calc()" />
+            <input class="input-field" type="text" id="cmp-jeonse" placeholder="예: 300,000,000" oninput="fmtInput(this);calc()" />
           </div>
           <div class="input-group" style="margin:0">
             <label class="input-label">대출 금리 <span class="sub">(%)</span></label>
@@ -131,11 +131,11 @@ function toggleFaq(btn) {
         <div class="input-row">
           <div class="input-group" style="margin:0">
             <label class="input-label">월세 보증금 <span class="sub">(원)</span></label>
-            <input class="input-field" type="number" id="cmp-deposit" placeholder="예: 50,000,000" oninput="calc()" />
+            <input class="input-field" type="text" id="cmp-deposit" placeholder="예: 50,000,000" oninput="fmtInput(this);calc()" />
           </div>
           <div class="input-group" style="margin:0">
             <label class="input-label">월세 <span class="sub">(원/월)</span></label>
-            <input class="input-field" type="number" id="cmp-rent" placeholder="예: 800,000" oninput="calc()" />
+            <input class="input-field" type="text" id="cmp-rent" placeholder="예: 800,000" oninput="fmtInput(this);calc()" />
           </div>
         </div>
       </div>
@@ -244,8 +244,8 @@ function calc() {
 }
 
 function calcToMonthly() {
-  const jeonse  = parseFloat(document.getElementById('jeonse-amt').value) || 0;
-  const deposit = parseFloat(document.getElementById('monthly-deposit').value) || 0;
+  const jeonse  = getRaw('jeonse-amt');
+  const deposit = getRaw('monthly-deposit');
   const rate    = parseFloat(document.getElementById('conv-rate').value) || 6;
   if (!jeonse || !rate) { hide(); return; }
   const diff      = jeonse - deposit;
@@ -265,8 +265,8 @@ function calcToMonthly() {
 }
 
 function calcToJeonse() {
-  const deposit = parseFloat(document.getElementById('m-deposit').value) || 0;
-  const rent    = parseFloat(document.getElementById('m-rent').value)    || 0;
+  const deposit = getRaw('m-deposit');
+  const rent    = getRaw('m-rent');
   const rate    = parseFloat(document.getElementById('conv-rate2').value) || 6;
   if (!rent || !rate) { hide(); return; }
   const jeonse = deposit + (rent * 12 / (rate / 100));
@@ -285,10 +285,10 @@ function calcToJeonse() {
 }
 
 function calcCompare() {
-  const jeonse   = parseFloat(document.getElementById('cmp-jeonse').value)    || 0;
+  const jeonse   = getRaw('cmp-jeonse');
   const loanRate = parseFloat(document.getElementById('cmp-loan-rate').value) || 0;
-  const deposit  = parseFloat(document.getElementById('cmp-deposit').value)   || 0;
-  const rent     = parseFloat(document.getElementById('cmp-rent').value)      || 0;
+  const deposit  = getRaw('cmp-deposit');
+  const rent     = getRaw('cmp-rent');
   if (!jeonse || !rent) { hide(); return; }
 
   // 전세 비용: 전세금에 대한 기회비용(대출이자)
@@ -323,6 +323,20 @@ function calcCompare() {
 function show() { document.getElementById('result-area').style.display = ''; }
 function hide() { document.getElementById('result-area').style.display = 'none'; }
 function fmtWon(n) { return Math.round(Math.abs(n)).toLocaleString('ko-KR') + '원'; }
+
+function fmtInput(el) {
+  const raw = el.value.replace(/,/g, '');
+  if(raw === '' || isNaN(raw)) return;
+  const num = parseFloat(raw);
+  if(isNaN(num)) return;
+  el.value = Math.floor(num).toLocaleString('ko-KR');
+}
+function getRaw(id) {
+  const el = document.getElementById(id);
+  if(!el) return 0;
+  return parseFloat(el.value.replace(/,/g, '')) || 0;
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

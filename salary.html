@@ -458,6 +458,19 @@ function fmtWon(n) {
   return sign + Math.round(abs).toLocaleString('ko-KR') + '원';
 }
 
+
+function fmtInput(el) {
+  const raw = el.value.replace(/,/g, '');
+  if(raw === '' || isNaN(raw)) return;
+  const num = parseFloat(raw);
+  if(!isNaN(num)) el.value = Math.floor(num).toLocaleString('ko-KR');
+}
+function getRaw(id) {
+  const el = document.getElementById(id);
+  if(!el) return 0;
+  return parseFloat(el.value.replace(/,/g, '')) || 0;
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

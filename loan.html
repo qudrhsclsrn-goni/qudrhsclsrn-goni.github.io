@@ -102,7 +102,7 @@ function toggleFaq(btn) {
       <div class="input-row" style="margin-bottom:12px">
         <div class="input-group" style="margin:0">
           <label class="input-label">대출 원금 <span class="sub">(원)</span></label>
-          <input class="input-field" type="number" id="principal" placeholder="예: 100,000,000" oninput="calc()" />
+          <input class="input-field" type="text" id="principal" placeholder="예: 370,000,000" oninput="fmtInput(this);calc()" />
         </div>
         <div class="input-group" style="margin:0">
           <label class="input-label">연 금리 <span class="sub">(%)</span></label>
@@ -318,7 +318,7 @@ function setPeriod(months) {
 }
 
 function calc() {
-  const P      = parseFloat(document.getElementById('principal').value) || 0;
+  const P      = getRaw('principal');
   const annualR = parseFloat(document.getElementById('rate').value) || 0;
   const N      = parseInt(document.getElementById('period').value) || 0;
   const grace  = parseInt(document.getElementById('grace').value) || 0;
@@ -454,6 +454,19 @@ function fmtWon(n) {
   const sign = n < 0 ? '-' : '';
   const abs = Math.abs(n);
   return sign + Math.round(abs).toLocaleString('ko-KR') + '원';
+}
+
+
+function fmtInput(el) {
+  const pos = el.selectionStart;
+  const raw = el.value.replace(/,/g, '');
+  if(isNaN(raw) || raw === '') return;
+  const fmt = parseInt(raw).toLocaleString('ko-KR');
+  el.value = fmt;
+}
+
+function getRaw(id) {
+  return parseFloat(document.getElementById(id).value.replace(/,/g, '')) || 0;
 }
 
 function toggleDark() {

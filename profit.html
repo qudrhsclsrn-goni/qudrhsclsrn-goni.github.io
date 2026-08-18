@@ -60,11 +60,11 @@ function toggleFaq(btn) {
       <div class="input-row">
         <div class="input-group" style="margin:0">
           <label class="input-label">매수가 <span class="sub">(원)</span></label>
-          <input class="input-field" type="number" id="buy-price" placeholder="예: 50,000" step="any" oninput="calc()" />
+          <input class="input-field" type="text" id="buy-price" placeholder="예: 50,000" step="any" oninput="fmtInput(this);calc()" />
         </div>
         <div class="input-group" style="margin:0">
           <label class="input-label">매도가 <span class="sub">(원)</span></label>
-          <input class="input-field" type="number" id="sell-price" placeholder="예: 65,000" step="any" oninput="calc()" />
+          <input class="input-field" type="text" id="sell-price" placeholder="예: 65,000" step="any" oninput="fmtInput(this);calc()" />
         </div>
       </div>
 
@@ -290,8 +290,8 @@ function getFees() {
 }
 
 function calc() {
-  const buyPrice  = parseFloat(document.getElementById('buy-price').value) || 0;
-  const sellPrice = parseFloat(document.getElementById('sell-price').value) || 0;
+  const buyPrice  = getRaw('buy-price');
+  const sellPrice = getRaw('sell-price');
   const qty       = parseFloat(document.getElementById('qty').value) || 0;
 
   // 목표가 역산 업데이트
@@ -376,7 +376,7 @@ function calc() {
 }
 
 function calcTarget() {
-  const buyPrice  = parseFloat(document.getElementById('buy-price').value) || 0;
+  const buyPrice  = getRaw('buy-price');
   const targetPct = parseFloat(document.getElementById('target-pct').value);
   const targetEl  = document.getElementById('target-price');
 
@@ -410,6 +410,20 @@ function fmtWon(n) {
 function fmtQty(n) {
   const s = n.toFixed(8).replace(/\.?0+$/, '');
   return s.includes('.') ? s : Number(s).toLocaleString();
+}
+
+
+function fmtInput(el) {
+  const raw = el.value.replace(/,/g, '');
+  if(raw === '' || isNaN(raw)) return;
+  const num = parseFloat(raw);
+  if(isNaN(num)) return;
+  el.value = Math.floor(num).toLocaleString('ko-KR');
+}
+function getRaw(id) {
+  const el = document.getElementById(id);
+  if(!el) return 0;
+  return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
 function toggleDark() {
