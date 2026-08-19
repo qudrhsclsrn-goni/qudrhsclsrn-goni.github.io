@@ -223,151 +223,18 @@ function toggleFaq(btn) {
 
     <div class="ad-banner ad-banner-tall"><!-- AdSense 300x250 -->광고 영역 (300×250)</div>
 
-    <!-- 관련 계산기 -->
-    <div>
-            물타기 계산기</a>
-        <a href="split-buy.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">✂️</div>분할매수 계산기</a>
-        <a href="compound.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">💰</div>복리 계산기</a>
-        <a href="savings.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">🐷</div>적금·예금</a>
-      </div>물타기 계산기</a>
-        <a href="split-buy.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">✂️</div>분할매수 계산기</a>
-        <a href="compound.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">💰</div>복리 계산기</a>
-        <a href="salary.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">💼</div>연봉 실수령</a>
-      </div>
-    </div>
-
-
     <div>
       <div class="section-title">관련 계산기</div>
-      <div class="related-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
-        <a href="stock-add.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">📉</div>물타기 계산기</a>
-        <a href="split-buy.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">✂️</div>분할매수 계산기</a>
-        <a href="compound.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">💰</div>복리 계산기</a>
-        <a href="savings.html" class="related-card" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 10px;text-align:center;text-decoration:none"><div class="r-icon">🐷</div>적금·예금</a>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+        <a href="stock-add.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">📉</div>물타기 계산기</a>
+        <a href="split-buy.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">✂️</div>분할매수 계산기</a>
+        <a href="compound.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">💰</div>복리 계산기</a>
+        <a href="savings.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">🐷</div>적금·예금</a>
       </div>
-    </main>
-
-  <aside class="side-ad"><div class="side-ad-inner"><!-- AdSense 160x600 -->광고 영역<br/>160×600</div></aside>
-</div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-links">
-      <a href="index.html">홈</a>
-      <a href="privacy.html">개인정보처리방침</a>
-      <a href="terms.html">이용약관</a>
-      <a href="cookie.html">쿠키 정책</a>
-      <a href="contact.html">문의하기</a>
     </div>
-    <p class="footer-notice">모든 계산 결과는 참고용입니다. 중요한 투자·금융 결정 전 반드시 전문가와 상담하세요.</p>
-    <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
-  </div>
-</footer>
 
-<script>
-// 종목 유형별 수수료/세금 기본값
-const FEE_PRESETS = {
-  stock_domestic: { buyFee: 0.015, sellFee: 0.015, sellTax: 0.18, label: '국내 주식 기본값<br>수수료 0.015% · 거래세 0.18%<br><span style="color:var(--primary)">증권사마다 수수료가 다를 수 있어요. 직접 수정하세요.</span>' },
-  stock_us:       { buyFee: 0.015, sellFee: 0.015, sellTax: 0,    label: '미국 주식 기본값<br>수수료 0.015% · 거래세 없음<br><span style="color:var(--primary)">양도세(연 250만원 초과분 22%)는 별도 신고</span>' },
-  coin:           { buyFee: 0.05,  sellFee: 0.05,  sellTax: 0,    label: '코인 기본값 (업비트 기준)<br>수수료 0.05% · 거래세 없음<br><span style="color:var(--primary)">양도세는 별도 신고</span>' },
-  custom:         { buyFee: 0,     sellFee: 0,      sellTax: 0,    label: '직접 입력 모드<br>수수료·거래세를 직접 입력하세요' },
-};
 
-function onTypeChange() {
-  const type = document.getElementById('asset-type').value;
-  const preset = FEE_PRESETS[type];
-  // 기본값 자동 입력
-  document.getElementById('buy-fee').value  = preset.buyFee;
-  document.getElementById('sell-fee').value = preset.sellFee;
-  document.getElementById('sell-tax').value = preset.sellTax;
-  // 안내 문구 업데이트
-  document.getElementById('fee-info').innerHTML = '📌 ' + preset.label;
-  calc();
-}
 
-function getFees() {
-  // 항상 입력 필드 값 사용 (유형 변경 시 자동입력, 직접 수정도 가능)
-  return {
-    buyFee:  parseFloat(document.getElementById('buy-fee').value)  || 0,
-    sellFee: parseFloat(document.getElementById('sell-fee').value) || 0,
-    sellTax: parseFloat(document.getElementById('sell-tax').value) || 0,
-  };
-}
-
-function calc() {
-  const buyPrice  = getRaw('buy-price');
-  const sellPrice = getRaw('sell-price');
-  const qty       = parseFloat(document.getElementById('qty').value) || 0;
-
-  // 목표가 역산 업데이트
-  calcTarget();
-
-  if (!buyPrice || !sellPrice) {
-    document.getElementById('result-area').style.display = 'none';
-    return;
-  }
-
-  const fees = getFees();
-  const buyFeeRate  = fees.buyFee  / 100;
-  const sellFeeRate = (fees.sellFee + fees.sellTax) / 100;
-
-  // 수량 없으면 1주 기준
-  const q = qty || 1;
-
-  const buyTotal    = buyPrice * q;
-  const buyCost     = buyTotal * buyFeeRate;
-  const buyTotalAll = buyTotal + buyCost;
-
-  const sellTotal    = sellPrice * q;
-  const sellCost     = sellTotal * sellFeeRate;
-  const sellTotalNet = sellTotal - sellCost;
-
-  const grossProfit = sellTotal - buyTotal;
-  const netProfit   = sellTotalNet - buyTotalAll;
-  const grossPct    = (grossProfit / buyTotal) * 100;
-  const netPct      = (netProfit / buyTotalAll) * 100;
-
-  document.getElementById('result-area').style.display = '';
-
-  // 수익률
-  const pctEl = document.getElementById('r-pct');
-  pctEl.textContent = (netPct >= 0 ? '+' : '') + netPct.toFixed(2) + '%';
-  pctEl.className = 'result-value ' + (netPct >= 0 ? 'profit' : 'loss');
-  document.getElementById('r-pct-sub').textContent = '세전 ' + (grossPct >= 0 ? '+' : '') + grossPct.toFixed(2) + '%';
-
-  // 순수익
-  const netEl = document.getElementById('r-net');
-  netEl.textContent = (netProfit >= 0 ? '+' : '') + fmtWon(netProfit);
-  netEl.className = 'result-value ' + (netProfit >= 0 ? 'profit' : 'loss');
-  document.getElementById('r-net-sub').textContent = qty ? '수량 ' + fmtQty(qty) + ' 기준' : '1주(개) 기준';
-
-  // 매수/매도 총액
-  document.getElementById('r-buy-total').textContent = fmtWon(buyTotalAll);
-  document.getElementById('r-buy-sub').textContent = '수수료 ' + fmtWon(buyCost) + ' 포함';
-  document.getElementById('r-sell-total').textContent = fmtWon(sellTotalNet);
-  document.getElementById('r-sell-sub').textContent = '수수료+세금 ' + fmtWon(sellCost) + ' 차감';
-
-  // 세부 내역
-  const detail = document.getElementById('r-detail');
-  detail.innerHTML = `
-    <tr><td style="color:var(--text-muted);font-size:12px">매수가</td><td style="text-align:right">${fmtWon(buyPrice)} × ${fmtQty(q)}</td><td style="text-align:right;font-weight:600">${fmtWon(buyTotal)}</td></tr>
-    <tr><td style="color:var(--text-muted);font-size:12px">매수 수수료 (${fees.buyFee}%)</td><td></td><td style="text-align:right;color:#dc2626">-${fmtWon(buyCost)}</td></tr>
-    <tr style="border-top:1px solid var(--border)"><td style="color:var(--text-muted);font-size:12px">매도가</td><td style="text-align:right">${fmtWon(sellPrice)} × ${fmtQty(q)}</td><td style="text-align:right;font-weight:600">${fmtWon(sellTotal)}</td></tr>
-    <tr><td style="color:var(--text-muted);font-size:12px">매도 수수료 (${fees.sellFee}%)</td><td></td><td style="text-align:right;color:#dc2626">-${fmtWon(sellTotal * fees.sellFee/100)}</td></tr>
-    ${fees.sellTax > 0 ? `<tr><td style="color:var(--text-muted);font-size:12px">증권거래세 (${fees.sellTax}%)</td><td></td><td style="text-align:right;color:#dc2626">-${fmtWon(sellTotal * fees.sellTax/100)}</td></tr>` : ''}
-    <tr style="border-top:2px solid var(--border);font-weight:700"><td style="font-size:13px">최종 수익</td><td></td><td style="text-align:right;font-size:16px" class="${netProfit>=0?'pct-pos':'pct-neg'}">${netProfit>=0?'+':''}${fmtWon(netProfit)}</td></tr>
-  `;
-
-  // 수익 바
-  const maxPct = Math.max(Math.abs(netPct), 5);
-  document.getElementById('profit-bar').innerHTML = `
-    <div class="bep-bar-row">
-      <div class="bep-bar-label">세후 수익</div>
-      <div class="bep-bar-track">
-        <div class="bep-bar-fill" style="width:${Math.min(Math.abs(netPct)/maxPct*100,100)}%;background:${netPct>=0?'#16a34a':'#dc2626'}">
-          ${(netPct>=0?'+':'')+netPct.toFixed(2)+'%'}
-        </div>
-      </div>
     </div>
     <div class="bep-bar-row">
       <div class="bep-bar-label">세전 수익</div>
