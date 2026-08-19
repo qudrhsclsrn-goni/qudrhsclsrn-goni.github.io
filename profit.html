@@ -223,15 +223,7 @@ function toggleFaq(btn) {
 
     <div class="ad-banner ad-banner-tall"><!-- AdSense 300x250 -->광고 영역 (300×250)</div>
 
-    <div>
-      <div class="section-title">관련 계산기</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
-        <a href="stock-add.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">📉</div>물타기 계산기</a>
-        <a href="split-buy.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">✂️</div>분할매수 계산기</a>
-        <a href="compound.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">💰</div>복리 계산기</a>
-        <a href="savings.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:all 0.2s"><div style="font-size:26px;line-height:1;margin-bottom:6px">🐷</div>적금·예금</a>
-      </div>
-    </div>
+    
 
 
 
@@ -334,6 +326,29 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('dark-btn').textContent = theme === 'dark' ? '☀️' : '🌙';
 });
 </script>
+
+</div><!-- page-layout 닫기 -->
+
+    <div>
+      <div class="section-title">관련 계산기</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
+      <a href="stock-add.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">📉</div>물타기</a>
+      <a href="split-buy.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">✂️</div>분할매수</a>
+      <a href="compound.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">💰</div>복리</a>
+      <a href="savings.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">🐷</div>적금·예금</a>
+      </div>
+    </div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">홈</a><a href="privacy.html">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a><a href="contact.html">문의하기</a>
+    </div>
+    <p class="footer-notice">모든 계산 결과는 참고용입니다. 중요한 투자·금융 결정 전 반드시 전문가와 상담하세요.</p>
+    <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
+  </div>
+</footer>
 
   <!-- 네이버 애널리틱스 -->
   <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
