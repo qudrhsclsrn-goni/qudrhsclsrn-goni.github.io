@@ -240,19 +240,6 @@ select.input-field { cursor: pointer; }
 }
 
 /* ===== 관련 카드 ===== */
-.related-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 10px; margin-bottom: 20px;
-}
-.related-card {
-  background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 14px;
-  text-align: center; transition: all 0.2s; cursor: pointer;
-}
-.related-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
-.r-icon { font-size: 24px; margin-bottom: 6px; }
-.related-card { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
-
 /* ===== 히어로 ===== */
 /* ===== 카드 그리드 (메인) ===== */
 .card-grid {
@@ -339,7 +326,6 @@ select.input-field { cursor: pointer; }
   .input-row { grid-template-columns: 1fr; }
   .result-grid { grid-template-columns: 1fr 1fr; }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
-  .related-grid { grid-template-columns: repeat(2, 1fr); }
   .buy-entry { grid-template-columns: 50px 1fr 28px; }
   .buy-entry .input-field:last-of-type { display: none; }
 }
@@ -389,4 +375,43 @@ select.input-field { cursor: pointer; }
 @media (max-width: 480px) {
   .hero { padding: 24px 18px; }
   .hero-title { font-size: 24px; }
+}
+
+/* ===== 관련 카드 ===== */
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.related-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 10px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.related-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  color: var(--primary);
+}
+.r-icon {
+  font-size: 26px;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
 }
