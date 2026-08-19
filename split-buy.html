@@ -403,6 +403,31 @@ function getRaw(id) {
   return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
+
+function saveCalc_split() {
+  const data = {};
+    try { data["first-price"] = document.getElementById("first-price")?.value || ""; } catch(e) {}
+  try { data["total-budget"] = document.getElementById("total-budget")?.value || ""; } catch(e) {}
+  try { data["splits"] = document.getElementById("splits")?.value || ""; } catch(e) {}
+  localStorage.setItem('calc_split', JSON.stringify(data));
+  const msg = document.getElementById('save-msg-split');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc_split() {
+  const raw = localStorage.getItem('calc_split');
+  if(!raw) { document.getElementById('save-msg-split').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-split').textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+    if(data["first-price"] !== undefined && document.getElementById("first-price")) document.getElementById("first-price").value = data["first-price"];
+  if(data["total-budget"] !== undefined && document.getElementById("total-budget")) document.getElementById("total-budget").value = data["total-budget"];
+  if(data["splits"] !== undefined && document.getElementById("splits")) document.getElementById("splits").value = data["splits"];
+  if(typeof calc === "function") calc();
+  const msg = document.getElementById('save-msg-split');
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

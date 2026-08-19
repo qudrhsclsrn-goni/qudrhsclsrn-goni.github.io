@@ -476,6 +476,27 @@ function getRaw(id) {
   return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
+
+function saveCalc_salary() {
+  const data = {};
+    try { data["salary"] = document.getElementById("salary")?.value || ""; } catch(e) {}
+  localStorage.setItem('calc_salary', JSON.stringify(data));
+  const msg = document.getElementById('save-msg-salary');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc_salary() {
+  const raw = localStorage.getItem('calc_salary');
+  if(!raw) { document.getElementById('save-msg-salary').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-salary').textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+    if(data["salary"] !== undefined && document.getElementById("salary")) document.getElementById("salary").value = data["salary"];
+  if(typeof calc === "function") calc();
+  const msg = document.getElementById('save-msg-salary');
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

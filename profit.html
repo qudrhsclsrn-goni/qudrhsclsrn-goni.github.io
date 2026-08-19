@@ -431,6 +431,31 @@ function getRaw(id) {
   return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
+
+function saveCalc_profit() {
+  const data = {};
+    try { data["buy-price"] = document.getElementById("buy-price")?.value || ""; } catch(e) {}
+  try { data["buy-qty"] = document.getElementById("buy-qty")?.value || ""; } catch(e) {}
+  try { data["sell-price"] = document.getElementById("sell-price")?.value || ""; } catch(e) {}
+  localStorage.setItem('calc_profit', JSON.stringify(data));
+  const msg = document.getElementById('save-msg-profit');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc_profit() {
+  const raw = localStorage.getItem('calc_profit');
+  if(!raw) { document.getElementById('save-msg-profit').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-profit').textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+    if(data["buy-price"] !== undefined && document.getElementById("buy-price")) document.getElementById("buy-price").value = data["buy-price"];
+  if(data["buy-qty"] !== undefined && document.getElementById("buy-qty")) document.getElementById("buy-qty").value = data["buy-qty"];
+  if(data["sell-price"] !== undefined && document.getElementById("sell-price")) document.getElementById("sell-price").value = data["sell-price"];
+  if(typeof calc === "function") calc();
+  const msg = document.getElementById('save-msg-profit');
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

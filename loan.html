@@ -52,6 +52,16 @@ function toggleFaq(btn) {
     }
     .faq-a.open { display: block; }
 
+  
+    .purpose-tab {
+      padding: 12px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--card-bg); cursor: pointer; font-family: var(--font);
+      color: var(--text-primary); text-align: center; transition: all 0.15s;
+    }
+    .purpose-tab:hover { border-color: var(--primary); background: var(--highlight-bg); }
+    .purpose-tab.active { border-color: var(--primary); background: var(--highlight-bg); color: var(--primary); }
+    .purpose-tab.active div:first-child { transform: scale(1.1); }
+
   </style>
   <meta property="og:title" content="대출 이자 계산기 - 월 상환금 자동 계산" />
   <meta property="og:description" content="대출 금리와 기간만 입력하면 월 납입금, 총이자, 상환 스케줄 즉시 확인." />
@@ -96,6 +106,36 @@ function toggleFaq(btn) {
 
     <!-- 입력 카드 -->
     <div class="calc-card">
+
+      <!-- 대출 용도 선택 -->
+      <div style="margin-bottom:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:10px">대출 용도</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="purpose-tabs">
+          <button class="purpose-tab active" onclick="setPurpose('home')" data-purpose="home">
+            <div style="font-size:20px;margin-bottom:4px">🏠</div>
+            <div style="font-size:12px;font-weight:700">주택·부동산</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px">주담대·전세대출</div>
+          </button>
+          <button class="purpose-tab" onclick="setPurpose('car')" data-purpose="car">
+            <div style="font-size:20px;margin-bottom:4px">🚗</div>
+            <div style="font-size:12px;font-weight:700">자동차</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px">할부·오토론</div>
+          </button>
+          <button class="purpose-tab" onclick="setPurpose('business')" data-purpose="business">
+            <div style="font-size:20px;margin-bottom:4px">💼</div>
+            <div style="font-size:12px;font-weight:700">사업·창업</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px">사업자대출</div>
+          </button>
+          <button class="purpose-tab" onclick="setPurpose('general')" data-purpose="general">
+            <div style="font-size:20px;margin-bottom:4px">💳</div>
+            <div style="font-size:12px;font-weight:700">일반·신용</div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:2px">신용·마이너스통장</div>
+          </button>
+        </div>
+        <div id="purpose-hint" style="margin-top:10px;padding:10px 14px;background:var(--surface-2);border-radius:var(--radius-sm);font-size:13px;color:var(--text-muted)">
+          🏠 주택·부동산 대출 — 일반적으로 연 3~5% 금리, 최대 30~40년 상환
+        </div>
+      </div>
 
       <!-- 상환 방식 탭 -->
       <div class="method-tabs">
@@ -472,6 +512,56 @@ function fmtInput(el) {
 
 function getRaw(id) {
   return parseFloat(document.getElementById(id).value.replace(/,/g, '')) || 0;
+}
+
+
+const PURPOSE_DATA = {
+  home:     { hint: '🏠 주택·부동산 대출 — 일반적으로 연 3~5% 금리, 최대 30~40년 상환', rate: 3.8, period: 360 },
+  car:      { hint: '🚗 자동차 할부 — 일반적으로 연 4~7% 금리, 12~60개월 상환', rate: 5.5, period: 48 },
+  business: { hint: '💼 사업자 대출 — 일반적으로 연 4~8% 금리, 최대 10년 상환', rate: 5.0, period: 60 },
+  general:  { hint: '💳 신용·일반 대출 — 일반적으로 연 5~15% 금리, 12~60개월 상환', rate: 7.0, period: 36 },
+};
+
+function setPurpose(type) {
+  document.querySelectorAll('.purpose-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-purpose="${type}"]`).classList.add('active');
+  const d = PURPOSE_DATA[type];
+  document.getElementById('purpose-hint').textContent = d.hint;
+  // 금리·기간 자동 설정 (비어있을 때만)
+  if(!document.getElementById('rate').value) {
+    document.getElementById('rate').value = d.rate;
+  }
+  if(!document.getElementById('period').value) {
+    document.getElementById('period').value = d.period;
+  }
+  calc();
+}
+
+
+function saveCalc_loan() {
+  const data = {};
+    try { data["principal"] = document.getElementById("principal")?.value || ""; } catch(e) {}
+  try { data["rate"] = document.getElementById("rate")?.value || ""; } catch(e) {}
+  try { data["period"] = document.getElementById("period")?.value || ""; } catch(e) {}
+  try { data["grace"] = document.getElementById("grace")?.value || ""; } catch(e) {}
+  localStorage.setItem('calc_loan', JSON.stringify(data));
+  const msg = document.getElementById('save-msg-loan');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc_loan() {
+  const raw = localStorage.getItem('calc_loan');
+  if(!raw) { document.getElementById('save-msg-loan').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-loan').textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+    if(data["principal"] !== undefined && document.getElementById("principal")) document.getElementById("principal").value = data["principal"];
+  if(data["rate"] !== undefined && document.getElementById("rate")) document.getElementById("rate").value = data["rate"];
+  if(data["period"] !== undefined && document.getElementById("period")) document.getElementById("period").value = data["period"];
+  if(data["grace"] !== undefined && document.getElementById("grace")) document.getElementById("grace").value = data["grace"];
+  if(typeof calc === "function") calc();
+  const msg = document.getElementById('save-msg-loan');
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
 }
 
 function toggleDark() {

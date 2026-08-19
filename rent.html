@@ -342,6 +342,33 @@ function getRaw(id) {
   return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
+
+function saveCalc_rent() {
+  const data = {};
+    try { data["jeonse-amt"] = document.getElementById("jeonse-amt")?.value || ""; } catch(e) {}
+  try { data["monthly-deposit"] = document.getElementById("monthly-deposit")?.value || ""; } catch(e) {}
+  try { data["m-deposit"] = document.getElementById("m-deposit")?.value || ""; } catch(e) {}
+  try { data["m-rent"] = document.getElementById("m-rent")?.value || ""; } catch(e) {}
+  localStorage.setItem('calc_rent', JSON.stringify(data));
+  const msg = document.getElementById('save-msg-rent');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc_rent() {
+  const raw = localStorage.getItem('calc_rent');
+  if(!raw) { document.getElementById('save-msg-rent').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-rent').textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+    if(data["jeonse-amt"] !== undefined && document.getElementById("jeonse-amt")) document.getElementById("jeonse-amt").value = data["jeonse-amt"];
+  if(data["monthly-deposit"] !== undefined && document.getElementById("monthly-deposit")) document.getElementById("monthly-deposit").value = data["monthly-deposit"];
+  if(data["m-deposit"] !== undefined && document.getElementById("m-deposit")) document.getElementById("m-deposit").value = data["m-deposit"];
+  if(data["m-rent"] !== undefined && document.getElementById("m-rent")) document.getElementById("m-rent").value = data["m-rent"];
+  if(typeof calc === "function") calc();
+  const msg = document.getElementById('save-msg-rent');
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

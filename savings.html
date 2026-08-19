@@ -536,6 +536,33 @@ function getRaw(id) {
   return parseFloat(el.value.replace(/,/g, '')) || 0;
 }
 
+
+function saveCalc_savings() {
+  const data = {};
+    try { data["principal"] = document.getElementById("principal")?.value || ""; } catch(e) {}
+  try { data["monthly"] = document.getElementById("monthly")?.value || ""; } catch(e) {}
+  try { data["rate"] = document.getElementById("rate")?.value || ""; } catch(e) {}
+  try { data["period"] = document.getElementById("period")?.value || ""; } catch(e) {}
+  localStorage.setItem('calc_savings', JSON.stringify(data));
+  const msg = document.getElementById('save-msg-savings');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc_savings() {
+  const raw = localStorage.getItem('calc_savings');
+  if(!raw) { document.getElementById('save-msg-savings').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-savings').textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+    if(data["principal"] !== undefined && document.getElementById("principal")) document.getElementById("principal").value = data["principal"];
+  if(data["monthly"] !== undefined && document.getElementById("monthly")) document.getElementById("monthly").value = data["monthly"];
+  if(data["rate"] !== undefined && document.getElementById("rate")) document.getElementById("rate").value = data["rate"];
+  if(data["period"] !== undefined && document.getElementById("period")) document.getElementById("period").value = data["period"];
+  if(typeof calc === "function") calc();
+  const msg = document.getElementById('save-msg-savings');
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
 function toggleDark() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');

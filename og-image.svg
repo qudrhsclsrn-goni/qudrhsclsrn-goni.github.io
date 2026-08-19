@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0f1e"/>
+      <stop offset="100%" style="stop-color:#0f1f3d"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#c2410c"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eab308"/>
+      <stop offset="100%" style="stop-color:#a16207"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#15803d"/>
+    </linearGradient>
+    <linearGradient id="bar5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#1d4ed8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-red">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- 미묘한 그리드 -->
+  <g opacity="0.04" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="126" x2="1200" y2="126"/>
+    <line x1="0" y1="252" x2="1200" y2="252"/>
+    <line x1="0" y1="378" x2="1200" y2="378"/>
+    <line x1="0" y1="504" x2="1200" y2="504"/>
+    <line x1="240" y1="0" x2="240" y2="630"/>
+    <line x1="480" y1="0" x2="480" y2="630"/>
+    <line x1="720" y1="0" x2="720" y2="630"/>
+    <line x1="960" y1="0" x2="960" y2="630"/>
+  </g>
+
+  <!-- 왼쪽 텍스트 영역 -->
+  <!-- 로고 -->
+  <rect x="60" y="55" width="40" height="40" rx="10" fill="#ef4444" filter="url(#glow)"/>
+  <text x="80" y="81" font-family="serif" font-size="20" font-weight="900" fill="white" text-anchor="middle">₩</text>
+
+  <text x="112" y="83" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="20" font-weight="800" fill="white">물타기</text>
+  <text x="204" y="83" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="20" font-weight="800" fill="#ef4444">계산기</text>
+
+  <!-- 구분선 -->
+  <line x1="60" y1="110" x2="520" y2="110" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- 메인 타이틀 -->
+  <text x="60" y="175" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="52" font-weight="900" fill="white" letter-spacing="-2">계산은 빠르게,</text>
+  <text x="60" y="240" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="52" font-weight="900" letter-spacing="-2">
+    <tspan fill="#ef4444" filter="url(#glow-red)">투자는</tspan>
+    <tspan fill="white"> 현명하게</tspan>
+  </text>
+
+  <!-- 설명 -->
+  <text x="60" y="290" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="18" fill="#64748b">주식·코인 물타기부터 연봉·대출·적금까지</text>
+  <text x="60" y="316" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="18" fill="#64748b">투자자를 위한 <tspan fill="#ef4444" font-weight="700">무료</tspan> 계산기 모음</text>
+
+  <!-- 계산기 목록 태그 -->
+  <g transform="translate(60, 350)">
+    <!-- 물타기 -->
+    <rect width="110" height="32" rx="16" fill="#7f1d1d"/>
+    <text x="55" y="21" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="13" font-weight="700" fill="#fca5a5" text-anchor="middle">📉 물타기</text>
+    <!-- 수익률 -->
+    <rect x="118" width="110" height="32" rx="16" fill="#14532d"/>
+    <text x="173" y="21" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="13" font-weight="700" fill="#86efac" text-anchor="middle">📈 수익률</text>
+    <!-- 연봉 -->
+    <rect x="236" width="110" height="32" rx="16" fill="#1e3a8a"/>
+    <text x="291" y="21" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="13" font-weight="700" fill="#93c5fd" text-anchor="middle">💼 연봉</text>
+    <!-- 대출 -->
+    <rect y="42" width="110" height="32" rx="16" fill="#312e81"/>
+    <text x="55" y="63" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="13" font-weight="700" fill="#c4b5fd" text-anchor="middle">🏦 대출이자</text>
+    <!-- 적금 -->
+    <rect x="118" y="42" width="110" height="32" rx="16" fill="#713f12"/>
+    <text x="173" y="63" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="13" font-weight="700" fill="#fde68a" text-anchor="middle">🐷 적금예금</text>
+    <!-- 복리 -->
+    <rect x="236" y="42" width="110" height="32" rx="16" fill="#134e4a"/>
+    <text x="291" y="63" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="13" font-weight="700" fill="#99f6e4" text-anchor="middle">💰 복리</text>
+  </g>
+
+  <!-- 도메인 -->
+  <text x="60" y="570" font-family="monospace" font-size="15" fill="#334155">stockbuy.co.kr</text>
+
+  <!-- 오른쪽 막대그래프 -->
+  <!-- 그래프 배경 카드 -->
+  <rect x="620" y="40" width="540" height="550" rx="20" fill="#0d1526" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- 그래프 타이틀 -->
+  <text x="890" y="85" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="16" font-weight="700" fill="#64748b" text-anchor="middle">수익률 비교 분석</text>
+
+  <!-- Y축 라벨 -->
+  <text x="650" y="140" font-family="monospace" font-size="11" fill="#334155" text-anchor="end">+60%</text>
+  <text x="650" y="210" font-family="monospace" font-size="11" fill="#334155" text-anchor="end">+40%</text>
+  <text x="650" y="280" font-family="monospace" font-size="11" fill="#334155" text-anchor="end">+20%</text>
+  <text x="650" y="350" font-family="monospace" font-size="11" fill="#334155" text-anchor="end">0%</text>
+  <text x="650" y="420" font-family="monospace" font-size="11" fill="#ef4444" text-anchor="end">-20%</text>
+  <text x="650" y="490" font-family="monospace" font-size="11" fill="#ef4444" text-anchor="end">-40%</text>
+
+  <!-- 기준선 (0%) -->
+  <line x1="658" y1="345" x2="1140" y2="345" stroke="#1e3a5f" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- 그리드 라인 -->
+  <line x1="658" y1="135" x2="1140" y2="135" stroke="#0f2744" stroke-width="1"/>
+  <line x1="658" y1="205" x2="1140" y2="205" stroke="#0f2744" stroke-width="1"/>
+  <line x1="658" y1="275" x2="1140" y2="275" stroke="#0f2744" stroke-width="1"/>
+  <line x1="658" y1="415" x2="1140" y2="415" stroke="#0f2744" stroke-width="1"/>
+  <line x1="658" y1="485" x2="1140" y2="485" stroke="#0f2744" stroke-width="1"/>
+
+  <!-- 막대 1: 물타기 전 (-38%) - 빨간색 강조 -->
+  <rect x="680" y="345" width="72" height="152" rx="6" fill="url(#bar1)" filter="url(#glow-red)"/>
+  <text x="716" y="510" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#fca5a5" text-anchor="middle" font-weight="700">물타기 전</text>
+  <text x="716" y="335" font-family="monospace" font-size="13" fill="#ef4444" text-anchor="middle" font-weight="800">-38%</text>
+
+  <!-- 막대 2: 물타기 후 (-12%) - 주황 -->
+  <rect x="780" y="345" width="72" height="48" rx="6" fill="url(#bar2)"/>
+  <text x="816" y="510" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#fdba74" text-anchor="middle" font-weight="700">물타기 후</text>
+  <text x="816" y="335" font-family="monospace" font-size="13" fill="#f97316" text-anchor="middle" font-weight="800">-12%</text>
+
+  <!-- 막대 3: 복리 (+24%) - 초록 -->
+  <rect x="880" y="249" width="72" height="96" rx="6" fill="url(#bar4)"/>
+  <text x="916" y="510" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#86efac" text-anchor="middle" font-weight="700">복리 10년</text>
+  <text x="916" y="239" font-family="monospace" font-size="13" fill="#22c55e" text-anchor="middle" font-weight="800">+24%</text>
+
+  <!-- 막대 4: 분할매수 (+18%) - 파랑 -->
+  <rect x="980" y="273" width="72" height="72" rx="6" fill="url(#bar5)"/>
+  <text x="1016" y="510" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#93c5fd" text-anchor="middle" font-weight="700">분할매수</text>
+  <text x="1016" y="263" font-family="monospace" font-size="13" fill="#3b82f6" text-anchor="middle" font-weight="800">+18%</text>
+
+  <!-- 막대 5: 연봉계산 (노랑) -->
+  <rect x="1080" y="205" width="42" height="140" rx="6" fill="url(#bar3)" opacity="0.6"/>
+  <text x="1101" y="510" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="11" fill="#fde68a" text-anchor="middle" font-weight="700">적금</text>
+  <text x="1101" y="195" font-family="monospace" font-size="12" fill="#eab308" text-anchor="middle" font-weight="800">+56%</text>
+
+  <!-- 강조 라벨: 물타기로 손실 절감 -->
+  <rect x="660" y="530" width="220" height="42" rx="8" fill="#7f1d1d" opacity="0.8"/>
+  <text x="770" y="548" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#fca5a5" text-anchor="middle" font-weight="700">📉 물타기로</text>
+  <text x="770" y="564" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#fca5a5" text-anchor="middle" font-weight="700">손실 26%p 절감!</text>
+
+  <rect x="895" y="530" width="230" height="42" rx="8" fill="#14532d" opacity="0.8"/>
+  <text x="1010" y="548" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#86efac" text-anchor="middle" font-weight="700">📈 계산기로</text>
+  <text x="1010" y="564" font-family="'Apple SD Gothic Neo','Malgun Gothic',sans-serif" font-size="12" fill="#86efac" text-anchor="middle" font-weight="700">현명한 투자 결정!</text>
+</svg>
