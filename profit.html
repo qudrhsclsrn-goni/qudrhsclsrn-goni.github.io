@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5000637956714787" crossorigin="anonymous"></script>
-<script>
-function toggleFaq(btn) {
-  btn.classList.toggle('open');
-  const ans = btn.nextElementSibling;
-  ans.classList.toggle('open');
-}
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>주식 수익률 계산기 - 코인 매수가 매도가 세후 수익 계산</title>
+  <meta name="google-site-verification" content="d4KBqPjZPYaJ8HZiYXq7_yxpAYEHJdC6vcHCbPYMMn0" />
+  <meta name="google-site-verification" content="BwwvjMJGgKs-DOTrY7oTHORruxhqAGOKARu7iaTz-pI" />
+  <title>주식 수익률 계산기 - 코인 매수가 매도가 세후 수익 계산 | stockbuy.co.kr</title>
+  <meta name="description" content="매수가·매도가를 입력하면 수수료와 세금을 반영한 실제 수익률을 계산합니다. 국내주식·미국주식·코인 지원." />
   <meta name="keywords" content="주식수익률계산기, 코인수익률, 매수가매도가계산, 주식세후수익, 수익률계산기" />
-  <meta name="description" content="주식·코인 매수가와 매도가를 입력하면 수익률, 세후 수익금을 자동 계산. 국내주식·미국주식·코인 수수료와 세금 자동 반영. 목표 수익률로 매도가 역산." />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
-  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
   <meta property="og:title" content="주식·코인 수익률 계산기 - 세후 수익 자동 계산" />
-  <meta property="og:description" content="수수료·세금 차감 후 실제 수익률을 바로 확인. 목표 수익률로 매도가도 역산." />
+  <meta property="og:description" content="수수료·세금 차감 후 실제 수익률을 바로 확인." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://stockbuy.co.kr/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://stockbuy.co.kr/og-image.png" />
-  <meta property="og:site_name" content="물타기계산기" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="주식·코인 수익률 계산기 - 세후 수익 자동 계산" />
-  <meta name="twitter:description" content="수수료·세금 차감 후 실제 수익률을 바로 확인. 목표 수익률로 매도가도 역산." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#2563eb" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5000637956714787" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <script>
+  function toggleFaq(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  }
+  </script>
+  <style>
+    .method-tabs { display:flex; gap:8px; margin-bottom:16px; }
+    .method-tab {
+      flex:1; padding:10px; border:1px solid var(--border); border-radius:var(--radius-sm);
+      background:none; cursor:pointer; font-family:var(--font); font-size:13px;
+      font-weight:600; color:var(--text-muted); transition:all 0.15s; text-align:center;
+    }
+    .method-tab.active { border-color:var(--primary); color:var(--primary); background:var(--highlight-bg); }
+    .stock-type-tabs { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
+    .stock-tab {
+      padding:6px 14px; border:1px solid var(--border); border-radius:20px;
+      background:none; cursor:pointer; font-family:var(--font); font-size:12px;
+      font-weight:600; color:var(--text-muted); transition:all 0.15s;
+    }
+    .stock-tab.active { border-color:var(--primary); color:var(--primary); background:var(--highlight-bg); }
+    .result-big { font-size:40px; font-weight:800; letter-spacing:-1px; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-item:last-child { border-bottom:none; }
+    .faq-q { width:100%;padding:13px 0;background:none;border:none;font-size:14px;font-weight:500;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font); }
+    .faq-q:hover { color:var(--primary); }
+    .faq-arrow { font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0; }
+    .faq-q.open .faq-arrow { transform:rotate(180deg); }
+    .faq-a { font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none; }
+    .faq-a.open { display:block; }
+  </style>
 </head>
 <body>
 
@@ -41,304 +65,198 @@ function toggleFaq(btn) {
         <a href="index.html">홈</a>
         <a href="privacy.html">개인정보처리방침</a>
       </nav>
-      <button class="dark-toggle" onclick="toggleDark()" title="다크모드 전환" id="dark-btn">🌙</button>
+      <button class="dark-toggle" onclick="toggleDark()" id="dark-btn">🌙</button>
     </div>
   </div>
 </header>
 
 <div class="page-layout">
-  <aside class="side-ad"><div class="side-ad-inner"><!-- AdSense 160x600 -->광고 영역<br/>160×600</div></aside>
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
 
   <main class="main-content">
     <nav class="breadcrumb">
       <a href="index.html">홈</a><span>›</span><span>수익률 계산기</span>
     </nav>
-
     <h1 class="page-title">수익률 계산기</h1>
     <p class="page-desc">매수가·매도가를 입력하면 수수료와 세금을 반영한 실제 수익률을 계산합니다.</p>
 
-    <div class="ad-banner"><!-- AdSense 728x90 -->광고 영역 (728×90)</div>
+    <div class="ad-banner">광고 영역 (728×90)</div>
 
     <!-- 입력 카드 -->
     <div class="calc-card">
-
-      <div class="input-row">
-        <div class="input-group" style="margin:0">
-          <label class="input-label">매수가 <span class="sub">(원)</span></label>
-          <input class="input-field" type="text" id="buy-price" placeholder="예: 50,000" step="any" oninput="fmtInput(this);calc()" />
-        </div>
-        <div class="input-group" style="margin:0">
-          <label class="input-label">매도가 <span class="sub">(원)</span></label>
-          <input class="input-field" type="text" id="sell-price" placeholder="예: 65,000" step="any" oninput="fmtInput(this);calc()" />
-        </div>
+      <!-- 종목 유형 선택 -->
+      <div class="stock-type-tabs">
+        <button class="stock-tab active" onclick="setStock('kr')">🇰🇷 국내주식</button>
+        <button class="stock-tab" onclick="setStock('us')">🇺🇸 미국주식</button>
+        <button class="stock-tab" onclick="setStock('coin')">₿ 코인</button>
+        <button class="stock-tab" onclick="setStock('custom')">⚙️ 직접입력</button>
       </div>
 
-      <div class="divider"></div>
-
-      <div class="input-row">
-        <div class="input-group" style="margin:0">
-          <label class="input-label">수량</label>
-          <input class="input-field" type="number" id="qty" placeholder="예: 100" step="any" oninput="calc()" />
-        </div>
-        <div class="input-group" style="margin:0">
-          <label class="input-label">종목 유형</label>
-          <select class="input-field" id="asset-type" onchange="onTypeChange()">
-            <option value="stock_domestic">국내 주식</option>
-            <option value="stock_us">미국 주식</option>
-            <option value="coin">코인</option>
-  
-          </select>
-        </div>
+      <!-- 수수료 안내 -->
+      <div id="fee-info" style="background:var(--surface-2);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--text-muted);margin-bottom:16px">
+        🇰🇷 국내주식 — 매수 수수료 0.015% · 매도 수수료 0.015% · 증권거래세 0.18%
       </div>
 
-      <!-- 수수료 입력 (항상 표시, 유형 변경 시 자동입력) -->
-      <div style="margin-top:14px">
+      <!-- 직접입력 수수료 (hidden) -->
+      <div id="custom-fee-area" style="display:none;margin-bottom:16px">
         <div class="input-row">
-          <div class="input-group" style="margin:0">
-            <label class="input-label">매수 수수료 <span class="sub">(%)</span></label>
-            <input class="input-field" type="number" id="buy-fee" placeholder="0.015" step="any" value="0.015" oninput="calc()" />
+          <div>
+            <label class="input-label">매수 수수료 (%)</label>
+            <input class="input-field" type="number" id="custom-buy-fee" value="0.015" step="0.001" oninput="calc()" />
           </div>
-          <div class="input-group" style="margin:0">
-            <label class="input-label">매도 수수료 <span class="sub">(%)</span></label>
-            <input class="input-field" type="number" id="sell-fee" placeholder="0.015" step="any" value="0.015" oninput="calc()" />
+          <div>
+            <label class="input-label">매도 수수료 (%)</label>
+            <input class="input-field" type="number" id="custom-sell-fee" value="0.015" step="0.001" oninput="calc()" />
           </div>
-        </div>
-        <div class="input-row" style="margin-top:8px">
-          <div class="input-group" style="margin:0">
-            <label class="input-label">거래세 <span class="sub">(%)</span></label>
-            <input class="input-field" type="number" id="sell-tax" placeholder="0.18" step="any" value="0.18" oninput="calc()" />
-          </div>
-          <div class="input-group" style="margin:0;display:flex;align-items:flex-end">
-            <div id="fee-info" style="font-size:11px;color:var(--text-muted);background:var(--surface-2);padding:7px 10px;border-radius:var(--radius-sm);line-height:1.5;width:100%">
-              📌 국내 주식 기본값<br>수수료 0.015% · 거래세 0.18%
-            </div>
+          <div>
+            <label class="input-label">거래세 (%)</label>
+            <input class="input-field" type="number" id="custom-sell-tax" value="0.18" step="0.001" oninput="calc()" />
           </div>
         </div>
       </div>
 
+      <!-- 매수 정보 -->
+      <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:10px">📥 매수</div>
+      <div class="input-row" style="margin-bottom:16px">
+        <div>
+          <label class="input-label">매수가 (원)</label>
+          <input class="input-field" type="text" id="buy-price" placeholder="예: 50,000" oninput="fmtInput(this);calc()" />
+        </div>
+        <div>
+          <label class="input-label">매수 수량</label>
+          <input class="input-field" type="text" id="buy-qty" placeholder="예: 100" oninput="fmtInput(this);calc()" />
+        </div>
+      </div>
+
+      <!-- 매도 정보 -->
+      <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:10px">📤 매도</div>
+      <div class="input-row" style="margin-bottom:16px">
+        <div>
+          <label class="input-label">매도가 (원)</label>
+          <input class="input-field" type="text" id="sell-price" placeholder="예: 60,000" oninput="fmtInput(this);calc()" />
+        </div>
+        <div>
+          <label class="input-label">목표 수익률 → 매도가 역산</label>
+          <input class="input-field" type="number" id="target-pct" placeholder="예: 20 (20% 수익)" step="any" oninput="calcTarget()" />
+        </div>
+      </div>
+
+      <!-- 저장/불러오기 -->
+      <div style="display:flex;gap:8px;margin-top:4px;padding-top:16px;border-top:1px solid var(--border)">
+        <button onclick="saveCalc()" style="flex:1;padding:9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-2);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font)">💾 저장</button>
+        <button onclick="loadCalc()" style="flex:1;padding:9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface-2);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font)">📂 불러오기</button>
+      </div>
+      <div id="save-msg" style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:6px;min-height:16px"></div>
     </div>
 
     <!-- 결과 -->
-    <div id="result-area" style="display:none">
-      <div class="calc-card">
-
-        <div class="result-grid">
-          <div class="result-card highlight">
-            <div class="result-label">수익률</div>
-            <div class="result-value" id="r-pct">-</div>
-            <div class="result-sub" id="r-pct-sub"></div>
-          </div>
-          <div class="result-card">
-            <div class="result-label">순수익 (세후)</div>
-            <div class="result-value" id="r-net">-</div>
-            <div class="result-sub" id="r-net-sub"></div>
-          </div>
-          <div class="result-card">
-            <div class="result-label">매수 총액</div>
-            <div class="result-value" id="r-buy-total">-</div>
-            <div class="result-sub" id="r-buy-sub"></div>
-          </div>
-          <div class="result-card">
-            <div class="result-label">매도 총액 (수령액)</div>
-            <div class="result-value" id="r-sell-total">-</div>
-            <div class="result-sub" id="r-sell-sub"></div>
-          </div>
+    <div class="calc-card" id="result-area" style="display:none">
+      <div class="result-grid" style="margin-bottom:16px">
+        <div class="result-card highlight" style="grid-column:1/-1;padding:20px">
+          <div class="result-label">세후 순수익률</div>
+          <div class="result-big" id="r-net-pct">-</div>
         </div>
+      </div>
+      <div class="result-grid">
+        <div class="result-card">
+          <div class="result-label">매수 총금액</div>
+          <div class="result-value" id="r-buy-total">-</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">매도 총금액</div>
+          <div class="result-value" id="r-sell-total">-</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">세전 수익금</div>
+          <div class="result-value" id="r-gross">-</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">세후 순수익</div>
+          <div class="result-value" id="r-net">-</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">총 수수료</div>
+          <div class="result-value" id="r-fee">-</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">거래세</div>
+          <div class="result-value" id="r-tax">-</div>
+        </div>
+      </div>
 
-        <!-- 세부 내역 -->
-        <div class="divider"></div>
-        <div class="section-title">세부 내역</div>
-        <table class="result-table">
-          <tbody id="r-detail"></tbody>
-        </table>
+      <!-- BEP 바 -->
+      <div style="margin-top:8px">
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">세전 수익 <span id="r-gross-pct"></span></div>
+        <div class="bep-bar-row">
+          <div class="bep-bar-label" id="r-bar-buy">매수</div>
+          <div class="bep-bar-track">
+            <div class="bep-bar-fill" id="r-bar-fill" style="width:50%">+0%</div>
+          </div>
+          <div class="bep-bar-label" id="r-bar-sell">매도</div>
+        </div>
+      </div>
 
-        <!-- 수익률 바 -->
-        <div class="divider"></div>
-        <div class="section-title">수익 시각화</div>
-        <div class="bep-bar-wrap" id="profit-bar"></div>
-
+      <!-- 목표 매도가 -->
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:700;color:var(--text-secondary);margin-bottom:8px">목표 수익률 역산</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <input class="input-field" type="number" id="target-pct2" placeholder="목표 수익률 %" step="any" oninput="calcTarget2()" style="flex:1" />
+          <span style="color:var(--text-muted);font-size:14px">→</span>
+          <input class="input-field" id="target-price" placeholder="필요 매도가" readonly style="flex:1;background:var(--surface-2)" />
+        </div>
       </div>
     </div>
 
-    <!-- 목표가 역산 -->
-    <div class="calc-card" style="margin-top:0">
-      <div style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:12px">🎯 목표 수익률로 매도가 역산</div>
-      <div class="input-row">
-        <div class="input-group" style="margin:0">
-          <label class="input-label">목표 수익률 <span class="sub">(%)</span></label>
-          <input class="input-field" type="number" id="target-pct" placeholder="예: 20" step="any" oninput="calcTarget()" />
-        </div>
-        <div class="input-group" style="margin:0">
-          <label class="input-label">필요 매도가</label>
-          <input class="input-field" type="text" id="target-price" placeholder="매수가를 먼저 입력하세요" readonly
-            style="background:var(--surface-2);cursor:default;font-weight:600;color:var(--primary)" />
-        </div>
-      </div>
-    </div>
+    <div class="ad-banner ad-banner-tall">광고 영역 (300×250)</div>
 
-
-    <div class="calc-card" style="margin-top:0">
-      <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">주식·코인 수익률 계산 방법</h2>
+    <!-- 설명글 -->
+    <div class="calc-card">
+      <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">수익률 계산 방법</h2>
       <div style="font-size:14px;color:var(--text-secondary);line-height:1.9">
-        <p style="margin-bottom:12px">수익률은 단순히 매도가에서 매수가를 빼는 것이 아닙니다. <strong style="color:var(--primary)">수수료와 세금을 반드시 고려</strong>해야 실제 수익을 정확히 파악할 수 있습니다.</p>
-        <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:16px 0 8px">세전 수익률 계산</h3>
+        <p style="margin-bottom:12px">주식·코인 수익률은 단순히 <strong>(매도가 - 매수가) / 매수가</strong>로 계산하면 안 됩니다. 수수료와 세금을 반드시 고려해야 합니다.</p>
         <div style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:12px;font-size:13px">
-          수익률 = (매도가 - 매수가) ÷ 매수가 × 100
+          <strong>세후 순수익</strong> = 매도금액 - 매수금액 - 매수수수료 - 매도수수료 - 거래세
         </div>
-        <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:16px 0 8px">국내주식 세금·수수료</h3>
-        <ul style="padding-left:18px;margin-bottom:12px">
-          <li style="margin-bottom:6px">매수 수수료: 약 0.015% (증권사별 상이)</li>
-          <li style="margin-bottom:6px">매도 수수료: 약 0.015%</li>
-          <li style="margin-bottom:6px">증권거래세: 0.18% (코스피·코스닥 기준, 2024년)</li>
-        </ul>
-        <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:16px 0 8px">미국주식 세금</h3>
-        <ul style="padding-left:18px;margin-bottom:12px">
-          <li style="margin-bottom:6px">양도소득세: 연간 250만원 초과분에 대해 22% 부과</li>
-          <li style="margin-bottom:6px">연간 250만원 이하 수익은 비과세</li>
-          <li style="margin-bottom:6px">손익통산 가능 (손실과 이익을 합산하여 계산)</li>
+        <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:16px 0 8px">종목별 세금·수수료</h3>
+        <ul style="padding-left:18px">
+          <li style="margin-bottom:6px"><strong>국내주식</strong> — 수수료 0.015% · 증권거래세 0.18%</li>
+          <li style="margin-bottom:6px"><strong>미국주식</strong> — 수수료 0.25% · 거래세 없음 (양도소득세 별도)</li>
+          <li style="margin-bottom:6px"><strong>코인</strong> — 거래소별 다름 (기본 0.1%) · 거래세 없음</li>
         </ul>
       </div>
     </div>
-    <div class="calc-card" style="margin-top:0">
+
+    <!-- FAQ -->
+    <div class="calc-card">
       <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">자주 묻는 질문 (FAQ)</h2>
-      <div id="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)"><span>수수료가 다르면 어떻게 하나요?</span><span class="faq-arrow">▼</span></button>
-          <div class="faq-a">종목 유형에서 직접입력을 선택하거나 자동입력된 수수료 값을 직접 수정하면 됩니다. 증권사마다 수수료가 다르므로 본인의 증권사 수수료를 확인 후 입력하세요.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)"><span>목표 수익률로 매도가를 역산할 수 있나요?</span><span class="faq-arrow">▼</span></button>
-          <div class="faq-a">네, 가능합니다. 매수가 입력 후 하단 "목표 수익률로 매도가 역산" 섹션에서 원하는 수익률을 입력하면 필요한 매도가를 자동으로 계산해드립니다.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)"><span>코인 수익에도 세금이 있나요?</span><span class="faq-arrow">▼</span></button>
-          <div class="faq-a">2025년부터 가상자산 양도소득세가 시행될 예정입니다. 연간 250만원 초과 수익에 대해 20% 세율이 적용됩니다. 정확한 세금은 세무사와 상담하시기 바랍니다.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" onclick="toggleFaq(this)"><span>ETF 수익률 계산도 가능한가요?</span><span class="faq-arrow">▼</span></button>
-          <div class="faq-a">네, ETF도 국내 주식과 동일한 방식으로 계산하시면 됩니다. 국내 ETF는 증권거래세가 비과세이므로 매도 세금 항목에서 거래세를 0으로 입력하세요.</div>
-        </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>수수료는 왜 포함해야 하나요?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">매수·매도 시 수수료와 거래세가 발생하기 때문에 실제 수익은 단순 계산보다 낮습니다. 이 계산기는 모든 비용을 반영한 순수익을 보여줍니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>코인 수익률도 계산할 수 있나요?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">네! 코인 탭을 선택하면 거래소 수수료(기본 0.1%)를 반영한 수익률을 계산합니다. 직접입력 탭에서 원하는 수수료율로 변경할 수 있습니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>목표 수익률 역산이란?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">원하는 수익률(예: 20%)을 입력하면, 수수료와 세금을 모두 고려한 실제 필요 매도가를 자동으로 계산합니다.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)"><span>미국주식 양도소득세는 포함되나요?</span><span class="faq-arrow">▼</span></button>
+        <div class="faq-a">미국주식 양도소득세(22%)는 연간 250만원 공제 후 적용되어 개인마다 다르므로 이 계산기에는 포함되지 않습니다. 세금 신고 시 별도 확인이 필요합니다.</div>
       </div>
     </div>
 
-    <div class="ad-banner ad-banner-tall"><!-- AdSense 300x250 -->광고 영역 (300×250)</div>
-
-    
-
-
-
-    </div>
-    <div class="bep-bar-row">
-      <div class="bep-bar-label">세전 수익</div>
-      <div class="bep-bar-track">
-        <div class="bep-bar-fill" style="width:${Math.min(Math.abs(grossPct)/maxPct*100,100)}%;background:${grossPct>=0?'#2563eb':'#dc2626'}">
-          ${(grossPct>=0?'+':'')+grossPct.toFixed(2)+'%'}
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-<script>
-function calcTarget() {
-  const buyPrice  = getRaw('buy-price');
-  const targetPct = parseFloat(document.getElementById('target-pct').value);
-  const targetEl  = document.getElementById('target-price');
-
-  if (!buyPrice || isNaN(targetPct)) {
-    targetEl.value = buyPrice ? '목표 수익률을 입력하세요' : '매수가를 먼저 입력하세요';
-    targetEl.style.color = 'var(--text-muted)';
-    return;
-  }
-
-  const fees = getFees();
-  const buyFeeRate  = fees.buyFee  / 100;
-  const sellFeeRate = (fees.sellFee + fees.sellTax) / 100;
-
-  // 목표 순수익률로 필요 매도가 역산
-  // netProfit / buyTotalAll = targetPct/100
-  // (sellPrice*(1-sellFeeRate) - buyPrice*(1+buyFeeRate)) / (buyPrice*(1+buyFeeRate)) = targetPct/100
-  const buyTotalPerShare = buyPrice * (1 + buyFeeRate);
-  const needSellNet = buyTotalPerShare * (1 + targetPct / 100);
-  const needSellPrice = needSellNet / (1 - sellFeeRate);
-
-  targetEl.value = needSellPrice.toLocaleString(undefined, { maximumFractionDigits: 0 }) + '원';
-  targetEl.style.color = targetPct >= 0 ? '#dc2626' : '#2563eb';
-}
-
-/* ===== 유틸 ===== */
-function fmtWon(n) {
-  const sign = n < 0 ? '-' : '';
-  const abs = Math.abs(n);
-  return sign + Math.round(abs).toLocaleString('ko-KR') + '원';
-}
-function fmtQty(n) {
-  const s = n.toFixed(8).replace(/\.?0+$/, '');
-  return s.includes('.') ? s : Number(s).toLocaleString();
-}
-
-
-function fmtInput(el) {
-  const raw = el.value.replace(/,/g, '');
-  if(raw === '' || isNaN(raw)) return;
-  const num = parseFloat(raw);
-  if(isNaN(num)) return;
-  el.value = Math.floor(num).toLocaleString('ko-KR');
-}
-function getRaw(id) {
-  const el = document.getElementById(id);
-  if(!el) return 0;
-  return parseFloat(el.value.replace(/,/g, '')) || 0;
-}
-
-
-function saveCalc_profit() {
-  const data = {};
-    try { data["buy-price"] = document.getElementById("buy-price")?.value || ""; } catch(e) {}
-  try { data["buy-qty"] = document.getElementById("buy-qty")?.value || ""; } catch(e) {}
-  try { data["sell-price"] = document.getElementById("sell-price")?.value || ""; } catch(e) {}
-  localStorage.setItem('calc_profit', JSON.stringify(data));
-  const msg = document.getElementById('save-msg-profit');
-  msg.textContent = '✅ 저장됐어요!';
-  setTimeout(() => msg.textContent = '', 2000);
-}
-
-function loadCalc_profit() {
-  const raw = localStorage.getItem('calc_profit');
-  if(!raw) { document.getElementById('save-msg-profit').textContent = '저장된 값이 없어요.'; setTimeout(() => document.getElementById('save-msg-profit').textContent = '', 2000); return; }
-  const data = JSON.parse(raw);
-    if(data["buy-price"] !== undefined && document.getElementById("buy-price")) document.getElementById("buy-price").value = data["buy-price"];
-  if(data["buy-qty"] !== undefined && document.getElementById("buy-qty")) document.getElementById("buy-qty").value = data["buy-qty"];
-  if(data["sell-price"] !== undefined && document.getElementById("sell-price")) document.getElementById("sell-price").value = data["sell-price"];
-  if(typeof calc === "function") calc();
-  const msg = document.getElementById('save-msg-profit');
-  msg.textContent = '📂 불러왔어요!';
-  setTimeout(() => msg.textContent = '', 2000);
-}
-
-function toggleDark() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  localStorage.setItem('calczip-theme', isDark ? 'light' : 'dark');
-  document.getElementById('dark-btn').textContent = isDark ? '🌙' : '☀️';
-}
-document.addEventListener('DOMContentLoaded', function() {
-  const theme = document.documentElement.getAttribute('data-theme');
-  document.getElementById('dark-btn').textContent = theme === 'dark' ? '☀️' : '🌙';
-});
-</script>
-
-
+    <!-- 관련 계산기 -->
     <div>
       <div class="section-title">관련 계산기</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;width:100%">
-      <a href="stock-add.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:border-color 0.15s"><div style="font-size:26px;line-height:1;margin-bottom:4px">📉</div>물타기</a>
-      <a href="split-buy.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:border-color 0.15s"><div style="font-size:26px;line-height:1;margin-bottom:4px">✂️</div>분할매수</a>
-      <a href="compound.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:border-color 0.15s"><div style="font-size:26px;line-height:1;margin-bottom:4px">💰</div>복리</a>
-      <a href="savings.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary);transition:border-color 0.15s"><div style="font-size:26px;line-height:1;margin-bottom:4px">🐷</div>적금·예금</a>
+        <a href="stock-add.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">📉</div>물타기</a>
+        <a href="split-buy.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">✂️</div>분할매수</a>
+        <a href="compound.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">💰</div>복리</a>
+        <a href="savings.html" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 8px;text-align:center;text-decoration:none;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;color:var(--text-secondary)"><div style="font-size:24px;margin-bottom:4px">🐷</div>적금·예금</a>
       </div>
     </div>
-
   </main>
 
   <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
@@ -354,6 +272,197 @@ document.addEventListener('DOMContentLoaded', function() {
     <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+const STOCK_PRESETS = {
+  kr:     { buyFee:0.015, sellFee:0.015, sellTax:0.18,  label:'🇰🇷 국내주식 — 매수 수수료 0.015% · 매도 수수료 0.015% · 증권거래세 0.18%' },
+  us:     { buyFee:0.25,  sellFee:0.25,  sellTax:0,     label:'🇺🇸 미국주식 — 수수료 0.25% · 거래세 없음 (양도소득세 별도)' },
+  coin:   { buyFee:0.1,   sellFee:0.1,   sellTax:0,     label:'₿ 코인 — 수수료 0.1% (거래소 기본값)' },
+  custom: { buyFee:0.015, sellFee:0.015, sellTax:0.18,  label:'⚙️ 직접입력 — 수수료와 세금을 직접 입력하세요' },
+};
+let currentStock = 'kr';
+
+function setStock(type) {
+  currentStock = type;
+  document.querySelectorAll('.stock-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  const p = STOCK_PRESETS[type];
+  document.getElementById('fee-info').textContent = p.label;
+  const customArea = document.getElementById('custom-fee-area');
+  if (type === 'custom') {
+    customArea.style.display = '';
+  } else {
+    customArea.style.display = 'none';
+    document.getElementById('custom-buy-fee').value = p.buyFee;
+    document.getElementById('custom-sell-fee').value = p.sellFee;
+    document.getElementById('custom-sell-tax').value = p.sellTax;
+  }
+  calc();
+}
+
+function getFees() {
+  if (currentStock === 'custom') {
+    return {
+      buyFee:  parseFloat(document.getElementById('custom-buy-fee').value)  || 0,
+      sellFee: parseFloat(document.getElementById('custom-sell-fee').value) || 0,
+      sellTax: parseFloat(document.getElementById('custom-sell-tax').value) || 0,
+    };
+  }
+  return STOCK_PRESETS[currentStock];
+}
+
+function getRaw(id) {
+  const el = document.getElementById(id);
+  if (!el) return 0;
+  return parseFloat(el.value.replace(/,/g, '')) || 0;
+}
+
+function fmtInput(el) {
+  const raw = el.value.replace(/,/g, '');
+  if (raw === '' || isNaN(raw)) return;
+  const num = parseFloat(raw);
+  if (!isNaN(num)) el.value = Math.floor(num).toLocaleString('ko-KR');
+}
+
+function fmtWon(n) {
+  const sign = n < 0 ? '-' : '';
+  return sign + Math.round(Math.abs(n)).toLocaleString('ko-KR') + '원';
+}
+
+function calc() {
+  const buyPrice  = getRaw('buy-price');
+  const buyQty    = getRaw('buy-qty');
+  const sellPrice = getRaw('sell-price');
+
+  if (!buyPrice || !buyQty || !sellPrice) {
+    document.getElementById('result-area').style.display = 'none';
+    return;
+  }
+
+  const fees = getFees();
+  const buyFeeRate  = fees.buyFee  / 100;
+  const sellFeeRate = fees.sellFee / 100;
+  const sellTaxRate = fees.sellTax / 100;
+
+  const buyTotal  = buyPrice  * buyQty;
+  const sellTotal = sellPrice * buyQty;
+  const buyFee    = buyTotal  * buyFeeRate;
+  const sellFee   = sellTotal * sellFeeRate;
+  const sellTax   = sellTotal * sellTaxRate;
+  const totalFees = buyFee + sellFee + sellTax;
+
+  const grossProfit = sellTotal - buyTotal;
+  const netProfit   = grossProfit - totalFees;
+  const grossPct    = grossProfit / buyTotal * 100;
+  const netPct      = netProfit   / buyTotal * 100;
+
+  document.getElementById('result-area').style.display = '';
+
+  const netEl = document.getElementById('r-net-pct');
+  netEl.textContent = (netPct >= 0 ? '+' : '') + netPct.toFixed(2) + '%';
+  netEl.style.color  = netPct >= 0 ? '#dc2626' : '#2563eb';
+
+  document.getElementById('r-buy-total').textContent  = fmtWon(buyTotal);
+  document.getElementById('r-sell-total').textContent = fmtWon(sellTotal);
+
+  const grossEl = document.getElementById('r-gross');
+  grossEl.textContent = fmtWon(grossProfit);
+  grossEl.className = 'result-value ' + (grossProfit >= 0 ? 'profit' : 'loss');
+
+  const netEl2 = document.getElementById('r-net');
+  netEl2.textContent = fmtWon(netProfit);
+  netEl2.className = 'result-value ' + (netProfit >= 0 ? 'profit' : 'loss');
+
+  document.getElementById('r-fee').textContent = fmtWon(totalFees);
+  document.getElementById('r-tax').textContent = fmtWon(sellTax);
+
+  // BEP 바
+  document.getElementById('r-gross-pct').textContent = (grossPct >= 0 ? '+' : '') + grossPct.toFixed(2) + '%';
+  const maxPct = Math.max(Math.abs(grossPct), 1);
+  const fillPct = Math.min(Math.abs(grossPct) / maxPct * 100, 100);
+  const fill = document.getElementById('r-bar-fill');
+  fill.style.width = fillPct + '%';
+  fill.style.background = grossPct >= 0 ? '#2563eb' : '#dc2626';
+  fill.textContent = (grossPct >= 0 ? '+' : '') + grossPct.toFixed(2) + '%';
+  document.getElementById('r-bar-buy').textContent  = '매수 ' + buyPrice.toLocaleString('ko-KR') + '원';
+  document.getElementById('r-bar-sell').textContent = '매도 ' + sellPrice.toLocaleString('ko-KR') + '원';
+}
+
+function calcTarget() {
+  const buyPrice  = getRaw('buy-price');
+  const targetPct = parseFloat(document.getElementById('target-pct').value);
+  if (!buyPrice || isNaN(targetPct)) return;
+
+  const fees = getFees();
+  const buyFeeRate  = fees.buyFee  / 100;
+  const sellFeeRate = (fees.sellFee + fees.sellTax) / 100;
+
+  const buyTotalPerShare = buyPrice * (1 + buyFeeRate);
+  const needSellNet      = buyTotalPerShare * (1 + targetPct / 100);
+  const needSellPrice    = needSellNet / (1 - sellFeeRate);
+
+  const el = document.getElementById('sell-price');
+  el.value = Math.round(needSellPrice).toLocaleString('ko-KR');
+  calc();
+}
+
+function calcTarget2() {
+  const buyPrice  = getRaw('buy-price');
+  const targetPct = parseFloat(document.getElementById('target-pct2').value);
+  const el = document.getElementById('target-price');
+  if (!buyPrice || isNaN(targetPct)) { el.value = ''; return; }
+
+  const fees = getFees();
+  const buyFeeRate  = fees.buyFee  / 100;
+  const sellFeeRate = (fees.sellFee + fees.sellTax) / 100;
+
+  const buyTotalPerShare = buyPrice * (1 + buyFeeRate);
+  const needSellNet      = buyTotalPerShare * (1 + targetPct / 100);
+  const needSellPrice    = needSellNet / (1 - sellFeeRate);
+
+  el.value = Math.round(needSellPrice).toLocaleString('ko-KR') + '원';
+  el.style.color = targetPct >= 0 ? '#dc2626' : '#2563eb';
+}
+
+function saveCalc() {
+  const data = {
+    buyPrice:  document.getElementById('buy-price').value,
+    buyQty:    document.getElementById('buy-qty').value,
+    sellPrice: document.getElementById('sell-price').value,
+    stock:     currentStock,
+  };
+  localStorage.setItem('calc_profit', JSON.stringify(data));
+  const msg = document.getElementById('save-msg');
+  msg.textContent = '✅ 저장됐어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function loadCalc() {
+  const raw = localStorage.getItem('calc_profit');
+  const msg = document.getElementById('save-msg');
+  if (!raw) { msg.textContent = '저장된 값이 없어요.'; setTimeout(() => msg.textContent = '', 2000); return; }
+  const data = JSON.parse(raw);
+  if (data.buyPrice)  document.getElementById('buy-price').value  = data.buyPrice;
+  if (data.buyQty)    document.getElementById('buy-qty').value    = data.buyQty;
+  if (data.sellPrice) document.getElementById('sell-price').value = data.sellPrice;
+  if (data.stock)     setStock(data.stock);
+  calc();
+  msg.textContent = '📂 불러왔어요!';
+  setTimeout(() => msg.textContent = '', 2000);
+}
+
+function toggleDark() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  localStorage.setItem('calczip-theme', isDark ? 'light' : 'dark');
+  document.getElementById('dark-btn').textContent = isDark ? '🌙' : '☀️';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const theme = document.documentElement.getAttribute('data-theme');
+  document.getElementById('dark-btn').textContent = theme === 'dark' ? '☀️' : '🌙';
+});
+</script>
 
   <!-- 네이버 애널리틱스 -->
   <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
