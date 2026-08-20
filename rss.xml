@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>물타기계산기 - stockbuy.co.kr</title>
+    <link>https://stockbuy.co.kr</link>
+    <description>주식·코인 물타기부터 연봉·적금·대출까지 투자자를 위한 무료 계산기 모음</description>
+    <language>ko</language>
+    <lastBuildDate>Wed, 20 Aug 2026 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://stockbuy.co.kr/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>주식 물타기 계산기 - 코인 평균단가 자동 계산</title>
+      <link>https://stockbuy.co.kr/stock-add.html</link>
+      <description>추가 매수 후 평균단가와 손익분기점을 바로 확인하세요. 현재보유와 추가매수 입력하면 새 평균단가 즉시 계산.</description>
+      <guid>https://stockbuy.co.kr/stock-add.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>주식 수익률 계산기 - 세후 수익 자동 계산</title>
+      <link>https://stockbuy.co.kr/profit.html</link>
+      <description>매수가·매도가를 입력하면 수수료와 세금을 반영한 실제 수익률을 계산합니다. 국내주식·미국주식·코인 지원.</description>
+      <guid>https://stockbuy.co.kr/profit.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>대출 이자 계산기 - 월 상환금·총이자 무료 계산</title>
+      <link>https://stockbuy.co.kr/loan.html</link>
+      <description>대출 금액·금리·기간을 입력하면 월 납입금과 총 이자를 바로 계산합니다. 원리금균등·원금균등·만기일시 방식 지원.</description>
+      <guid>https://stockbuy.co.kr/loan.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>연봉 실수령액 계산기 - 4대보험 소득세 공제 계산 (2026)</title>
+      <link>https://stockbuy.co.kr/salary.html</link>
+      <description>2026년 기준 4대보험·소득세 공제 후 실제 매달 받는 금액을 계산합니다. 부양가족 세액공제 반영.</description>
+      <guid>https://stockbuy.co.kr/salary.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>적금·예금 계산기 - 만기 수령액·세후이자 계산</title>
+      <link>https://stockbuy.co.kr/savings.html</link>
+      <description>비과세·ISA 등 세제혜택을 적용한 만기 실수령액을 계산합니다.</description>
+      <guid>https://stockbuy.co.kr/savings.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>복리 계산기 - 원금·수익률·기간으로 복리 수익 계산</title>
+      <link>https://stockbuy.co.kr/compound.html</link>
+      <description>원금·수익률·기간을 입력하면 복리 수익과 연도별 자산 증가를 확인합니다. 72법칙 지원.</description>
+      <guid>https://stockbuy.co.kr/compound.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>분할매수 계산기 - 주식·코인 회차별 매수 전략 계산</title>
+      <link>https://stockbuy.co.kr/split-buy.html</link>
+      <description>금액균등·수량균등·하락비례 방식으로 회차별 매수 전략을 계산합니다.</description>
+      <guid>https://stockbuy.co.kr/split-buy.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>전월세 전환 계산기 - 전세를 월세로 월세를 전세로 변환</title>
+      <link>https://stockbuy.co.kr/rent.html</link>
+      <description>전환율 기준으로 전세↔월세 전환 금액을 계산합니다. 전세 vs 월세 비교 기능 지원.</description>
+      <guid>https://stockbuy.co.kr/rent.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>D-day 계산기 - 날짜 카운트다운 기념일·시험·여행</title>
+      <link>https://stockbuy.co.kr/dday.html</link>
+      <description>기념일·시험·여행 등 중요한 날까지 남은 날짜를 등록하고 관리하세요.</description>
+      <guid>https://stockbuy.co.kr/dday.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>한강 실시간 수온 - 한강 물 온도 확인</title>
+      <link>https://stockbuy.co.kr/hangang.html</link>
+      <description>서울시 수질 자동측정망 기반 한강 관측소별 실시간 수온 정보입니다.</description>
+      <guid>https://stockbuy.co.kr/hangang.html</guid>
+      <pubDate>Wed, 20 Aug 2026 00:00:00 +0900</pubDate>
+    </item>
+  </channel>
+</rss>
