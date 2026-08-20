@@ -16,81 +16,12 @@ function toggleFaq(btn) {
   <meta name="description" content="D-day 계산기. 기념일, 시험, 여행, 수능 등 중요한 날까지 남은 날짜를 계산. 여러 개 등록·저장, 매년 반복 기능. 브라우저에 자동 저장." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
-  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
-  <style>
-    .dday-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px; margin-bottom: 10px;
-      box-shadow: var(--shadow); transition: all 0.2s; position: relative;
-    }
-    .dday-card:hover { box-shadow: var(--shadow-md); }
-    .dday-card.past { opacity: 0.75; }
-
-    .dday-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
-    .dday-emoji { font-size:28px; line-height:1; flex-shrink:0; }
-    .dday-title-wrap { flex:1; min-width:0; }
-    .dday-name { font-size:15px; font-weight:700; color:var(--text-primary); margin-bottom:2px; }
-    .dday-date-str { font-size:12px; color:var(--text-muted); }
-    .dday-del { width:28px; height:28px; border:none; background:none; color:var(--text-muted); font-size:16px; cursor:pointer; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.15s; }
-    .dday-del:hover { background:#fef2f2; color:#ef4444; }
-
-    .dday-number { font-size:42px; font-weight:800; letter-spacing:-2px; line-height:1; }
-    .dday-number.future { color: var(--primary); }
-    .dday-number.today  { color: #16a34a; }
-    .dday-number.past   { color: var(--text-muted); }
-
-    .dday-label { font-size:13px; color:var(--text-muted); margin-top:4px; }
-    .dday-progress { margin-top:14px; }
-    .dday-progress-bar { height:6px; background:var(--surface-2); border-radius:3px; overflow:hidden; margin-top:6px; }
-    .dday-progress-fill { height:100%; border-radius:3px; transition:width 0.6s; }
-    .dday-progress-label { display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-top:4px; }
-
-    .dday-units { display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
-    .dday-unit { text-align:center; background:var(--surface-2); border-radius:var(--radius-sm); padding:8px 12px; flex:1; min-width:60px; }
-    .dday-unit-num { font-size:18px; font-weight:700; color:var(--text-primary); }
-    .dday-unit-label { font-size:11px; color:var(--text-muted); margin-top:2px; }
-
-    /* 입력 폼 */
-    .add-form { background:var(--card-bg); border:1px dashed var(--border-2); border-radius:var(--radius); padding:20px; margin-bottom:20px; }
-    .emoji-grid { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-    .emoji-btn { width:36px; height:36px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--input-bg); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
-    .emoji-btn.selected { border-color:var(--primary); background:var(--highlight-bg); }
-    .emoji-btn:hover { border-color:var(--primary); }
-
-    .toggle-form-btn { width:100%; padding:11px; border:1px dashed var(--border-2); border-radius:var(--radius); background:none; color:var(--text-muted); font-size:14px; font-weight:500; cursor:pointer; font-family:var(--font); transition:all 0.15s; margin-bottom:16px; }
-    .toggle-form-btn:hover { border-color:var(--primary); color:var(--primary); background:var(--highlight-bg); }
-
-    .sort-btns { display:flex; gap:6px; margin-bottom:14px; }
-    .sort-btn { padding:5px 12px; border:1px solid var(--border); border-radius:20px; background:none; font-size:12px; color:var(--text-muted); cursor:pointer; font-family:var(--font); transition:all 0.15s; }
-    .sort-btn.active { border-color:var(--primary); color:var(--primary); background:var(--highlight-bg); }
-
-    .empty-state { text-align:center; padding:40px 20px; color:var(--text-muted); }
-    .empty-icon { font-size:48px; margin-bottom:12px; }
-    .empty-text { font-size:14px; }
-
-    .today-highlight { background:linear-gradient(135deg,#dcfce7,#bbf7d0); border-color:#86efac; }
-    [data-theme="dark"] .today-highlight { background:linear-gradient(135deg,#14532d44,#14532d66); border-color:#16a34a; }
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" /></noscript>
   
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-q {
-      width: 100%; padding: 13px 0; background: none; border: none;
-      font-size: 14px; font-weight: 500; color: var(--text-primary);
-      cursor: pointer; text-align: left; display: flex;
-      justify-content: space-between; align-items: center; gap: 12px;
-      font-family: var(--font);
-    }
-    .faq-q:hover { color: var(--primary); }
-    .faq-arrow { font-size: 11px; color: var(--text-muted); transition: transform 0.2s; flex-shrink: 0; }
-    .faq-q.open .faq-arrow { transform: rotate(180deg); }
-    .faq-a {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.8;
-      padding: 0 0 13px; display: none;
-    }
-    .faq-a.open { display: block; }
-
-  </style>
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>.dday-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:10px;box-shadow:var(--shadow);transition:all 0.2s;position:relative}.dday-card:hover{box-shadow:var(--shadow-md)}.dday-card.past{opacity:0.75}.dday-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}.dday-emoji{font-size:28px;line-height:1;flex-shrink:0}.dday-title-wrap{flex:1;min-width:0}.dday-name{font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:2px}.dday-date-str{font-size:12px;color:var(--text-muted)}.dday-del{width:28px;height:28px;border:none;background:none;color:var(--text-muted);font-size:16px;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}.dday-del:hover{background:#fef2f2;color:#ef4444}.dday-number{font-size:42px;font-weight:800;letter-spacing:-2px;line-height:1}.dday-number.future{color:var(--primary)}.dday-number.today{color:#16a34a}.dday-number.past{color:var(--text-muted)}.dday-label{font-size:13px;color:var(--text-muted);margin-top:4px}.dday-progress{margin-top:14px}.dday-progress-bar{height:6px;background:var(--surface-2);border-radius:3px;overflow:hidden;margin-top:6px}.dday-progress-fill{height:100%;border-radius:3px;transition:width 0.6s}.dday-progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-top:4px}.dday-units{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}.dday-unit{text-align:center;background:var(--surface-2);border-radius:var(--radius-sm);padding:8px 12px;flex:1;min-width:60px}.dday-unit-num{font-size:18px;font-weight:700;color:var(--text-primary)}.dday-unit-label{font-size:11px;color:var(--text-muted);margin-top:2px}.add-form{background:var(--card-bg);border:1px dashed var(--border-2);border-radius:var(--radius);padding:20px;margin-bottom:20px}.emoji-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.emoji-btn{width:36px;height:36px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--input-bg);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s}.emoji-btn.selected{border-color:var(--primary);background:var(--highlight-bg)}.emoji-btn:hover{border-color:var(--primary)}.toggle-form-btn{width:100%;padding:11px;border:1px dashed var(--border-2);border-radius:var(--radius);background:none;color:var(--text-muted);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all 0.15s;margin-bottom:16px}.toggle-form-btn:hover{border-color:var(--primary);color:var(--primary);background:var(--highlight-bg)}.sort-btns{display:flex;gap:6px;margin-bottom:14px}.sort-btn{padding:5px 12px;border:1px solid var(--border);border-radius:20px;background:none;font-size:12px;color:var(--text-muted);cursor:pointer;font-family:var(--font);transition:all 0.15s}.sort-btn.active{border-color:var(--primary);color:var(--primary);background:var(--highlight-bg)}.empty-state{text-align:center;padding:40px 20px;color:var(--text-muted)}.empty-icon{font-size:48px;margin-bottom:12px}.empty-text{font-size:14px}.today-highlight{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#86efac}[data-theme="dark"] .today-highlight{background:linear-gradient(135deg,#14532d44,#14532d66);border-color:#16a34a}.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}.faq-q{width:100%;padding:13px 0;background:none;border:none;font-size:14px;font-weight:500;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font)}.faq-q:hover{color:var(--primary)}.faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}.faq-q.open .faq-arrow{transform:rotate(180deg)}.faq-a{font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none}.faq-a.open{display:block}</style>
   <meta property="og:title" content="D-day 계산기 - 중요한 날까지 남은 날짜 계산" />
   <meta property="og:description" content="기념일·시험·여행까지 남은 날짜를 계산하고 저장하세요. 매년 반복 기능 지원." />
   <meta property="og:type" content="website" />
@@ -475,8 +406,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
   <!-- 네이버 애널리틱스 -->
-  <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
-  <script type="text/javascript">
+  <script defer src="//wcs.pstatic.net/wcslog.js"></script>
+  <script defer>
+  document.addEventListener("DOMContentLoaded",function(){
   if(!wcs_add) var wcs_add = {};
   wcs_add["wa"] = "1a7e95eccbfa280";
   if(window.wcs) { wcs_do(); }

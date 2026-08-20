@@ -16,56 +16,12 @@ function toggleFaq(btn) {
   <meta name="description" content="적금·예금 만기 수령액과 세후 이자를 자동 계산. 일반과세(15.4%)·비과세·세금우대(1.4%)·ISA 계좌 선택 가능. 단리·복리 방식 지원." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
-  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
-  <style>
-    .product-tabs { display:flex; gap:6px; margin-bottom:18px; background:var(--surface-2); padding:4px; border-radius:var(--radius-sm); }
-    .product-tab { flex:1; padding:8px 4px; border:none; background:none; border-radius:var(--radius-sm); font-size:13px; font-weight:500; color:var(--text-muted); cursor:pointer; transition:all 0.15s; font-family:var(--font); }
-    .product-tab.active { background:var(--card-bg); color:var(--primary); box-shadow:var(--shadow); }
-
-    .tax-options { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
-    .tax-option { border:1px solid var(--border); border-radius:var(--radius-sm); padding:10px 12px; cursor:pointer; transition:all 0.15s; }
-    .tax-option.selected { border-color:var(--primary); background:var(--highlight-bg); }
-    .tax-option input[type=radio] { display:none; }
-    .tax-option-title { font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:2px; }
-    .tax-option-rate { font-size:12px; color:var(--primary); font-weight:600; }
-    .tax-option-desc { font-size:11px; color:var(--text-muted); margin-top:2px; line-height:1.4; }
-
-    .interest-type { display:flex; gap:6px; }
-    .int-btn { flex:1; padding:7px; border:1px solid var(--border); border-radius:var(--radius-sm); background:none; font-size:13px; color:var(--text-muted); cursor:pointer; font-family:var(--font); transition:all 0.15s; }
-    .int-btn.active { border-color:var(--primary); color:var(--primary); background:var(--highlight-bg); font-weight:500; }
-
-    .result-big { font-size:28px; font-weight:800; letter-spacing:-1px; }
-    .breakdown-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); font-size:13px; }
-    .breakdown-row:last-child { border-bottom:none; }
-    .breakdown-label { color:var(--text-muted); }
-    .breakdown-val { font-weight:500; color:var(--text-primary); }
-    .breakdown-val.minus { color:#dc2626; }
-    .breakdown-val.plus  { color:#16a34a; }
-
-    .month-table-wrap { max-height:280px; overflow-y:auto; border:1px solid var(--border); border-radius:var(--radius-sm); }
-    .month-table-wrap::-webkit-scrollbar { width:4px; }
-    .month-table-wrap::-webkit-scrollbar-thumb { background:var(--border-2); border-radius:2px; }
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" /></noscript>
   
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-q {
-      width: 100%; padding: 13px 0; background: none; border: none;
-      font-size: 14px; font-weight: 500; color: var(--text-primary);
-      cursor: pointer; text-align: left; display: flex;
-      justify-content: space-between; align-items: center; gap: 12px;
-      font-family: var(--font);
-    }
-    .faq-q:hover { color: var(--primary); }
-    .faq-arrow { font-size: 11px; color: var(--text-muted); transition: transform 0.2s; flex-shrink: 0; }
-    .faq-q.open .faq-arrow { transform: rotate(180deg); }
-    .faq-a {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.8;
-      padding: 0 0 13px; display: none;
-    }
-    .faq-a.open { display: block; }
-
-  </style>
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>.product-tabs{display:flex;gap:6px;margin-bottom:18px;background:var(--surface-2);padding:4px;border-radius:var(--radius-sm)}.product-tab{flex:1;padding:8px 4px;border:none;background:none;border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.15s;font-family:var(--font)}.product-tab.active{background:var(--card-bg);color:var(--primary);box-shadow:var(--shadow)}.tax-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}.tax-option{border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer;transition:all 0.15s}.tax-option.selected{border-color:var(--primary);background:var(--highlight-bg)}.tax-option input[type=radio]{display:none}.tax-option-title{font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:2px}.tax-option-rate{font-size:12px;color:var(--primary);font-weight:600}.tax-option-desc{font-size:11px;color:var(--text-muted);margin-top:2px;line-height:1.4}.interest-type{display:flex;gap:6px}.int-btn{flex:1;padding:7px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;font-size:13px;color:var(--text-muted);cursor:pointer;font-family:var(--font);transition:all 0.15s}.int-btn.active{border-color:var(--primary);color:var(--primary);background:var(--highlight-bg);font-weight:500}.result-big{font-size:28px;font-weight:800;letter-spacing:-1px}.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}.breakdown-row:last-child{border-bottom:none}.breakdown-label{color:var(--text-muted)}.breakdown-val{font-weight:500;color:var(--text-primary)}.breakdown-val.minus{color:#dc2626}.breakdown-val.plus{color:#16a34a}.month-table-wrap{max-height:280px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius-sm)}.month-table-wrap::-webkit-scrollbar{width:4px}.month-table-wrap::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:2px}.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}.faq-q{width:100%;padding:13px 0;background:none;border:none;font-size:14px;font-weight:500;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font)}.faq-q:hover{color:var(--primary)}.faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}.faq-q.open .faq-arrow{transform:rotate(180deg)}.faq-a{font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none}.faq-a.open{display:block}</style>
   <meta property="og:title" content="적금·예금 계산기 - 세후 만기 수령액 계산" />
   <meta property="og:description" content="비과세·ISA·세금우대 선택 가능. 적금 만기 수령액을 정확하게 계산하세요." />
   <meta property="og:type" content="website" />
@@ -572,8 +528,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
   <!-- 네이버 애널리틱스 -->
-  <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
-  <script type="text/javascript">
+  <script defer src="//wcs.pstatic.net/wcslog.js"></script>
+  <script defer>
+  document.addEventListener("DOMContentLoaded",function(){
   if(!wcs_add) var wcs_add = {};
   wcs_add["wa"] = "1a7e95eccbfa280";
   if(window.wcs) { wcs_do(); }

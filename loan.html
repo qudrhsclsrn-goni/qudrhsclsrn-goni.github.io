@@ -16,53 +16,12 @@ function toggleFaq(btn) {
   <meta name="description" content="대출 원금, 금리, 기간 입력 시 월 납입금과 총 이자를 자동 계산. 원리금균등·원금균등·만기일시 방식 지원. 거치기간, 상환 스케줄 확인." />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" /></noscript>
+  
   <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
-  <style>
-    .method-tabs { display:flex; gap:6px; margin-bottom:18px; background:var(--surface-2); padding:4px; border-radius:var(--radius-sm); }
-    .method-tab { flex:1; padding:8px 4px; border:none; background:none; border-radius:var(--radius-sm); font-size:13px; font-weight:500; color:var(--text-muted); cursor:pointer; transition:all 0.15s; font-family:var(--font); }
-    .method-tab.active { background:var(--card-bg); color:var(--primary); box-shadow:var(--shadow); }
-    .summary-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
-    .schedule-wrap { max-height:320px; overflow-y:auto; border:1px solid var(--border); border-radius:var(--radius-sm); }
-    .schedule-wrap::-webkit-scrollbar { width:4px; }
-    .schedule-wrap::-webkit-scrollbar-thumb { background:var(--border-2); border-radius:2px; }
-    .toggle-schedule { width:100%; padding:9px; border:1px solid var(--border); border-radius:var(--radius-sm); background:none; color:var(--text-muted); font-size:13px; cursor:pointer; font-family:var(--font); transition:all 0.15s; margin-top:10px; }
-    .toggle-schedule:hover { border-color:var(--primary); color:var(--primary); background:var(--highlight-bg); }
-    .chart-wrap { margin-bottom:14px; }
-    .donut-row { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
-    .donut-labels { display:flex; flex-direction:column; gap:8px; }
-    .donut-label-item { display:flex; align-items:center; gap:8px; font-size:13px; }
-    .donut-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
-  
-    .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-item:last-child { border-bottom: none; }
-    .faq-q {
-      width: 100%; padding: 13px 0; background: none; border: none;
-      font-size: 14px; font-weight: 500; color: var(--text-primary);
-      cursor: pointer; text-align: left; display: flex;
-      justify-content: space-between; align-items: center; gap: 12px;
-      font-family: var(--font);
-    }
-    .faq-q:hover { color: var(--primary); }
-    .faq-arrow { font-size: 11px; color: var(--text-muted); transition: transform 0.2s; flex-shrink: 0; }
-    .faq-q.open .faq-arrow { transform: rotate(180deg); }
-    .faq-a {
-      font-size: 13px; color: var(--text-secondary); line-height: 1.8;
-      padding: 0 0 13px; display: none;
-    }
-    .faq-a.open { display: block; }
-
-  
-    .purpose-tab {
-      padding: 12px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm);
-      background: var(--card-bg); cursor: pointer; font-family: var(--font);
-      color: var(--text-primary); text-align: center; transition: all 0.15s;
-    }
-    .purpose-tab:hover { border-color: var(--primary); background: var(--highlight-bg); }
-    .purpose-tab.active { border-color: var(--primary); background: var(--highlight-bg); color: var(--primary); }
-    .purpose-tab.active div:first-child { transform: scale(1.1); }
-
-  </style>
+  <style>.method-tabs{display:flex;gap:6px;margin-bottom:18px;background:var(--surface-2);padding:4px;border-radius:var(--radius-sm)}.method-tab{flex:1;padding:8px 4px;border:none;background:none;border-radius:var(--radius-sm);font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all 0.15s;font-family:var(--font)}.method-tab.active{background:var(--card-bg);color:var(--primary);box-shadow:var(--shadow)}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.schedule-wrap{max-height:320px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--radius-sm)}.schedule-wrap::-webkit-scrollbar{width:4px}.schedule-wrap::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:2px}.toggle-schedule{width:100%;padding:9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;color:var(--text-muted);font-size:13px;cursor:pointer;font-family:var(--font);transition:all 0.15s;margin-top:10px}.toggle-schedule:hover{border-color:var(--primary);color:var(--primary);background:var(--highlight-bg)}.chart-wrap{margin-bottom:14px}.donut-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.donut-labels{display:flex;flex-direction:column;gap:8px}.donut-label-item{display:flex;align-items:center;gap:8px;font-size:13px}.donut-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}.faq-q{width:100%;padding:13px 0;background:none;border:none;font-size:14px;font-weight:500;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font)}.faq-q:hover{color:var(--primary)}.faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}.faq-q.open .faq-arrow{transform:rotate(180deg)}.faq-a{font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 0 13px;display:none}.faq-a.open{display:block}.purpose-tab{padding:12px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--card-bg);cursor:pointer;font-family:var(--font);color:var(--text-primary);text-align:center;transition:all 0.15s}.purpose-tab:hover{border-color:var(--primary);background:var(--highlight-bg)}.purpose-tab.active{border-color:var(--primary);background:var(--highlight-bg);color:var(--primary)}.purpose-tab.active div:first-child{transform:scale(1.1)}</style>
   <meta property="og:title" content="대출 이자 계산기 - 월 상환금 자동 계산" />
   <meta property="og:description" content="대출 금리와 기간만 입력하면 월 납입금, 총이자, 상환 스케줄 즉시 확인." />
   <meta property="og:type" content="website" />
@@ -577,8 +536,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
   <!-- 네이버 애널리틱스 -->
-  <script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
-  <script type="text/javascript">
+  <script defer src="//wcs.pstatic.net/wcslog.js"></script>
+  <script defer>
+  document.addEventListener("DOMContentLoaded",function(){
   if(!wcs_add) var wcs_add = {};
   wcs_add["wa"] = "1a7e95eccbfa280";
   if(window.wcs) { wcs_do(); }
