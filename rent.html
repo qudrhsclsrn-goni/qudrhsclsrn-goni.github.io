@@ -191,6 +191,53 @@ function toggleFaq(btn) {
 
     
 
+
+<div class="calc-card" style="margin-top:12px">
+  <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">전월세 전환 완벽 가이드</h2>
+  <div style="font-size:14px;color:var(--text-secondary);line-height:1.9">
+    <p>전세와 월세 중 어떤 것이 유리한지는 개인 상황에 따라 다릅니다. 전월세 전환율을 활용하면 두 방식을 객관적으로 비교할 수 있습니다.</p>
+    <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:20px 0 8px">전월세 전환율이란?</h3>
+    <p>전세보증금을 월세로 전환할 때 적용하는 비율입니다. 법정 전월세 전환율은 한국은행 기준금리 + 3.5%포인트와 10% 중 낮은 값을 적용합니다. 2026년 기준 참고금리는 약 6~8% 수준입니다.</p>
+    <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:20px 0 8px">전세 vs 월세 선택 기준</h3>
+    <p><strong>전세가 유리한 경우:</strong> 목돈이 있고 대출 없이 전세를 구할 수 있을 때, 월세 부담이 없어 생활비 여유가 생기고 전세 만기 시 보증금을 돌려받아 목돈 활용이 가능합니다.</p>
+    <p><strong>월세가 유리한 경우:</strong> 목돈이 없거나 자금을 투자에 활용하고 싶을 때, 투자 수익률이 전월세 전환율보다 높다면 전세보다 월세가 경제적으로 유리할 수 있습니다.</p>
+    <h3 style="font-size:15px;font-weight:700;color:var(--text-primary);margin:20px 0 8px">임차인 권리 보호</h3>
+    <ul style="padding-left:18px;margin:0">
+      <li style="margin-bottom:8px"><strong>전세보증보험:</strong> HUG, HF 등에서 전세보증금 반환을 보장하는 보험에 가입할 수 있습니다.</li>
+      <li style="margin-bottom:8px"><strong>확정일자:</strong> 주민센터에서 확정일자를 받으면 대항력이 생겨 보증금을 보호받을 수 있습니다.</li>
+      <li style="margin-bottom:8px"><strong>전세금 반환청구권:</strong> 계약 만료 후 집주인이 보증금을 돌려주지 않으면 법적으로 청구할 수 있습니다.</li>
+    </ul>
+  </div>
+</div>
+<div class="calc-card" style="margin-top:12px">
+  <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">자주 묻는 질문 (FAQ)</h2>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>전월세 전환율 계산 방법은?</span><span class="faq-arrow">▼</span></button><div class="faq-a">월세 = (전세보증금 - 월세보증금) × 전환율 ÷ 12로 계산합니다. 예를 들어 전세 2억원을 보증금 5,000만원 월세로 전환한다면: (2억 - 5,000만) × 6% ÷ 12 = 월 75만원입니다.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>반전세란 무엇인가요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">반전세는 보증금이 일반 월세보다 높고 전세보다 낮은 형태입니다. 보증금을 어느 정도 낼 수 있지만 전세보증금 전액을 마련하기 어려운 경우에 활용됩니다.</div></div>
+  <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>월세 세액공제를 받을 수 있나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">총급여 8,000만원 이하 무주택 근로자는 월세의 15~17%를 세액공제 받을 수 있습니다. 연말정산 시 임대차 계약서, 주민등록등본, 계좌이체 내역을 준비하면 됩니다.</div></div>
+</div>
+
+
+<div class="calc-card" style="margin-top:12px">
+  <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">전월세 전환 계산 예시</h2>
+  <div style="font-size:14px;color:var(--text-secondary);line-height:1.9">
+    <p><strong>예시:</strong> 전세보증금 2억원을 보증금 5,000만원 + 월세로 전환할 때 (전환율 6%)</p>
+    <div style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;margin:12px 0;font-size:13px">
+      월세 = (전세보증금 - 월세보증금) × 전환율 ÷ 12<br>
+      = (2억 - 5,000만원) × 6% ÷ 12<br>
+      = 1억 5,000만원 × 0.06 ÷ 12<br>
+      = <strong>월 75만원</strong>
+    </div>
+    <p>반대로 보증금 5,000만원에 월세 75만원을 전세로 전환하면:</p>
+    <div style="background:var(--surface-2);border-radius:var(--radius-sm);padding:12px 14px;margin:12px 0;font-size:13px">
+      전세보증금 = 월세보증금 + (월세 × 12 ÷ 전환율)<br>
+      = 5,000만원 + (75만원 × 12 ÷ 0.06)<br>
+      = 5,000만원 + 1억 5,000만원<br>
+      = <strong>전세 2억원</strong>
+    </div>
+    <p>이 계산기로 전세↔월세 전환을 빠르게 확인하고 임대차 협상에 활용하세요.</p>
+  </div>
+</div>
+
     <div>
       <div class="section-title">관련 계산기</div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;width:100%">
