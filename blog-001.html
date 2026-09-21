@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주식 물타기 계산기 직접 만든 이유 — 계좌 -37% 맞고 나서 | stockbuy.co.kr</title>
+  <meta name="description" content="주식 물타기 시 평균단가를 정확히 계산하는 방법과 손익분기점 계산법을 실제 경험을 바탕으로 설명합니다." />
+  <meta name="keywords" content="주식 물타기 계산기, 평균단가 계산, 손익분기점, 물타기 방법" />
+  <meta property="og:title" content="주식 물타기 계산기 직접 만든 이유 — 계좌 -37% 맞고 나서" />
+  <meta property="og:description" content="주식 물타기 시 평균단가를 정확히 계산하는 방법과 손익분기점 계산법을 실제 경험을 바탕으로 설명합니다." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://stockbuy.co.kr/og-image.png" />
+  <meta property="article:published_time" content="2026-08-20" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://stockbuy.co.kr/blog-001.html" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5000637956714787" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJ0C31LXTN"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NJ0C31LXTN');</script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" /></noscript>
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>
+    .post-hero{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px}
+    .post-cat{font-size:12px;font-weight:700;color:var(--primary);background:var(--highlight-bg);padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px}
+    .post-title{font-size:24px;font-weight:800;color:var(--text-primary);line-height:1.4;margin-bottom:10px;letter-spacing:-0.5px}
+    .post-meta{display:flex;gap:16px;font-size:13px;color:var(--text-muted);flex-wrap:wrap}
+    .post-body{font-size:15px;color:var(--text-secondary);line-height:1.95}
+    .post-body h2{font-size:20px;font-weight:800;color:var(--text-primary);margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--primary)}
+    .post-body h3{font-size:17px;font-weight:700;color:var(--text-primary);margin:24px 0 10px}
+    .post-body p{margin-bottom:16px}
+    .post-body ul,.post-body ol{padding-left:22px;margin-bottom:16px}
+    .post-body li{margin-bottom:8px}
+    .info-box{background:var(--surface-2);border-left:4px solid var(--primary);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin:16px 0;font-size:14px}
+    .formula-box{background:#0f172a;color:#e2e8f0;border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;font-size:14px;font-family:monospace;line-height:1.8}
+    .formula-box span{color:#60a5fa}
+    .data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+    .data-table th{background:var(--primary);color:white;padding:10px 14px;text-align:center}
+    .data-table td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:center}
+    .data-table tr:nth-child(even) td{background:var(--surface-2)}
+    .data-table .red{color:#dc2626;font-weight:700}
+    .data-table .blue{color:#2563eb;font-weight:700}
+    .data-table .green{color:#16a34a;font-weight:700}
+    .cta-box{background:linear-gradient(135deg,#1e40af,#2563eb);color:white;border-radius:var(--radius);padding:24px 28px;margin:28px 0;text-align:center}
+    .cta-box p{color:rgba(255,255,255,0.9);margin-bottom:14px;font-size:15px}
+    .cta-btn{display:inline-block;background:white;color:#1e40af;font-weight:800;font-size:15px;padding:12px 28px;border-radius:8px;text-decoration:none}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-item:last-child{border-bottom:none}
+    .faq-q{width:100%;padding:14px 0;background:none;border:none;font-size:15px;font-weight:600;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font)}
+    .faq-q:hover{color:var(--primary)}
+    .faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}
+    .faq-q.open .faq-arrow{transform:rotate(180deg)}
+    .faq-a{font-size:14px;color:var(--text-secondary);line-height:1.8;padding:0 0 14px;display:none}
+    .faq-a.open{display:block}
+    .post-nav{display:flex;gap:10px;margin-top:20px}
+    .post-nav a{flex:1;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;text-decoration:none;color:var(--text-secondary);transition:all 0.15s}
+    .post-nav a:hover{border-color:var(--primary);color:var(--primary)}
+    .highlight{background:#fef9c3;padding:2px 5px;border-radius:3px;font-weight:700;color:#854d0e}
+    [data-theme="dark"] .highlight{background:#422006;color:#fde68a}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"주식 물타기 계산기 직접 만든 이유 — 계좌 -37% 맞고 나서","description":"주식 물타기 시 평균단가를 정확히 계산하는 방법과 손익분기점 계산법을 실제 경험을 바탕으로 설명합니다.","datePublished":"2026-08-20","author":{"@type":"Person","name":"물타기계산기"},"publisher":{"@type":"Organization","name":"물타기계산기","url":"https://stockbuy.co.kr"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://stockbuy.co.kr/blog-001.html"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"물타기 평균단가는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"총 매수금액 합계를 총 보유수량으로 나눠 가중평균으로 계산합니다."}},{"@type":"Question","name":"물타기는 몇 번이 적당한가요?","acceptedAnswer":{"@type":"Answer","text":"일반적으로 2~3회를 권장합니다."}}]}</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">물타기<span>계산기</span></a>
+    <div class="header-right">
+      <nav class="header-nav"><a href="index.html">계산기</a><a href="blog.html" style="color:var(--primary)">블로그</a></nav>
+      <button class="dark-toggle" onclick="toggleDark()" id="dark-btn">🌙</button>
+    </div>
+  </div>
+</header>
+<div class="page-layout">
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+  <main class="main-content">
+    <nav class="breadcrumb"><a href="index.html">홈</a><span>›</span><a href="blog.html">블로그</a><span>›</span><span>📈 주식투자</span></nav>
+    <div class="post-hero">
+      <span class="post-cat">📈 주식투자</span>
+      <h1 class="post-title">주식 물타기 계산기 직접 만든 이유 — 계좌 -37% 맞고 나서</h1>
+      <div class="post-meta"><span>📅 2026-08-20</span><span>⏱ 5분</span><span>✍️ stockbuy.co.kr</span></div>
+    </div>
+    <div class="ad-banner">광고 영역 (728×90)</div>
+    <div class="calc-card post-body">
+<p>솔직히 말하면 계좌 수익률이 <strong>-37%</strong>일 때 이 계산기를 만들었다. 총매입 1,200만원이 796만원이 됐을 때 물타기를 할지 말지, 한다면 평균단가가 얼마가 되는지 계산하려고 엑셀을 켰는데 자꾸 틀렸다.</p>
+<h2>물타기란 무엇인가?</h2>
+<p><strong>물타기</strong>란 보유 중인 주식이나 코인의 가격이 하락했을 때 추가로 매수해 평균 매수단가를 낮추는 투자 전략이다. 예를 들어 1만원에 100주를 샀다가 주가가 8,000원으로 떨어졌을 때 8,000원에 100주를 추가 매수하면 평균단가는 9,000원이 된다.</p>
+<div class="info-box">💡 핵심: 물타기는 평균단가를 낮춰 손익분기점을 내리는 전략이다. 단, 하락 원인이 종목 자체의 문제라면 물타기보다 손절이 나을 수 있다.</div>
+<h2>평균단가 계산 공식</h2>
+<p>물타기 후 평균단가는 단순 평균이 아니라 <strong>가중평균</strong>으로 계산해야 한다.</p>
+<div class="formula-box">평균단가 = <span>총 매수금액 합계</span> ÷ <span>총 보유수량</span><br><br>예시: (7,514원 × 40주) + (4,500원 × 40주) = 480,560원<br>480,560원 ÷ 80주 = <span>6,007원</span></div>
+<h2>실제 내 종목으로 계산한 결과</h2>
+<div style="overflow-x:auto"><table class="data-table">
+<tr><th>구분</th><th>매수가</th><th>수량</th><th>금액</th></tr>
+<tr><td>현재 보유</td><td>7,514원</td><td>40주</td><td>300,560원</td></tr>
+<tr><td>추가 매수</td><td>4,500원</td><td>40주</td><td>180,000원</td></tr>
+<tr><td><strong>물타기 후</strong></td><td class="blue">6,007원</td><td><strong>80주</strong></td><td><strong>480,560원</strong></td></tr>
+</table></div>
+<p>손익분기점이 7,514원에서 6,007원으로 낮아져 원금 회복에 필요한 상승률이 <span class="highlight">67% → 33%</span>로 절반 가까이 줄었다.</p>
+<h2>손실률별 회복 필요 상승률</h2>
+<div style="overflow-x:auto"><table class="data-table">
+<tr><th>손실률</th><th>회복 필요 상승률</th></tr>
+<tr><td>-10%</td><td class="red">+11.1%</td></tr>
+<tr><td>-20%</td><td class="red">+25.0%</td></tr>
+<tr><td>-30%</td><td class="red">+42.9%</td></tr>
+<tr><td>-50%</td><td class="red">+100.0%</td></tr>
+<tr><td>-70%</td><td class="red">+233.3%</td></tr>
+</table></div>
+<h2>물타기 전에 꼭 확인할 것</h2>
+<ol>
+<li><strong>하락 원인 파악:</strong> 시장 전체가 빠진 건지, 종목 자체 이슈인지 먼저 확인한다.</li>
+<li><strong>예산 설정:</strong> 한 종목에 투자금의 30% 이상 집중하지 않는다.</li>
+<li><strong>분할 매수:</strong> 한 번에 다 넣지 말고 2~3번에 나눠서 매수한다.</li>
+<li><strong>평단 확인:</strong> 물타기 후 새 평균단가와 손익분기점을 숫자로 확인한다.</li>
+</ol></div>
+    <div class="cta-box">
+      <p>📊 직접 계산해보고 싶다면?<br><small style="opacity:0.8">설치 없이 바로 사용하는 무료 계산기</small></p>
+      <a class="cta-btn" href="stock-add.html">물타기 계산기 바로가기 →</a>
+    </div>
+    <div class="calc-card">
+      <h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">자주 묻는 질문 (FAQ)</h2>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>물타기 평균단가는 어떻게 계산하나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">총 매수금액 합계를 총 보유수량으로 나눠 가중평균으로 계산합니다. 단순히 두 가격을 더해 2로 나누면 수량이 다를 때 틀린 답이 나옵니다.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>물타기는 몇 번이 적당한가요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">일반적으로 2~3회를 권장합니다. 처음부터 최대 몇 회까지 할지 계획을 세우는 것이 좋습니다.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>코인 물타기도 같은 방식으로 계산하나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">네, 계산 방식은 동일합니다. 코인은 소수점 단위 거래가 가능하므로 소수점 수량도 입력해 계산할 수 있습니다.</div></div>
+    </div>
+    <div class="ad-banner ad-banner-tall">광고 영역 (300×250)</div>
+    <div class="post-nav">
+      <a href="blog.html">← 블로그 목록</a>
+      <a href="index.html" style="text-align:right">계산기 홈 →</a>
+    </div>
+  </main>
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+</div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links"><a href="index.html">홈</a><a href="blog.html">블로그</a><a href="privacy.html">개인정보처리방침</a><a href="contact.html">문의하기</a></div>
+    <p class="footer-notice">이 글은 정보 제공 목적으로 작성되었으며 투자 권유가 아닙니다.</p>
+    <p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+function toggleFaq(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+function toggleDark(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',isDark?'light':'dark');localStorage.setItem('calczip-theme',isDark?'light':'dark');document.getElementById('dark-btn').textContent=isDark?'🌙':'☀️';}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('dark-btn').textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';});
+</script>
+<script defer src="//wcs.pstatic.net/wcslog.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(!wcs_add)var wcs_add={};wcs_add["wa"]="1a7e95eccbfa280";if(window.wcs){wcs_do();}});</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>주식 분할매수 DCA 전략 완벽 가이드 — 평균단가 낮추는 법 | stockbuy.co.kr</title>
+  <meta name="description" content="금액균등·수량균등·하락비례 분할매수 전략의 차이와 평균단가 계산법을 실제 예시로 정리했습니다." /><meta name="keywords" content="분할매수, DCA 전략, 주식 분할매수, 평균단가 낮추기, 정액분할투자" />
+  <meta property="og:title" content="주식 분할매수 DCA 전략 완벽 가이드 — 평균단가 낮추는 법" /><meta property="og:description" content="금액균등·수량균등·하락비례 분할매수 전략의 차이와 평균단가 계산법을 실제 예시로 정리했습니다." />
+  <meta property="og:type" content="article" /><meta property="og:image" content="https://stockbuy.co.kr/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://stockbuy.co.kr/blog-006.html" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5000637956714787" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJ0C31LXTN"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NJ0C31LXTN');</script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" /></noscript>
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>.post-hero{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px}.post-cat{font-size:12px;font-weight:700;color:var(--primary);background:var(--highlight-bg);padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px}.post-title{font-size:24px;font-weight:800;color:var(--text-primary);line-height:1.4;margin-bottom:10px;letter-spacing:-0.5px}.post-meta{display:flex;gap:16px;font-size:13px;color:var(--text-muted);flex-wrap:wrap}.post-body{font-size:15px;color:var(--text-secondary);line-height:1.95}.post-body h2{font-size:20px;font-weight:800;color:var(--text-primary);margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--primary)}.post-body h3{font-size:17px;font-weight:700;color:var(--text-primary);margin:24px 0 10px}.post-body p{margin-bottom:16px}.post-body ul,.post-body ol{padding-left:22px;margin-bottom:16px}.post-body li{margin-bottom:8px}.info-box{background:var(--surface-2);border-left:4px solid var(--primary);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin:16px 0;font-size:14px}.formula-box{background:#0f172a;color:#e2e8f0;border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;font-size:14px;font-family:monospace;line-height:1.8}.formula-box span{color:#60a5fa}.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}.data-table th{background:var(--primary);color:white;padding:10px 14px;text-align:center}.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:center}.data-table tr:nth-child(even) td{background:var(--surface-2)}.data-table .red{color:#dc2626;font-weight:700}.data-table .blue{color:#2563eb;font-weight:700}.data-table .green{color:#16a34a;font-weight:700}.cta-box{background:linear-gradient(135deg,#1e40af,#2563eb);color:white;border-radius:var(--radius);padding:24px 28px;margin:28px 0;text-align:center}.cta-box p{color:rgba(255,255,255,0.9);margin-bottom:14px;font-size:15px}.cta-btn{display:inline-block;background:white;color:#1e40af;font-weight:800;font-size:15px;padding:12px 28px;border-radius:8px;text-decoration:none}.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}.faq-q{width:100%;padding:14px 0;background:none;border:none;font-size:15px;font-weight:600;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font)}.faq-q:hover{color:var(--primary)}.faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}.faq-q.open .faq-arrow{transform:rotate(180deg)}.faq-a{font-size:14px;color:var(--text-secondary);line-height:1.8;padding:0 0 14px;display:none}.faq-a.open{display:block}.post-nav{display:flex;gap:10px;margin-top:20px}.post-nav a{flex:1;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;text-decoration:none;color:var(--text-secondary);transition:all 0.15s}.post-nav a:hover{border-color:var(--primary);color:var(--primary)}.highlight{background:#fef9c3;padding:2px 5px;border-radius:3px;font-weight:700;color:#854d0e}[data-theme="dark"] .highlight{background:#422006;color:#fde68a}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"주식 분할매수 DCA 전략 완벽 가이드 — 평균단가 낮추는 법","description":"금액균등·수량균등·하락비례 분할매수 전략의 차이와 평균단가 계산법을 실제 예시로 정리했습니다.","datePublished":"2026-09-03","author":{"@type":"Person","name":"물타기계산기"},"publisher":{"@type":"Organization","name":"물타기계산기","url":"https://stockbuy.co.kr"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"DCA 전략이란 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"Dollar Cost Averaging의 약자로 일정 기간마다 동일한 금액을 꾸준히 투자하는 전략입니다. 시장 타이밍 예측 없이도 장기적으로 좋은 결과를 가져다줍니다."}},{"@type":"Question","name":"분할매수와 물타기의 차이는 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"분할매수는 처음부터 계획적으로 나눠 매수하는 전략이고, 물타기는 보유 종목이 하락한 후 평균단가를 낮추기 위해 추가 매수하는 것입니다."}}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner"><a href="index.html" class="logo">물타기<span>계산기</span></a><div class="header-right"><nav class="header-nav"><a href="index.html">계산기</a><a href="blog.html" style="color:var(--primary)">블로그</a></nav><button class="dark-toggle" onclick="toggleDark()" id="dark-btn">🌙</button></div></div></header>
+<div class="page-layout">
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+  <main class="main-content">
+    <nav class="breadcrumb"><a href="index.html">홈</a><span>›</span><a href="blog.html">블로그</a><span>›</span><span>📈 주식투자</span></nav>
+    <div class="post-hero"><span class="post-cat">📈 주식투자</span><h1 class="post-title">주식 분할매수 DCA 전략 완벽 가이드 — 평균단가 낮추는 법</h1><div class="post-meta"><span>📅 2026-09-03</span><span>⏱ 5분</span><span>✍️ stockbuy.co.kr</span></div></div>
+    <div class="ad-banner">광고 영역 (728×90)</div>
+    <div class="calc-card post-body"><p>한 번에 전액을 투자하는 것보다 여러 번에 나눠 매수하면 <strong>매수 타이밍 리스크</strong>를 줄일 수 있다. 이것이 분할매수 전략의 핵심이다.</p>
+<h2>분할매수 방식 3가지 비교</h2>
+<div style="overflow-x:auto"><table class="data-table">
+<tr><th>방식</th><th>특징</th><th>장점</th><th>단점</th></tr>
+<tr><td>금액균등 (DCA)</td><td>매 회차 동일 금액 매수</td><td>가격 낮을 때 더 많이 삼</td><td>단순하지만 기계적</td></tr>
+<tr><td>수량균등</td><td>매 회차 동일 수량 매수</td><td>계획이 단순</td><td>고가일 때도 같은 수량</td></tr>
+<tr><td>하락비례</td><td>하락폭 클수록 더 많이</td><td>평균단가 빠르게 낮춤</td><td>자금 부담 클 수 있음</td></tr>
+</table></div>
+<h2>실제 예시: 300만원으로 3회 분할매수</h2>
+<div style="overflow-x:auto"><table class="data-table">
+<tr><th>회차</th><th>매수가</th><th>금액균등(수량)</th><th>수량균등(금액)</th></tr>
+<tr><td>1회차</td><td>10,000원</td><td>100주 (100만원)</td><td>100주 (100만원)</td></tr>
+<tr><td>2회차</td><td>8,000원</td><td>125주 (100만원)</td><td>100주 (80만원)</td></tr>
+<tr><td>3회차</td><td>7,000원</td><td>143주 (100만원)</td><td>100주 (70만원)</td></tr>
+<tr><td>평균단가</td><td>—</td><td class="blue">8,197원</td><td class="blue">8,333원</td></tr>
+</table></div>
+<p>금액균등 방식이 수량균등보다 평균단가가 더 낮다. 가격이 낮을 때 더 많이 살 수 있기 때문이다.</p>
+<h2>분할매수 실천 원칙</h2>
+<ul>
+<li>매수 횟수는 3~5회가 일반적으로 적절하다.</li>
+<li>각 회차별 매수 기준(가격 또는 날짜)을 미리 정해둔다.</li>
+<li>전체 투자 예산을 초과하지 않도록 회차별 금액을 미리 계획한다.</li>
+<li>월 1회 정기 분할매수(DCA)는 시장 예측 없이도 장기적으로 좋은 결과를 낳는다.</li>
+</ul></div>
+    <div class="cta-box"><p>📊 직접 계산해보고 싶다면?<br><small style="opacity:0.8">설치 없이 바로 사용하는 무료 계산기</small></p><a class="cta-btn" href="split-buy.html">분할매수 계산기 바로가기 →</a></div>
+    <div class="calc-card"><h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">자주 묻는 질문 (FAQ)</h2><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>DCA 전략이란 무엇인가요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">Dollar Cost Averaging의 약자로 일정 기간마다 동일한 금액을 꾸준히 투자하는 전략입니다. 시장 타이밍을 예측하지 않고 장기적으로 꾸준히 투자해 평균 매수단가를 안정화할 수 있습니다.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>분할매수와 물타기의 차이는 무엇인가요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">분할매수는 처음부터 계획적으로 나눠 매수하는 전략이고, 물타기는 보유 종목이 하락한 후 평균단가를 낮추기 위해 추가 매수하는 것입니다. 분할매수가 더 계획적인 접근입니다.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>몇 회로 나눠서 매수하는 것이 좋나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">일반적으로 3~5회를 권장합니다. 너무 잘게 나누면 관리가 복잡해지고, 너무 적게 나누면 분산 효과가 줄어듭니다.</div></div></div>
+    <div class="ad-banner ad-banner-tall">광고 영역 (300×250)</div>
+    <div class="post-nav"><a href="blog.html">← 블로그 목록</a><a href="index.html" style="text-align:right">계산기 홈 →</a></div>
+  </main>
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+</div>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-links"><a href="index.html">홈</a><a href="blog.html">블로그</a><a href="privacy.html">개인정보처리방침</a><a href="contact.html">문의하기</a></div><p class="footer-notice">이 글은 정보 제공 목적으로 작성되었으며 투자 권유가 아닙니다.</p><p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p></div></footer>
+<script>
+function toggleFaq(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+function toggleDark(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',isDark?'light':'dark');localStorage.setItem('calczip-theme',isDark?'light':'dark');document.getElementById('dark-btn').textContent=isDark?'🌙':'☀️';}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('dark-btn').textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';});
+</script>
+<script defer src="//wcs.pstatic.net/wcslog.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(!wcs_add)var wcs_add={};wcs_add["wa"]="1a7e95eccbfa280";if(window.wcs){wcs_do();}});</script>
+</body></html>

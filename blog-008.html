@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>적금 이자 계산법 — 단리·복리 차이와 실제 받는 돈 계산 | stockbuy.co.kr</title>
+  <meta name="description" content="정기적금과 정기예금의 이자 계산 방법과 세금 공제 후 실수령 이자를 예시로 계산해봤습니다." /><meta name="keywords" content="적금 이자 계산, 단리 복리 차이, 예금 적금 비교, 세후 이자, 만기 수령액" />
+  <meta property="og:title" content="적금 이자 계산법 — 단리·복리 차이와 실제 받는 돈 계산" /><meta property="og:description" content="정기적금과 정기예금의 이자 계산 방법과 세금 공제 후 실수령 이자를 예시로 계산해봤습니다." />
+  <meta property="og:type" content="article" /><meta property="og:image" content="https://stockbuy.co.kr/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://stockbuy.co.kr/blog-008.html" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5000637956714787" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJ0C31LXTN"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-NJ0C31LXTN');</script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" /></noscript>
+  <script>(function(){const t=localStorage.getItem('calczip-theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>.post-hero{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px}.post-cat{font-size:12px;font-weight:700;color:var(--primary);background:var(--highlight-bg);padding:3px 10px;border-radius:10px;display:inline-block;margin-bottom:12px}.post-title{font-size:24px;font-weight:800;color:var(--text-primary);line-height:1.4;margin-bottom:10px;letter-spacing:-0.5px}.post-meta{display:flex;gap:16px;font-size:13px;color:var(--text-muted);flex-wrap:wrap}.post-body{font-size:15px;color:var(--text-secondary);line-height:1.95}.post-body h2{font-size:20px;font-weight:800;color:var(--text-primary);margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--primary)}.post-body h3{font-size:17px;font-weight:700;color:var(--text-primary);margin:24px 0 10px}.post-body p{margin-bottom:16px}.post-body ul,.post-body ol{padding-left:22px;margin-bottom:16px}.post-body li{margin-bottom:8px}.info-box{background:var(--surface-2);border-left:4px solid var(--primary);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin:16px 0;font-size:14px}.formula-box{background:#0f172a;color:#e2e8f0;border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;font-size:14px;font-family:monospace;line-height:1.8}.formula-box span{color:#60a5fa}.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}.data-table th{background:var(--primary);color:white;padding:10px 14px;text-align:center}.data-table td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:center}.data-table tr:nth-child(even) td{background:var(--surface-2)}.data-table .red{color:#dc2626;font-weight:700}.data-table .blue{color:#2563eb;font-weight:700}.data-table .green{color:#16a34a;font-weight:700}.cta-box{background:linear-gradient(135deg,#1e40af,#2563eb);color:white;border-radius:var(--radius);padding:24px 28px;margin:28px 0;text-align:center}.cta-box p{color:rgba(255,255,255,0.9);margin-bottom:14px;font-size:15px}.cta-btn{display:inline-block;background:white;color:#1e40af;font-weight:800;font-size:15px;padding:12px 28px;border-radius:8px;text-decoration:none}.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}.faq-q{width:100%;padding:14px 0;background:none;border:none;font-size:15px;font-weight:600;color:var(--text-primary);cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;font-family:var(--font)}.faq-q:hover{color:var(--primary)}.faq-arrow{font-size:11px;color:var(--text-muted);transition:transform 0.2s;flex-shrink:0}.faq-q.open .faq-arrow{transform:rotate(180deg)}.faq-a{font-size:14px;color:var(--text-secondary);line-height:1.8;padding:0 0 14px;display:none}.faq-a.open{display:block}.post-nav{display:flex;gap:10px;margin-top:20px}.post-nav a{flex:1;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:13px;text-decoration:none;color:var(--text-secondary);transition:all 0.15s}.post-nav a:hover{border-color:var(--primary);color:var(--primary)}.highlight{background:#fef9c3;padding:2px 5px;border-radius:3px;font-weight:700;color:#854d0e}[data-theme="dark"] .highlight{background:#422006;color:#fde68a}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"적금 이자 계산법 — 단리·복리 차이와 실제 받는 돈 계산","description":"정기적금과 정기예금의 이자 계산 방법과 세금 공제 후 실수령 이자를 예시로 계산해봤습니다.","datePublished":"2026-09-07","author":{"@type":"Person","name":"물타기계산기"},"publisher":{"@type":"Organization","name":"물타기계산기","url":"https://stockbuy.co.kr"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"적금 이자는 어떻게 계산하나요?","acceptedAnswer":{"@type":"Answer","text":"정기적금 이자 = 월납입액 × 납입개월수 × (납입개월수+1)/2 × 연이율/12로 계산합니다. 첫 달 납입금은 만기까지 전체 기간, 마지막 달은 1개월치 이자만 받습니다."}},{"@type":"Question","name":"적금이자에 세금은 얼마나 내나요?","acceptedAnswer":{"@type":"Answer","text":"일반과세는 이자소득의 15.4%(소득세 14%+지방세 1.4%)를 납부합니다. ISA 계좌 활용 시 200만원까지 비과세 혜택을 받을 수 있습니다."}}]}</script>
+</head>
+<body>
+<header class="site-header"><div class="header-inner"><a href="index.html" class="logo">물타기<span>계산기</span></a><div class="header-right"><nav class="header-nav"><a href="index.html">계산기</a><a href="blog.html" style="color:var(--primary)">블로그</a></nav><button class="dark-toggle" onclick="toggleDark()" id="dark-btn">🌙</button></div></div></header>
+<div class="page-layout">
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+  <main class="main-content">
+    <nav class="breadcrumb"><a href="index.html">홈</a><span>›</span><a href="blog.html">블로그</a><span>›</span><span>💰 재테크</span></nav>
+    <div class="post-hero"><span class="post-cat">💰 재테크</span><h1 class="post-title">적금 이자 계산법 — 단리·복리 차이와 실제 받는 돈 계산</h1><div class="post-meta"><span>📅 2026-09-07</span><span>⏱ 4분</span><span>✍️ stockbuy.co.kr</span></div></div>
+    <div class="ad-banner">광고 영역 (728×90)</div>
+    <div class="calc-card post-body"><p>적금 금리가 5%라고 해서 원금의 5%를 다 받는 게 아니다. 정기적금은 매월 납입하기 때문에 실제 이자는 예금보다 적고, 세금도 떼인다.</p>
+<h2>적금 이자 계산 공식</h2>
+<div class="formula-box">정기적금 이자 = 월납입액 × <span>n(n+1)/2</span> × 연이율/12<br>(n = 납입개월수)<br><br>예시: 월 30만원 × 12개월 × 5%<br>이자 = 300,000 × 78 × 0.05/12 = <span>97,500원</span></div>
+<h2>월 30만원, 연 5%, 12개월 적금 계산</h2>
+<div style="overflow-x:auto"><table class="data-table">
+<tr><th>항목</th><th>금액</th></tr>
+<tr><td>총 납입원금</td><td>3,600,000원</td></tr>
+<tr><td>세전 이자</td><td>97,500원</td></tr>
+<tr><td>이자 세금 (15.4%)</td><td class="red">-15,015원</td></tr>
+<tr><td class="green"><strong>세후 실수령 이자</strong></td><td class="green"><strong>82,485원</strong></td></tr>
+<tr><td><strong>만기 수령액</strong></td><td><strong>3,682,485원</strong></td></tr>
+</table></div>
+<h2>세금 절약하는 방법</h2>
+<ul>
+<li><strong>ISA 계좌:</strong> 연 2,000만원 한도, 이자·배당 200만원까지 비과세</li>
+<li><strong>청년도약계좌:</strong> 만 19~34세 대상, 정부 기여금 + 비과세 혜택</li>
+<li><strong>주택청약종합저축:</strong> 연 300만원까지 소득공제 (연말정산 시)</li>
+</ul>
+<div class="info-box">💡 적금보다 예금이 금리가 낮은 경우도 있지만, 목돈이 있다면 예금이 이자를 더 많이 받을 수 있습니다. 두 상품을 계산기로 비교해보세요.</div></div>
+    <div class="cta-box"><p>📊 직접 계산해보고 싶다면?<br><small style="opacity:0.8">설치 없이 바로 사용하는 무료 계산기</small></p><a class="cta-btn" href="savings.html">적금·예금 계산기 바로가기 →</a></div>
+    <div class="calc-card"><h2 style="font-size:18px;font-weight:800;color:var(--text-primary);margin-bottom:16px">자주 묻는 질문 (FAQ)</h2><div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>적금 이자는 어떻게 계산하나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">정기적금은 월납입액 × 납입개월수 × (납입개월수+1)/2 × 연이율/12로 계산합니다. 첫 달 납입금이 가장 오래 돈을 맡기고 마지막 달은 1개월만 이자를 받습니다.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>만기 전 해지하면 이자가 줄어드나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">네, 중도해지 시 약정 금리보다 훨씬 낮은 중도해지이율이 적용됩니다. 보통 약정금리의 30~50% 수준으로 이자가 줄어들어 가능하면 만기까지 유지하는 것이 좋습니다.</div></div>
+<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)"><span>예금자보호는 얼마까지 되나요?</span><span class="faq-arrow">▼</span></button><div class="faq-a">예금자보호법에 따라 1인당 한 금융기관에서 원금과 이자 합산 최대 5,000만원까지 보호됩니다.</div></div></div>
+    <div class="ad-banner ad-banner-tall">광고 영역 (300×250)</div>
+    <div class="post-nav"><a href="blog.html">← 블로그 목록</a><a href="index.html" style="text-align:right">계산기 홈 →</a></div>
+  </main>
+  <aside class="side-ad"><div class="side-ad-inner">광고 영역<br/>160×600</div></aside>
+</div>
+<footer class="site-footer"><div class="footer-inner"><div class="footer-links"><a href="index.html">홈</a><a href="blog.html">블로그</a><a href="privacy.html">개인정보처리방침</a><a href="contact.html">문의하기</a></div><p class="footer-notice">이 글은 정보 제공 목적으로 작성되었으며 투자 권유가 아닙니다.</p><p class="footer-copy">© 2026 물타기계산기. All rights reserved.</p></div></footer>
+<script>
+function toggleFaq(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open');}
+function toggleDark(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',isDark?'light':'dark');localStorage.setItem('calczip-theme',isDark?'light':'dark');document.getElementById('dark-btn').textContent=isDark?'🌙':'☀️';}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('dark-btn').textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';});
+</script>
+<script defer src="//wcs.pstatic.net/wcslog.js"></script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(!wcs_add)var wcs_add={};wcs_add["wa"]="1a7e95eccbfa280";if(window.wcs){wcs_do();}});</script>
+</body></html>
